@@ -8,6 +8,7 @@
     <div class="content">
         <div class="bg"></div>
 <%--        Main content goes here--%>
+<p>HEHEHEHEHE</p>
     </div>
     <div class="footer">Stylesheet is not to be used in assessable submissions</div>
 </body>
