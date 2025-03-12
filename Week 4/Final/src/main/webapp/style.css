@@ -1,0 +1,71 @@
+:root {
+    --black: #272727;
+    --orange: #D4AA7D;
+    --light-orange: #EFD09E;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.bg {
+    height: 85%;
+    width: 100%;
+    opacity: 0.6;
+    filter: blur(10px);
+    background-image: radial-gradient(circle at center center, var(--light-orange), #e5e5f7), repeating-radial-gradient(circle at center center, var(--light-orange), var(--light-orange), 10px, transparent 20px, transparent 10px);
+    background-blend-mode: multiply;
+    position: absolute;
+    z-index: -2;
+}
+
+.content > h1{
+    padding: 10px;
+}
+
+.header {
+    height: 10%;
+    background-color: var(--black);
+    color: var(--orange);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+.content {
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer {
+    height: 5%;
+    background-color: var(--black);
+    color: var(--light-orange);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button, input {
+    background-color: var(--orange);
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 5px 20px 5px 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
