@@ -14,3 +14,7 @@
     height: 100px;
     background-color: beige;
 }
+
+.page_header:hover {
+    color: blue;
+}
