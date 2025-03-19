@@ -9,9 +9,11 @@
 <html>
 <head>
     <title>Header Page</title>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="page_header">aewjnrjwllarjwjkl</div>
+    <div class="page_header">
+        <p>Header Test</p>
+    </div>
 </body>
 </html>
