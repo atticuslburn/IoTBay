@@ -9,8 +9,9 @@
 <html>
 <head>
     <title>Header Page</title>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-
+    <div class="page_header">aewjnrjwllarjwjkl</div>
 </body>
 </html>
