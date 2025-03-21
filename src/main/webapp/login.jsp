@@ -9,6 +9,8 @@
 <html>
 <head>
     <title>Title</title>
+    <%--  KEEP THIS LINE, IMPORTANT FOR HEADER AND FOOTER  --%>
+    <%@ include file="template.jsp" %>
 </head>
 <body>
 
