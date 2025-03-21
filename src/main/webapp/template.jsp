@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="page_header">
-        <p>Header Test</p>
+        <p>Header</p>
     </div>
 </body>
 </html>
