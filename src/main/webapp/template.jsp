@@ -9,8 +9,11 @@
 <html>
 <head>
     <title>Header Page</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <div class="page_header">
+        <p>Header</p>
+    </div>
 </body>
 </html>
