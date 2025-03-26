@@ -17,6 +17,14 @@
         <a href="browse.jsp"><div class="box">Browse</div></a>
         <a href="account.jsp"><div class="box">Account</div></a>
     </div>
+
+    <div class="background_colour">
+
+    </div>
+
+    <div class="page_footer">
+
+    </div>
 </body>
 
 
