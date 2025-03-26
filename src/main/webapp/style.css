@@ -9,6 +9,31 @@ body {
 }
 
 
+
+
+
+/* Index Page*/
+.login_register {
+    display: flex;
+    height: 100px;
+    justify-content: space-around;
+    background-color: red;
+}
+
+
+.link_box {
+    flex-basis: 100px;
+    height: 50px;
+    background-color: lightblue;
+    text-align: center;
+    align-content: center;
+}
+
+.link_box:hover {
+    background-color: cornflowerblue;
+}
+
+
 /* Page Header & Footer */
 .page_header {
     position: sticky;
@@ -74,8 +99,6 @@ body {
     background-color: #CDC9C1;
     min-height: 100vh;
 }
-
-
 
 
 
