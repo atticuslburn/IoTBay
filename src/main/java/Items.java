@@ -1,2 +1,2 @@
-public class Items {
+public enum Items {
 }
