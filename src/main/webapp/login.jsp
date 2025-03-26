@@ -8,13 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Login</title>
     <%--  KEEP THIS LINE, IMPORTANT FOR HEADER AND FOOTER  --%>
     <%@ include file="template.jsp" %>
     <%-- Also includes style.css--%>
 
 </head>
 <body>
-
+<h1>Enter your email</h1>
 </body>
 </html>
