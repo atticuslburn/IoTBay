@@ -8,9 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>blah </title>
+    <title>Register</title>
+    <%--  KEEP THIS LINE, IMPORTANT FOR HEADER AND FOOTER  --%>
+    <%@ include file="template.jsp" %>
+    <%-- Also includes style.css--%>
 </head>
 <body>
+    <h1>Register</h1>
+
 
 </body>
 </html>
