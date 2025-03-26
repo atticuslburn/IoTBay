@@ -15,8 +15,11 @@
 <div id="Bottom">
     <p>In the bottom page</p>
 </div>
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
+
+<div class = "page_body">
+    <a href="login.jsp"><div class = "box">Login</div></a>
+    <a href="register.jsp"><div class = "box">Register</div></a>
+</div>
+
 </html>
