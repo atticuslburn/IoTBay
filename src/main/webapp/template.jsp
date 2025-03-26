@@ -6,6 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+
+%>
+
 <html>
 <head>
     <title>Template Page</title>
@@ -16,9 +21,8 @@
         <a href="index.jsp"><div class="box">Home</div></a>
         <a href="browse.jsp"><div class="box">Browse</div></a>
         <a href="account.jsp"><div class="box">Account</div></a>
+
+
     </div>
 </body>
-
-
-
 </html>

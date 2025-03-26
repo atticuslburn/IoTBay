@@ -37,6 +37,12 @@ body {
         }
     }
 }
+.header-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr) 30px 30px;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
 
 
 

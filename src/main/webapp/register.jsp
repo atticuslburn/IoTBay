@@ -9,10 +9,13 @@
 <html>
 <head>
     <title>Register</title>
+    <%--  KEEP THIS LINE, IMPORTANT FOR HEADER AND FOOTER  --%>
     <%@ include file="template.jsp" %>
+    <%-- Also includes style.css--%>
 </head>
 <body>
+    <h1>Register</h1>
+
 
 </body>
-<h1>Register</h1>
 </html>

@@ -9,8 +9,10 @@
     <div class="header">IOT shop</div>
     <div class="content">
         <div class="bg"></div>
+        <div class="header-grid"></div>
 <%--        Main content goes here--%>
     </div>
     <div class="footer">Stylesheet is not to be used in assessable submissions</div>
 </body>
 </html>
+
