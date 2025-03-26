@@ -8,12 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Header Page</title>
+    <title>Template Page</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="page_header">
-        <p>Header</p>
+        <a href="index.jsp"><div class="box">Home</div></a>
+        <a href="browse.jsp"><div class="box">Browse</div></a>
+        <a href="account.jsp"><div class="box">Account</div></a>
+
+
     </div>
 </body>
 </html>

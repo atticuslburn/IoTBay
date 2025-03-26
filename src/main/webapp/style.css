@@ -15,11 +15,25 @@ body {
     height: 100px;
     background-color: beige;
     margin-top: 0;
+    display: flex;
+    justify-content: space-around;
+    & > a {
+        margin: 20px 0 20px 40px;
+        flex-basis: 200px;
+        & > .box {
+            background-color: gray;
+            font-family: Verdana, Arial, sans-serif;
+            align-content: center;
+            font-size: xx-large;
+            text-align: center;
+            height: 60px
+        }
 
-}
-
-.page_header:hover {
-    color: blue;
+        & > .box:hover {
+            color: lightblue;
+            background-color: darkslategray;
+        }
+    }
 }
 
 

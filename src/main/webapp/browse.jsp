@@ -1,7 +1,9 @@
 <html>
 <head>
     <title>IOT Sales</title>
-    <link rel="stylesheet" href="style.css"/>
+    <%--  KEEP THIS LINE, IMPORTANT FOR HEADER AND FOOTER  --%>
+    <%@ include file="template.jsp" %>
+    <%-- Also includes style.css--%>
 </head>
 <body>
     <div class="header">IOT shop</div>
