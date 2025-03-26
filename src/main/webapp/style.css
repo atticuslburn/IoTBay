@@ -1,3 +1,16 @@
+:root {
+    --debut: #a5c9a5;
+    --fearless: #efc180;
+    --evermore: #c5ac90;
+    --midnights: #242e47;
+    --reputation: #746f70;
+    --folklore: #cdc9c1;
+    --1989: #b5e5f8;
+    --speaknow: #c7a8cb;
+    --lover: #f7b0cc;
+    --red: #7a2e39;
+}
+
 /*Remove Margins around everything*/
 p {
     margin: 0
@@ -24,13 +37,13 @@ body {
 .link_box {
     flex-basis: 100px;
     height: 50px;
-    background-color: lightblue;
+    background-color: var(--1989);
     text-align: center;
     align-content: center;
 }
 
 .link_box:hover {
-    background-color: cornflowerblue;
+    background-color: var(--debut);
 }
 
 
@@ -40,21 +53,21 @@ body {
     top: 0;
     width: 100%;
     height: 100px;
-    background-color: #242E47;
+    background-color: var(--midnights);
     margin-top: 0;
     display: flex;
     justify-content: space-around;
     & > a {
         margin: 20px 0 20px 40px;
         flex-basis: 200px;
-        color: #EFC180;
+        color: var(--fearless);
         font-size: large;
 
 
 
         & > .box:hover {
-            color: lightblue;
-            background-color: darkslategray;
+            color: var(--1989);
+            background-color: var(--reputation);
         }
     }
 }
@@ -63,7 +76,7 @@ body {
     bottom: 0;
     width: 100%;
     height: 100px;
-    background-color: #242E47;
+    background-color: var(--midnights);
     margin-top: 0;
     display: flex;
     justify-content: space-around;
