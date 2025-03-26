@@ -8,9 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>blah </title>
+    <title>Register</title>
+    <%@ include file="template.jsp" %>
 </head>
 <body>
 
 </body>
+<h1>Register</h1>
 </html>
