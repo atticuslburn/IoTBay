@@ -16,6 +16,8 @@
 </head>
 <body>
     <h1>Welcome Back</h1>
+    <%--  Will change to welcome.jsp page --%>
+
     <form action = "index.jsp" method = "post">
         <label> Username: </label>
         <input type = "text" id  = "username" name = "username"><br>
