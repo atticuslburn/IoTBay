@@ -123,6 +123,25 @@ p {
     color: black;
 }
 
+.center-box {
+  max-width: 600px;
+  margin: 15% auto;
+  padding: 40px;
+  text-align: center;
+  background-color: #f7f9fc;
+  color: #333;
+  font-size: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.center-box:hover {
+  transform: translateY(-3px);
+}
+
+
 
 
 
