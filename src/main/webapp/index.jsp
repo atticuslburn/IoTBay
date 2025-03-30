@@ -7,8 +7,10 @@
 </head>
 <body>
 
-<h1>Welcome to IoTBay</h1>
-<p>Please log in or register to continue.</p>
+<div class="center_container">
+    <h1>Welcome to IoTBay</h1>
+    <p>Please log in or register to continue.</p>
+</div>
 
 <div class = "page_body">
     <div class="login_register">
