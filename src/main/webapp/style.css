@@ -12,32 +12,29 @@
 }
 
 /*Remove Margins around everything*/
-p {
-    margin: 0
-}
-
-
 body {
     margin: 0;
+    font-family: Tahoma, Geneva, Verdana, sans-serif, serif;
+    color: #333;
+    background-color: #746f70;
 }
 
-
-
-
+p {
+    margin: 0;
+}
 
 /* Index Page*/
 .login_register {
     display: flex;
     height: 100px;
     justify-content: space-around;
-    background-color: red;
+    background-color: var(--evermore);
 }
-
 
 .link_box {
     flex-basis: 100px;
     height: 50px;
-    background-color: var(--1989);
+    background-color: whitesmoke;
     text-align: center;
     align-content: center;
 }
@@ -109,7 +106,7 @@ body {
 .background_colour{
     margin: 0;
     padding: 0;
-    background-color: #000000;
+    background-color: #746f70;
     min-height: 100vh;
 }
 

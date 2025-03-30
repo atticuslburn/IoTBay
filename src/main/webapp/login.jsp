@@ -15,6 +15,23 @@
 
 </head>
 <body>
-<h1>Enter your email</h1>
+    <h1>Welcome Back</h1>
+    <%--  Will change to welcome.jsp page --%>
+
+    <form action = "index.jsp" method = "post">
+        <label> Username: </label>
+        <input type = "text" id  = "username" name = "username"><br>
+
+        <label> Password: </label>
+        <input type = "password" id  = "password" name = "password"><br>
+
+        <br>
+        <input type = "submit" value = "Submit">
+    </form>
+
+    <p>
+        Don't have an account yet?
+        <a href = "register.jsp"> Register Here! </a>
+    </p>
 </body>
 </html>
