@@ -7,6 +7,9 @@
 </head>
 <body>
 
+<h1>Welcome to IoTBay</h1>
+<p>Please log in or register to continue.</p>
+
 <div class = "page_body">
     <div class="login_register">
         <a href="login.jsp"><div class = "link_box">Login</div></a>
