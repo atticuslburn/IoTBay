@@ -20,9 +20,7 @@
 
 
     <div class="page_footer">
-        <a href="index.jsp"><div class="box">Home</div></a>
-        <a href="browse.jsp"><div class="box">Browse</div></a>
-        <a href="account.jsp"><div class="box">Account</div></a>
+
     </div>
 
 
