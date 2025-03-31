@@ -6,13 +6,12 @@
     <%-- Also includes style.css--%>
 </head>
 <body>
-    <div class="header">IOT shop</div>
+    <h1>IOT shop</h1>
     <div class="content">
         <div class="bg"></div>
         <div class="header-grid"></div>
 <%--        Main content goes here--%>
     </div>
-    <div class="footer">Stylesheet is not to be used in assessable submissions</div>
 </body>
 </html>
 
