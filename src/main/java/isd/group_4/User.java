@@ -1,19 +1,23 @@
+package isd.group_4;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
     private int userID;
+    private String password;
     private String firstName;
     private String lastName;
     private String email;
     private String phone;
-    private int streetNumber;
+    private String streetNumber;
     private String suburb;
     private String postcode;
 
     public User(){}
 
-    public User (int userID, String firstName, String lastName, String email, String phone, int streetNumber, String suburb, String postcode) {
+    public User (int userID, String password, String firstName, String lastName, String email, String phone, String streetNumber, String suburb, String postcode) {
         this.userID = userID;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -21,6 +25,10 @@ public class User implements Serializable {
         this.streetNumber = streetNumber;
         this.suburb = suburb;
         this.postcode = postcode;
+    }
+
+    public boolean checkPassword(String password){
+        return password.equals(this.password);
     }
 
     public int getUserID() {
@@ -53,10 +61,10 @@ public class User implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public int getStreetNumber() {
+    public String getStreetNumber() {
         return streetNumber;
     }
-    public void setStreetNumber(int streetNumber) {
+    public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
     public String getSuburb() {
