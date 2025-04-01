@@ -16,10 +16,10 @@
 
     if (uname != null && upassword != null) {
         loggedInUser = UserData.authenticateUser(uname, upassword);
+        loggedInUser.login();
 
         if (loggedInUser != null) {
             session.setAttribute("user", loggedInUser);
-
             response.sendRedirect("welcome.jsp");
             return; // Stop further execution after redirect
         }
