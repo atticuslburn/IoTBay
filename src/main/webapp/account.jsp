@@ -47,8 +47,9 @@
     }
 %>
 
-<div>
-    <a href="logout.jsp">Logout</a>
+<div class="center-box" onclick="location.href='logout.jsp';">
+    Click to logout.
 </div>
+
 </body>
 </html>

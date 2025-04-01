@@ -32,15 +32,12 @@
 
             User nUser = new User(uID, upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, usuburb, upostcode);
 
-            // Save this user to UserData
             UserData.addUser(nUser);
-
-            // Redirect after successful registration
             response.sendRedirect("login.jsp");
             return;
         }
     %>
-    <form action="index.jsp" method="post">
+    <form action="register.jsp" method="post">
         <label for="email">Email: </label>
         <input type="email" id="email" name="email"><br>
         <label for="password">Password: </label>

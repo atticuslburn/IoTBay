@@ -7,7 +7,7 @@
     <%@ include file="template.jsp" %>
 </head>
 <body>
-<h1>Welcome Back</h1>
+<h1>Welcome!</h1>
 
 <%
     String uname = request.getParameter("username");
@@ -16,13 +16,14 @@
 
     if (uname != null && upassword != null) {
         loggedInUser = UserData.authenticateUser(uname, upassword);
-        loggedInUser.login();
 
         if (loggedInUser != null) {
+            loggedInUser.login();
             session.setAttribute("user", loggedInUser);
             response.sendRedirect("welcome.jsp");
             return; // Stop further execution after redirect
         }
+
  else {
 %>
 <p style="color:red;">Invalid username or password.</p>
