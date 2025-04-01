@@ -57,7 +57,7 @@
         <label for="postcode">Postcode: </label>
         <input type="text" id="postcode" name="postcode"><br>
         <br>
-        <input type="submit" id="submit_login" name="submit_login" value="submit" >
+        <input type="submit" id="submit_login" name="submit_login" value="Submit" >
     </form>
 
 </body>
