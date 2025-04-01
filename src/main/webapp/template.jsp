@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="isd.group_4.User"%>
+<%@ page import="isd.group_4.User, isd.group_4.UserData" %>
 <%
     String password = request.getParameter("password");
     String firstName = request.getParameter("first_name");
@@ -35,9 +35,10 @@
         <a href="index.jsp"><div class="box">Home</div></a>
         <a href="browse.jsp"><div class="box">Browse</div></a>
         <%
-            if (session.getAttribute("loggedInUser") != null) {
+            User nuser = (User) session.getAttribute("user");
+            if (session.getAttribute("user") != null) {
         %>
-        <a href="account.jsp"><div class="box">Account (<%=user.getFirstName()%>)</div></a>
+        <a href="account.jsp"><div class="box">Account (<%=nuser.getFirstName()%>)</div></a>
         <%
             }
         %>

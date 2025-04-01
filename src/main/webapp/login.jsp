@@ -1,37 +1,52 @@
-<%--
-  Created by IntelliJ IDEA.
-  isd.group_4.User: yuhanchang
-  Date: 19/3/2025
-  Time: 7:27 pm
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="isd.group_4.User, isd.group_4.UserData" %>
+
 <html>
 <head>
     <title>Login</title>
-    <%--  KEEP THIS LINE, IMPORTANT FOR HEADER AND FOOTER  --%>
     <%@ include file="template.jsp" %>
-    <%-- Also includes style.css--%>
-
 </head>
 <body>
-    <h1>Welcome Back</h1>
-    <%--  Will change to welcome.jsp page --%>
+<h1>Welcome!</h1>
 
-    <form action = "index.jsp" method = "post">
-        <label> Username: </label>
-        <input type = "text" id  = "username" name = "username"><br>
+<%
+    String uname = request.getParameter("username");
+    String upassword = request.getParameter("password");
+    User loggedInUser = null;
 
-        <label> Password: </label>
-        <input type = "password" id  = "password" name = "password"><br>
+    if (uname != null && upassword != null) {
+        loggedInUser = UserData.authenticateUser(uname, upassword);
 
-        <br>
-        <input type = "submit" value = "Submit">
-    </form>
+        if (loggedInUser != null) {
+            loggedInUser.login();
+            session.setAttribute("user", loggedInUser);
+            response.sendRedirect("welcome.jsp");
+            return; // Stop further execution after redirect
+        }
 
-    <p>
-        Don't have an account yet?
-        <a href = "register.jsp"> Register Here! </a>
-    </p>
+ else {
+%>
+<p style="color:red;">Invalid username or password.</p>
+<%
+        }
+    }
+%>
+
+<form action="login.jsp" method="post">
+    <label> Username: </label>
+    <input type="text" name="username"><br>
+
+    <label> Password: </label>
+    <input type="password" name="password"><br>
+
+    <br>
+    <input type="submit" value="Login">
+</form>
+
+
+<p>
+    Don't have an account yet?
+    <a href="register.jsp"> Register Here! </a>
+</p>
 </body>
 </html>

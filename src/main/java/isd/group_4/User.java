@@ -2,6 +2,7 @@ package isd.group_4;
 
 import java.io.Serializable;
 
+
 public class User implements Serializable {
     private int userID;
     private String password;
@@ -12,6 +13,7 @@ public class User implements Serializable {
     private String streetNumber;
     private String suburb;
     private String postcode;
+    private boolean loggedInUser;
 
     public User(){}
 
@@ -25,6 +27,7 @@ public class User implements Serializable {
         this.streetNumber = streetNumber;
         this.suburb = suburb;
         this.postcode = postcode;
+        this.loggedInUser = false;
     }
 
     public boolean checkPassword(String password){
@@ -79,4 +82,6 @@ public class User implements Serializable {
     public void setPostcode(String postcode) {
         this.postcode = postcode;
     }
+    public void login() {this.loggedInUser = true;}
+    public void logout() {this.loggedInUser = false;}
 }

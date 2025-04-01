@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="isd.group_4.User, isd.group_4.UserData" %>
 <html>
 <head>
     <title>Register</title>
@@ -15,7 +16,28 @@
 </head>
 <body>
     <h1>Register</h1>
-    <form action="index.jsp" method="post">
+    <%
+        if (request.getParameter("submit_login") != null) {
+
+            String uemail = request.getParameter("email");
+            String upassword = request.getParameter("password");
+            String ufirstName = request.getParameter("first_name");
+            String ulastName = request.getParameter("last_name");
+            String uphone = request.getParameter("phone_number");
+            String ustreetNumber = request.getParameter("street_number");
+            String usuburb = request.getParameter("suburb");
+            String upostcode = request.getParameter("postcode");
+
+            int uID = UserData.getUsers().size() + 1;
+
+            User nUser = new User(uID, upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, usuburb, upostcode);
+
+            UserData.addUser(nUser);
+            response.sendRedirect("login.jsp");
+            return;
+        }
+    %>
+    <form action="register.jsp" method="post">
         <label for="email">Email: </label>
         <input type="email" id="email" name="email"><br>
         <label for="password">Password: </label>

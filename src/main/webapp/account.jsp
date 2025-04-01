@@ -1,39 +1,55 @@
 
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@page import="isd.group_4.User"%>
-<%
-    User user = (User) session.getAttribute("loggedInUser");
-    if(user == null){
-        response.sendRedirect("index.jsp");
-    }
-%>
 
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="isd.group_4.User, isd.group_4.UserData" %>
 
 <html>
 <head>
     <title>Account Page</title>
-    <link rel="stylesheet" href="style.css">
+    <%--  KEEP THIS LINE, IMPORTANT FOR HEADER AND FOOTER  --%>
+    <%@ include file="template.jsp" %>
+    <%-- Also includes style.css--%>
 </head>
 <body>
-<div>
-    <div class="page_header">
-        <a href="index.jsp"><div class="box">Home</div></a>
-        <a href="browse.jsp"><div class="box">Browse</div></a>
-        <%
-            if (session.getAttribute("loggedInUser") != null) {
-        %>
-        <a href="account.jsp"><div class="box">Account (<%=user.getFirstName()%>)</div></a>
-        <%
-            }
-        %>
-    </div>
-    <h1>Welcome, <%=user.getFirstName()%></h1>
-    <p> Email: <%= user.getEmail()%></p>
-    <p> Phone: <%= user.getPhone()%></p>
-    <p> UserId: <%= user.getUserID()%></p>
-    <div style= "text-align:center" class="box"><a href="logout.jsp">Logout </a></div>
-    <div class="page_footer"> </div>
 
+<% //check if there is a logged in user
+    if (session.getAttribute("user") == null) {
+
+%>
+
+<div class="center-box" onclick="location.href='browse.jsp';">
+    You are not logged in. Click to login or register.
 </div>
+<%
+        return;
+    }
+    else {
+        User loggedInUser = (User) session.getAttribute("user");
+        String fname = loggedInUser.getFirstName();
+        String lname = loggedInUser.getLastName();
+        String uemail = loggedInUser.getEmail();
+        String uphone = loggedInUser.getPhone();
+        String uStreet = loggedInUser.getStreetNumber();
+        String uSub = loggedInUser.getSuburb();
+        String pCode = loggedInUser.getPostcode();
+%>
+
+<div class="center-box">
+    Welcome, <%= fname + lname%> Your details are as follows:<br>
+    Email: <%= uemail%><br>
+    Phone: <%= uphone%><br>
+    Street Adress: <%= uStreet%><br>
+    Suburb: <%= uSub%><br>
+    Post Code: <%= pCode%>
+</div>
+<%
+    }
+%>
+
+<div class="center-box" onclick="location.href='logout.jsp';">
+    Click to logout.
+</div>
+
 </body>
 </html>
