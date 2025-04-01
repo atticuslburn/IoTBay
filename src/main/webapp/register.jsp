@@ -17,6 +17,7 @@
 <body>
     <h1>Register</h1>
     <%
+        boolean failedRegistration = false;
         if (request.getParameter("submit_login") != null) {
 
             String uemail = request.getParameter("email");
@@ -29,21 +30,30 @@
             String upostcode = request.getParameter("postcode");
 
             int uID = UserData.getUsers().size() + 1;
-
-            User nUser = new User(uID, upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, usuburb, upostcode);
-
-            UserData.addUser(nUser);
-            response.sendRedirect("login.jsp");
-            return;
+            if (!upassword.isEmpty() && !ufirstName.isEmpty() && !uemail.isEmpty()) {
+                User nUser = new User(uID, upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, usuburb, upostcode);
+                session.setAttribute("loggedInUser", nUser);
+                UserData.addUser(nUser);
+                response.sendRedirect("welcome.jsp");
+            } else {
+                failedRegistration = true;
+            }
+        }
+    %>
+    <%
+        if (failedRegistration) {
+    %>
+    <p class="fail_text">Please fill in your Email, Password and First Name.</p>
+    <%
         }
     %>
     <form action="register.jsp" method="post">
-        <label for="email">Email: </label>
+        <label for="email">Email*: </label>
         <input type="email" id="email" name="email"><br>
-        <label for="password">Password: </label>
+        <label for="password">Password*: </label>
         <input type="password" id="password" name="password"><br>
         <br>
-        <label for="first_name">First Name: </label>
+        <label for="first_name">First Name*: </label>
         <input type="text" id="first_name" name="first_name"><br>
         <label for="last_name">Last Name: </label>
         <input type="text" id="last_name" name="last_name"><br>
@@ -59,6 +69,9 @@
         <br>
         <input type="submit" id="submit_login" name="submit_login" value="submit" >
     </form>
-
+    <p>
+        Already have an account?
+        <a href="register.jsp"> Login Here! </a>
+    </p>
 </body>
 </html>

@@ -14,12 +14,20 @@
   </head>
   <body>
   <%
-    User loggedInUser = (User) session.getAttribute("user");
-    String fname = loggedInUser.getFirstName();
+    User loggedInUser = (User) session.getAttribute("loggedInUser");
+
+
+    if (loggedInUser != null) {
+      String fname = loggedInUser.getFirstName();
   %>
   <div class="center-box" onclick="location.href='browse.jsp';">
     Welcome, <%= fname %>! Click to start shopping.
   </div>
+  <%
+    } else {
+      response.sendRedirect("login.jsp");
+    }
+  %>
 
   </body>
 </html>

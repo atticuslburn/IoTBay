@@ -19,14 +19,14 @@
 
         if (loggedInUser != null) {
             loggedInUser.login();
-            session.setAttribute("user", loggedInUser);
+            session.setAttribute("loggedInUser", loggedInUser);
             response.sendRedirect("welcome.jsp");
             return; // Stop further execution after redirect
         }
 
  else {
 %>
-<p style="color:red;">Invalid username or password.</p>
+<p class="fail_text">Invalid username or password.</p>
 <%
         }
     }

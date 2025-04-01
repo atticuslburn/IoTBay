@@ -4,17 +4,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="isd.group_4.User, isd.group_4.UserData" %>
 
+<%--  KEEP THIS LINE, IMPORTANT FOR HEADER AND FOOTER  --%>
+<%@ include file="template.jsp" %>
+<%-- Also includes style.css--%>
+
 <html>
 <head>
     <title>Account Page</title>
-    <%--  KEEP THIS LINE, IMPORTANT FOR HEADER AND FOOTER  --%>
-    <%@ include file="template.jsp" %>
-    <%-- Also includes style.css--%>
+
 </head>
 <body>
 
 <% //check if there is a logged in user
-    if (session.getAttribute("user") == null) {
+    if (session.getAttribute("loggedInUser") == null) {
 
 %>
 
@@ -25,21 +27,26 @@
         return;
     }
     else {
-        User loggedInUser = (User) session.getAttribute("user");
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
         String fname = loggedInUser.getFirstName();
-        String lname = loggedInUser.getLastName();
         String uemail = loggedInUser.getEmail();
-        String uphone = loggedInUser.getPhone();
-        String uStreet = loggedInUser.getStreetNumber();
-        String uSub = loggedInUser.getSuburb();
-        String pCode = loggedInUser.getPostcode();
+        String lname = loggedInUser.getLastName();
+        String uphone = (!loggedInUser.getPhone().isEmpty()) ? (loggedInUser.getPhone()) : ("Unset");
+        String uStreet = (!loggedInUser.getStreetNumber().isEmpty()) ? (loggedInUser.getStreetNumber()) : ("Unset");
+        String uSub = (!loggedInUser.getSuburb().isEmpty()) ? (loggedInUser.getSuburb()) : ("Unset");
+        String pCode = (!loggedInUser.getPostcode().isEmpty()) ? (loggedInUser.getPostcode()) : ("Unset");
+
+        String fullName = fname;
+        if (!lname.isEmpty()) {
+            fullName+=" "+lname;
+        }
 %>
 
 <div class="center-box">
-    Welcome, <%= fname + lname%> Your details are as follows:<br>
+    Welcome, <%=fullName%>. Your details are as follows:<br>
     Email: <%= uemail%><br>
     Phone: <%= uphone%><br>
-    Street Adress: <%= uStreet%><br>
+    Street Address: <%= uStreet%><br>
     Suburb: <%= uSub%><br>
     Post Code: <%= pCode%>
 </div>

@@ -172,6 +172,11 @@ p {
     font-weight: 200;
     color: black;
 }
+.fail_text {
+    color: red;
+}
+
+
 
 .center-box {
     max-width: 600px;
@@ -190,6 +195,3 @@ p {
 .center-box:hover {
     transform: translateY(-3px);
 }
-
-
-
