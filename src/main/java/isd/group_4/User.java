@@ -2,6 +2,7 @@ package isd.group_4;
 
 import java.io.Serializable;
 
+
 public class User implements Serializable {
     private int userID;
     private String password;
