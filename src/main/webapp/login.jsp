@@ -32,7 +32,7 @@
     }
 %>
 
-<form action="login.jsp" method="post">
+<form action="welcome.jsp" method="post">
     <label> Username: </label>
     <input type="text" name="username"><br>
 
