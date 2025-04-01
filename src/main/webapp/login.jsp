@@ -19,12 +19,11 @@
 
         if (loggedInUser != null) {
             session.setAttribute("user", loggedInUser);
-%>
 
-<p>Login successful! Welcome, <%= loggedInUser.getFirstName() %>!</p>
-<a href="index.jsp">Continue to homepage</a>
-<%
-} else {
+            response.sendRedirect("welcome.jsp");
+            return; // Stop further execution after redirect
+        }
+ else {
 %>
 <p style="color:red;">Invalid username or password.</p>
 <%
