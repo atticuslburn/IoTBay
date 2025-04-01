@@ -16,18 +16,22 @@
 <body>
 
 <% //check if there is a logged in user
-    if (session.getAttribute("loggedInUser") == null) {
+    User loggedInUser = (User) session.getAttribute("loggedInUser");
+
+    if (loggedInUser == null) {
 
 %>
+<a href="login.jsp">
+    <div class="center-box">
 
-<div class="center-box" onclick="location.href='browse.jsp';">
-    You are not logged in. Click to login or register.
-</div>
+        You are not logged in. Click to login or register.
+    </div>
+</a>
+
 <%
         return;
     }
     else {
-        User loggedInUser = (User) session.getAttribute("loggedInUser");
         String fname = loggedInUser.getFirstName();
         String uemail = loggedInUser.getEmail();
         String lname = loggedInUser.getLastName();
