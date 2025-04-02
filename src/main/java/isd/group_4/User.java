@@ -2,7 +2,6 @@ package isd.group_4;
 
 import java.io.Serializable;
 
-
 public class User implements Serializable {
     private int userID;
     private String password;
@@ -84,4 +83,5 @@ public class User implements Serializable {
     }
     public void login() {this.loggedInUser = true;}
     public void logout() {this.loggedInUser = false;}
+
 }
