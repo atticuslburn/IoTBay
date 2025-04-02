@@ -18,7 +18,9 @@
     <h1>Register</h1>
     <%
         boolean failedRegistration = false;
-        boolean agreed = false;
+
+        String failtext = "Please fill in your Email, Password and First Name.";
+
         if (request.getParameter("submit_login") != null) {
 
             String uemail = request.getParameter("email");
@@ -29,14 +31,19 @@
             String ustreetNumber = request.getParameter("street_number");
             String usuburb = request.getParameter("suburb");
             String upostcode = request.getParameter("postcode");
-            agreed = request.getParameter("T_C")!=null;
+            boolean agreed = request.getParameter("terms_and_conditions")!=null;
 
             int uID = UserData.getUsers().size() + 1;
             if (!upassword.isEmpty() && !ufirstName.isEmpty() && !uemail.isEmpty()) {
-                User nUser = new User(uID, upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, usuburb, upostcode);
-                session.setAttribute("loggedInUser", nUser);
-                UserData.addUser(nUser);
-                response.sendRedirect("welcome.jsp");
+                if (!agreed) {
+                    failtext = "Please agree to the Terms and Conditions";
+                    failedRegistration = true;
+                } else {
+                    User nUser = new User(uID, upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, usuburb, upostcode);
+                    session.setAttribute("loggedInUser", nUser);
+                    UserData.addUser(nUser);
+                    response.sendRedirect("welcome.jsp");
+                }
             } else {
                 failedRegistration = true;
             }
@@ -45,7 +52,7 @@
     <%
         if (failedRegistration) {
     %>
-    <p class="fail_text">Please fill in your Email, Password and First Name.</p>
+    <p class="fail_text"><%=failtext%></p>
     <%
         }
     %>
@@ -70,8 +77,8 @@
         <input type="text" id="suburb" name="suburb"><br>
         <label for="postcode">Postcode: </label>
         <input type="text" id="postcode" name="postcode"><br>
-        <label for="T_C">Agree to our <span style = color:dodgerblue> Terms and Conditions</span></label>
-        <input type="checkbox" id="T_C" name="T_C">
+        <label for="terms_and_conditions">Agree to our <span style = color:dodgerblue> Terms and Conditions</span></label>
+        <input type="checkbox" id="terms_and_conditions" name="terms_and_conditions">
         <br>
         <input type="submit" id="submit_login" name="submit_login" value="Submit" >
     </form>
