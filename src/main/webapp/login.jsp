@@ -10,12 +10,12 @@
 <h1>Welcome!</h1>
 
 <%
-    String uname = request.getParameter("username");
+    String uemail = request.getParameter("email");
     String upassword = request.getParameter("password");
     User loggedInUser = null;
 
-    if (uname != null && upassword != null) {
-        loggedInUser = UserData.authenticateUser(uname, upassword);
+    if (uemail != null && upassword != null) {
+        loggedInUser = UserData.authenticateUser(uemail, upassword);
 
         if (loggedInUser != null) {
             loggedInUser.login();
