@@ -77,7 +77,7 @@
     </form>
     <p>
         Already have an account?
-        <a href="register.jsp"> Login Here! </a>
+        <a href="login.jsp"> Login Here! </a>
     </p>
 </body>
 </html>
