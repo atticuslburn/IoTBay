@@ -34,7 +34,7 @@
 %>
 
 <form action="login.jsp" method="post">
-    <label> Username: </label>
+    <label> Email: </label>
     <input type="text" name="email"><br>
 
     <label> Password: </label>
