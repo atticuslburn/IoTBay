@@ -1,4 +1,4 @@
-<%--
+        <%--
   Created by IntelliJ IDEA.
   isd.group_4.User: yuhanchang
   Date: 19/3/2025
@@ -18,6 +18,7 @@
     <h1>Register</h1>
     <%
         boolean failedRegistration = false;
+        boolean agreed = false;
         if (request.getParameter("submit_login") != null) {
 
             String uemail = request.getParameter("email");
@@ -28,6 +29,7 @@
             String ustreetNumber = request.getParameter("street_number");
             String usuburb = request.getParameter("suburb");
             String upostcode = request.getParameter("postcode");
+            agreed = request.getParameter("T_C")!=null;
 
             int uID = UserData.getUsers().size() + 1;
             if (!upassword.isEmpty() && !ufirstName.isEmpty() && !uemail.isEmpty()) {
@@ -47,6 +49,8 @@
     <%
         }
     %>
+
+
     <form action="register.jsp" method="post">
         <label for="email">Email*: </label>
         <input type="email" id="email" name="email"><br>
@@ -66,6 +70,8 @@
         <input type="text" id="suburb" name="suburb"><br>
         <label for="postcode">Postcode: </label>
         <input type="text" id="postcode" name="postcode"><br>
+        <label for="T_C">Agree to our <span style = color:dodgerblue> Terms and Conditions</span></label>
+        <input type="checkbox" id="T_C" name="T_C">
         <br>
         <input type="submit" id="submit_login" name="submit_login" value="Submit" >
     </form>
