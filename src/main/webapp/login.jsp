@@ -13,6 +13,7 @@
     String uemail = request.getParameter("email");
     String upassword = request.getParameter("password");
     User loggedInUser = null;
+    System.out.print("HELLO");
 
     if (uemail != null && upassword != null) {
         loggedInUser = UserData.authenticateUser(uemail, upassword);
@@ -32,9 +33,9 @@
     }
 %>
 
-<form action="welcome.jsp" method="post">
+<form action="login.jsp" method="post">
     <label> Username: </label>
-    <input type="text" name="username"><br>
+    <input type="text" name="email"><br>
 
     <label> Password: </label>
     <input type="password" name="password"><br>
