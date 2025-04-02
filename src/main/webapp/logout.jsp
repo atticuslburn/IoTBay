@@ -14,6 +14,7 @@
 <body>
 <%
   session.invalidate();
+  response.sendRedirect("index.jsp");
 %>
 <div class="center-box" onclick="location.href='browse.jsp';">
   Successfully logged out, click to return.
