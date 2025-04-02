@@ -1,10 +1,10 @@
 package isd.group_4;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class UserData {
 
-    private static final List<User> users = new ArrayList<>();
+    private static final LinkedList<User> users = new LinkedList<>();
     static {
         users.add(new User(1, "123", "Adrian", "Irwin", "adrian@gmail.com", "04123456", "42 Wallaby way", "Sydney", "1"));
     }
