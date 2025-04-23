@@ -17,37 +17,8 @@
 <body>
     <h1>Register</h1>
     <%
-        boolean failedRegistration = false;
-
-        String failtext = "Please fill in your Email, Password and First Name.";
-
-        if (request.getParameter("submit_login") != null) {
-
-            String uemail = request.getParameter("email");
-            String upassword = request.getParameter("password");
-            String ufirstName = request.getParameter("first_name");
-            String ulastName = request.getParameter("last_name");
-            String uphone = request.getParameter("phone_number");
-            String ustreetNumber = request.getParameter("street_number");
-            String usuburb = request.getParameter("suburb");
-            String upostcode = request.getParameter("postcode");
-            boolean agreed = request.getParameter("terms_and_conditions")!=null;
-
-            int uID = UserData.getUsers().size() + 1;
-            if (!upassword.isEmpty() && !ufirstName.isEmpty() && !uemail.isEmpty()) {
-                if (!agreed) {
-                    failtext = "Please agree to the Terms and Conditions";
-                    failedRegistration = true;
-                } else {
-                    User nUser = new User(uID, upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, usuburb, upostcode);
-                    session.setAttribute("loggedInUser", nUser);
-                    UserData.addUser(nUser);
-                    response.sendRedirect("welcome.jsp");
-                }
-            } else {
-                failedRegistration = true;
-            }
-        }
+        boolean failedRegistration = session.getAttribute("failedRegistration") != null;
+        String failtext = (String)session.getAttribute("failtext");
     %>
     <%
         if (failedRegistration) {
@@ -58,7 +29,7 @@
     %>
 
 
-    <form action="register.jsp" method="post">
+    <form action="/RegisterServlet" method="post">
         <label for="email">Email*: </label>
         <input type="email" id="email" name="email"><br>
         <label for="password">Password*: </label>
