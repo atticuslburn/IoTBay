@@ -18,18 +18,18 @@
     <h1>Register</h1>
     <%
         boolean failedRegistration = session.getAttribute("failedRegistration") != null;
-        String failtext = (String)session.getAttribute("failtext");
     %>
     <%
         if (failedRegistration) {
+            String failText = (String)session.getAttribute("failText");
     %>
-    <p class="fail_text"><%=failtext%></p>
+    <p class="fail_text"><%=failText%></p>
     <%
         }
     %>
 
 
-    <form action="/RegisterServlet" method="post">
+    <form action="RegisterServlet" method="post">
         <label for="email">Email*: </label>
         <input type="email" id="email" name="email"><br>
         <label for="password">Password*: </label>
@@ -44,6 +44,8 @@
         <br>
         <label for="street_number">Street Number: </label>
         <input type="text" id="street_number" name="street_number"><br>
+        <label for="street_name">Street Name: </label>
+        <input type="text" id="street_name" name="street_name"><br>
         <label for="suburb">Suburb: </label>
         <input type="text" id="suburb" name="suburb"><br>
         <label for="postcode">Postcode: </label>

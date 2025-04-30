@@ -10,13 +10,14 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String streetNumber;
+    private String streetName;
     private String suburb;
     private String postcode;
     private boolean loggedInUser;
 
     public User(){}
 
-    public User (int userID, String password, String firstName, String lastName, String email, String phone, String streetNumber, String suburb, String postcode) {
+    public User (int userID, String password, String firstName, String lastName, String email, String phone, String streetNumber, String streetName, String suburb, String postcode) {
         this.userID = userID;
         this.password = password;
         this.firstName = firstName;
@@ -24,6 +25,7 @@ public class User implements Serializable {
         this.email = email;
         this.phone = phone;
         this.streetNumber = streetNumber;
+        this.streetName = streetName;
         this.suburb = suburb;
         this.postcode = postcode;
         this.loggedInUser = false;

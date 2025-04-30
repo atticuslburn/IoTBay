@@ -18,7 +18,7 @@ public class RegisterServlet extends HttpServlet {
 
         boolean failedRegistration = false;
 
-        String failtext = "Please fill in your Email, Password and First Name.";
+        String failText = "Please fill in your Email, Password and First Name.";
 
         if (req.getParameter("submit_login") != null) {
 
@@ -28,6 +28,7 @@ public class RegisterServlet extends HttpServlet {
             String ulastName = req.getParameter("last_name");
             String uphone = req.getParameter("phone_number");
             String ustreetNumber = req.getParameter("street_number");
+            String ustreetName = req.getParameter("street_name");
             String usuburb = req.getParameter("suburb");
             String upostcode = req.getParameter("postcode");
             boolean agreed = req.getParameter("terms_and_conditions")!=null;
@@ -35,19 +36,22 @@ public class RegisterServlet extends HttpServlet {
             int uID = UserData.getUsers().size() + 1;
             if (!upassword.isEmpty() && !ufirstName.isEmpty() && !uemail.isEmpty()) {
                 if (!agreed) {
-                    failtext = "Please agree to the Terms and Conditions";
+                    failText = "Please agree to the Terms and Conditions";
                     failedRegistration = true;
                 } else {
-                    User nUser = new User(uID, upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, usuburb, upostcode);
+                    User nUser = new User(uID, upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, ustreetName, usuburb, upostcode);
                     session.setAttribute("loggedInUser", nUser);
                     UserData.addUser(nUser);
                     resp.sendRedirect("welcome.jsp");
                 }
             } else {
                 failedRegistration = true;
+                resp.sendRedirect("register.jsp");
             }
         }
         session.setAttribute("failedRegistration", failedRegistration);
-        session.setAttribute("failtext", failtext);
+        session.setAttribute("failText", failText);
+
+
     }
 }
