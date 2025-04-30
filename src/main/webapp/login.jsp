@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="isd.group_4.User, isd.group_4.UserData" %>
+<%@ page import="isd.group_4.User" %>
+<%@ page import="isd.group_4.database.DatabaseManager" %>
+<%@ page import="java.sql.SQLException" %>
 
 <html>
 <head>
@@ -13,10 +15,14 @@
     String uemail = request.getParameter("email");
     String upassword = request.getParameter("password");
     User loggedInUser = null;
-    System.out.print("HELLO");
+    DatabaseManager database = (DatabaseManager) session.getAttribute("database");
 
     if (uemail != null && upassword != null) {
-        loggedInUser = UserData.authenticateUser(uemail, upassword);
+        try {
+            loggedInUser = database.authenticateUser(uemail, upassword);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         if (loggedInUser != null) {
             loggedInUser.login();
@@ -34,7 +40,7 @@
 %>
 
 <form action="login.jsp" method="post">
-    <label> Username: </label>
+    <label> Email: </label>
     <input type="text" name="email"><br>
 
     <label> Password: </label>

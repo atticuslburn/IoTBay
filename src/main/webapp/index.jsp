@@ -1,3 +1,13 @@
+<%@ page import="isd.group_4.database.DatabaseManager" %>
+<%@ page import="isd.group_4.User" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="isd.group_4.database.DBConnector" %>
+
+
+
+
+
+
 <html>
 <head>
     <title>Index Page</title>
