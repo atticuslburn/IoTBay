@@ -77,5 +77,12 @@ public class DatabaseManager {
         return (user != null);
     }
 
+    public boolean deleteUser(int userID) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM USERS WHERE userID = ?");
+        preparedStatement.setInt(1, userID);
+        preparedStatement.executeUpdate();
+        return true;
+    }
+
 
 }
