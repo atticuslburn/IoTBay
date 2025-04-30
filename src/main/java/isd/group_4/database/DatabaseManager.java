@@ -21,6 +21,9 @@ public class DatabaseManager {
     }
     public int addUser(User user) throws SQLException {
         int userID = this.getUserCount();
+        if (userExists(user.getEmail())) {
+            return -1;
+        }
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         preparedStatement.setString(1, user.getPassword());
         preparedStatement.setString(2, user.getEmail());
@@ -34,7 +37,6 @@ public class DatabaseManager {
         preparedStatement.executeUpdate();
         return userID;
     }
-
     private User getUser(int userID) throws SQLException {
         ResultSet resultSet = statement.executeQuery("SELECT * FROM USERS WHERE userID = " + userID);
         if (resultSet.next()) {
@@ -53,7 +55,6 @@ public class DatabaseManager {
 
         return null;
     }
-
     public User authenticateUser(String email, String password) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT userID from USERS WHERE email = ? AND password = ?");
         preparedStatement.setString(1, email);
@@ -62,6 +63,18 @@ public class DatabaseManager {
         resultSet.next();
         int userID = resultSet.getInt("userID");
         return getUser(userID);
+    }
+    public int getUserID(String email) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT userID FROM USERS WHERE email = ?");
+        preparedStatement.setString(1, email);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        return resultSet.getInt("userID");
+    }
+    public boolean userExists(String email) throws SQLException {
+        int userID = this.getUserID(email);
+        User user = this.getUser(userID);
+        return (user != null);
     }
 
 

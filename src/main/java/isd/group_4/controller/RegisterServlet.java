@@ -50,7 +50,14 @@ public class RegisterServlet extends HttpServlet {
                     User nUser = new User(upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, ustreetName, usuburb, upostcode);
                     nUser.setUserID(userCount);
                     try {
-                        database.addUser(nUser);
+                        if (database.addUser(nUser) == -1) {
+                            failText = "Email is already in use.";
+                            failedRegistration = true;
+                            resp.sendRedirect("register.jsp");
+                            session.setAttribute("failedRegistration", failedRegistration);
+                            session.setAttribute("failText", failText);
+                            return;
+                        };
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
