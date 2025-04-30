@@ -1,6 +1,7 @@
 package isd.group_4.controller;
 
 import isd.group_4.User;
+import isd.group_4.database.DAO;
 import isd.group_4.database.DatabaseManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -35,10 +36,10 @@ public class RegisterServlet extends HttpServlet {
             String upostcode = req.getParameter("postcode");
             boolean agreed = req.getParameter("terms_and_conditions")!=null;
 
-            DatabaseManager database = (DatabaseManager) session.getAttribute("database");
+            DAO database = (DAO) session.getAttribute("database");
             int userCount;
             try {
-                userCount = database.getUserCount();
+                userCount = database.Users().getUserCount();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -50,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
                     User nUser = new User(upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, ustreetName, usuburb, upostcode);
                     nUser.setUserID(userCount);
                     try {
-                        if (database.addUser(nUser) == -1) {
+                        if (database.Users().add(nUser) == -1) {
                             failText = "Email is already in use.";
                             failedRegistration = true;
                             resp.sendRedirect("register.jsp");

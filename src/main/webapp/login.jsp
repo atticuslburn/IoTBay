@@ -2,6 +2,7 @@
 <%@ page import="isd.group_4.User" %>
 <%@ page import="isd.group_4.database.DatabaseManager" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="isd.group_4.database.DAO" %>
 
 <html>
 <head>
@@ -15,11 +16,11 @@
     String uemail = request.getParameter("email");
     String upassword = request.getParameter("password");
     User loggedInUser = null;
-    DatabaseManager database = (DatabaseManager) session.getAttribute("database");
+    DAO database = (DAO) session.getAttribute("database");
 
     if (uemail != null && upassword != null) {
         try {
-            loggedInUser = database.authenticateUser(uemail, upassword);
+            loggedInUser = database.Users().authenticateUser(uemail, upassword);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
