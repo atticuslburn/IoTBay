@@ -3,18 +3,7 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="isd.group_4.database.DBConnector" %>
 
-<%
-    User user = (User)session.getAttribute("loggedInUser");
-    DatabaseManager database = (DatabaseManager) session.getAttribute("database");
-    if (database == null) {
-        try {
-            database = new DatabaseManager(new DBConnector().getConnection());
-            session.setAttribute("database", database);
-        } catch (SQLException exception) {
-            System.out.println("fail");
-        }
-    }
-%>
+
 
 
 

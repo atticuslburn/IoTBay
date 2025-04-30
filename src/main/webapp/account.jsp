@@ -2,7 +2,7 @@
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="isd.group_4.User, isd.group_4.UserData" %>
+<%@ page import="isd.group_4.User" %>
 
 <%--  KEEP THIS LINE, IMPORTANT FOR HEADER AND FOOTER  --%>
 <%@ include file="template.jsp" %>
@@ -35,10 +35,10 @@
         String fname = loggedInUser.getFirstName();
         String uemail = loggedInUser.getEmail();
         String lname = loggedInUser.getLastName();
-        String uphone = (!loggedInUser.getPhone().isEmpty()) ? (loggedInUser.getPhone()) : ("Unset");
-        String uStreet = (!loggedInUser.getStreetNumber().isEmpty()) ? (loggedInUser.getStreetNumber()) : ("Unset");
-        String uSub = (!loggedInUser.getSuburb().isEmpty()) ? (loggedInUser.getSuburb()) : ("Unset");
-        String pCode = (!loggedInUser.getPostcode().isEmpty()) ? (loggedInUser.getPostcode()) : ("Unset");
+        String uphone = (loggedInUser.getPhone() != null) ? (loggedInUser.getPhone()) : ("Unset");
+        String uStreet = (loggedInUser.getStreetNumber() != null && loggedInUser.getStreetName() != null) ? (loggedInUser.getStreetNumber() + " " + loggedInUser.getStreetName()) : ("Unset");
+        String uSub = (loggedInUser.getSuburb() != null) ? (loggedInUser.getSuburb()) : ("Unset");
+        String pCode = (loggedInUser.getPostcode() != null) ? (loggedInUser.getPostcode()) : ("Unset");
 
         String fullName = fname;
         if (!lname.isEmpty()) {

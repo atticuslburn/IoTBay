@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class User implements Serializable {
     private int userID;
     private String password;
+    private String email;
     private String firstName;
     private String lastName;
-    private String email;
     private String phone;
     private String streetNumber;
     private String streetName;
@@ -17,12 +17,11 @@ public class User implements Serializable {
 
     public User(){}
 
-    public User (int userID, String password, String firstName, String lastName, String email, String phone, String streetNumber, String streetName, String suburb, String postcode) {
-        this.userID = userID;
+    public User (String password, String email, String firstName, String lastName, String phone, String streetNumber, String streetName, String suburb, String postcode) {
         this.password = password;
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.phone = phone;
         this.streetNumber = streetNumber;
         this.streetName = streetName;
@@ -40,6 +39,12 @@ public class User implements Serializable {
     }
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
     public String getFirstName() {
         return firstName;
@@ -71,6 +76,12 @@ public class User implements Serializable {
     public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
+    public String getStreetName() {
+        return streetName;
+    }
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
     public String getSuburb() {
         return suburb;
     }
@@ -80,7 +91,7 @@ public class User implements Serializable {
     public String getPostcode() {
         return postcode;
     }
-    public void setPostcode(String postcode) {
+    public void setPostcode(String postCode) {
         this.postcode = postcode;
     }
     public void login() {this.loggedInUser = true;}

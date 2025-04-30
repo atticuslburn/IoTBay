@@ -1,18 +1,36 @@
 package isd.group_4.controller;
 
 
-import jakarta.servlet.ServletException;
+import isd.group_4.User;
+import isd.group_4.database.DBConnector;
+import isd.group_4.database.DatabaseManager;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSessionEvent;
+import jakarta.servlet.http.HttpSessionListener;
 
-import java.io.IOException;
+import java.sql.SQLException;
 
 @WebListener
-public class StartupListener extends HttpServlet {
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+public class StartupListener implements ServletContextListener, HttpSessionListener {
+    public void contextInitialized(ServletContextEvent sce) {
+        System.out.println("StartupListener contextInitialized");
+    }
+    public void contextDestroyed(ServletContextEvent sce) {
+        System.out.println("StartupListener contextDestroyed");
+    }
+
+    public void sessionCreated(HttpSessionEvent se) {
+        System.out.println("StartupListener sessionCreated");
+        HttpSession session = se.getSession();
+        try {
+            DatabaseManager database = new DatabaseManager(new DBConnector().getConnection());
+            session.setAttribute("database", database);
+        } catch (SQLException exception) {
+            System.out.println("failed database connection");
+        }
+
     }
 }

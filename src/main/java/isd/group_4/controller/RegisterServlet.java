@@ -1,7 +1,7 @@
 package isd.group_4.controller;
 
 import isd.group_4.User;
-import isd.group_4.UserData;
+import isd.group_4.database.DatabaseManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     @Override
@@ -33,15 +35,28 @@ public class RegisterServlet extends HttpServlet {
             String upostcode = req.getParameter("postcode");
             boolean agreed = req.getParameter("terms_and_conditions")!=null;
 
-            int uID = UserData.getUsers().size() + 1;
+            DatabaseManager database = (DatabaseManager) session.getAttribute("database");
+            int userCount;
+            try {
+                userCount = database.getUserCount();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             if (!upassword.isEmpty() && !ufirstName.isEmpty() && !uemail.isEmpty()) {
                 if (!agreed) {
                     failText = "Please agree to the Terms and Conditions";
                     failedRegistration = true;
                 } else {
-                    User nUser = new User(uID, upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, ustreetName, usuburb, upostcode);
+                    User nUser = new User(upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, ustreetName, usuburb, upostcode);
+                    nUser.setUserID(userCount);
+                    try {
+                        database.addUser(nUser);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                     session.setAttribute("loggedInUser", nUser);
-                    UserData.addUser(nUser);
+
+
                     resp.sendRedirect("welcome.jsp");
                 }
             } else {
