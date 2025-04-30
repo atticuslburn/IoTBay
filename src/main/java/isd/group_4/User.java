@@ -97,4 +97,18 @@ public class User implements Serializable {
     public void login() {this.loggedInUser = true;}
     public void logout() {this.loggedInUser = false;}
 
+    boolean validateEmail() {
+        return this.email.contains("@");
+    }
+
+    boolean validatePhone() {
+        return this.phone.matches("[0-9]*");
+    }
+
+    boolean validatePhoneNumber() {
+        return this.phone.length() == 10;
+    }
+
+
+
 }

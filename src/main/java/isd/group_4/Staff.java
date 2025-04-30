@@ -1,4 +1,6 @@
 package isd.group_4;
 
-public class Staff extends User{
+import java.io.Serializable;
+
+public class Staff extends User implements Serializable {
 }
