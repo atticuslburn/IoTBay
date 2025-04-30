@@ -84,5 +84,22 @@ public class DatabaseManager {
         return true;
     }
 
+    public boolean updateUser(int userID, String password, User user) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE USERS SET (password = ?, email = ? , firstName = ?, lastName = ?, phone = ? , streetNumber = ?, streetName = ?, suburb = ?, postcode = ?) WHERE userID = ? && password = ?");
+        preparedStatement.setString(1, password);
+        preparedStatement.setString(2, user.getEmail());
+        preparedStatement.setString(3, user.getFirstName());
+        preparedStatement.setString(4, user.getLastName());
+        preparedStatement.setString(5, user.getPhone());
+        preparedStatement.setString(6, user.getStreetNumber());
+        preparedStatement.setString(7, user.getStreetName());
+        preparedStatement.setString(8, user.getSuburb());
+        preparedStatement.setString(9, user.getPostcode());
+        preparedStatement.setInt(10, userID);
+        preparedStatement.setString(11, password);
+        preparedStatement.executeUpdate();
+        return true;
+    }
+
 
 }
