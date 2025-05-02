@@ -1,6 +1,9 @@
 <html>
 <head>
     <title>IOT Sales</title>
+    <%@ page import="isd.group_4.Item" %>
+    <%@ page import="isd.group_4.database.DAO" %>
+    <%@ page import="java.util.List" %>
     <%--  KEEP THIS LINE, IMPORTANT FOR HEADER AND FOOTER  --%>
     <%@ include file="template.jsp" %>
     <%-- Also includes style.css--%>
@@ -9,27 +12,24 @@
     <h1>IOT shop</h1>
     <div class="content">
         <div class="bg"></div>
-        <div class="header-grid"></div>
-        Main content goes here
-
-<%--        <%
-            for (Items items : db.Albums().allAlbums()) {
-                String imagePath = "image/album/" + album.getTitle().toLowerCase().replace(' ', '_') + ".jpg";
-        %>
-        <div class="album-card">
-            <p>items</p>
-            <img src=<%=imagePath%> />
-            <p><%=album.getArtist()%></p>
-            <form method="post" action="/PurchaseServlet">
-                <input type="hidden" name="id" value="<%=album.getId()%>">
-                <input id="reg" type="submit" value="PURCHASE">
-            </form>
-        </div>
-
         <%
-            }
-        %>--%>
+            DAO database = (DAO) session.getAttribute("database");
+            List<Item> itemList = database.Items().getAllItems();
+        %>
+        <div class="header-grid">
+            <% for (Item item : itemList) { %>
+            <div class="center-box">
+                <h3><%= item.getItemName() %></h3>
+                <p><%= item.getItemDescription() %></p>
+                <p>Price: $<%= item.getPrice() %></p>
+                <p>Stock: <%= item.getQuantity() %></p>
+                <form method="post" action="PurchaseServlet">
+                    <input type="hidden" name="itemID" value="<%= item.getItemID() %>">
+                    <input type="submit" value="Buy Now">
+                </form>
+            </div>
+            <% } %>
+        </div>
     </div>
 </body>
 </html>
-

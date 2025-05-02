@@ -14,8 +14,8 @@ public class DAO {
         Connection connection = new DBConnector().getConnection();
         try {
             tables.add(new UserDatabaseManager(connection));
-        }
-        catch (SQLException ex) {
+            tables.add(new ItemDatabaseManager(connection));
+        } catch (SQLException ex) {
             System.out.println("Error initializing DBManagers");
         }
     }
@@ -24,4 +24,7 @@ public class DAO {
         return (UserDatabaseManager) tables.get(0);
     }
 
+    public ItemDatabaseManager Items() {
+        return (ItemDatabaseManager) tables.get(1);
+    }
 }

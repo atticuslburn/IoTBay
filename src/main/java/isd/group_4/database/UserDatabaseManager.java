@@ -1,7 +1,6 @@
 package isd.group_4.database;
 
 import java.sql.*;
-
 import isd.group_4.User;
 
 public class UserDatabaseManager extends DatabaseManager<User>  {
@@ -96,6 +95,4 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
         preparedStatement.executeUpdate();
         return true;
     }
-
-
 }
