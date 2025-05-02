@@ -1,5 +1,8 @@
 package isd.group_4;
 
+import isd.group_4.exceptions.InvalidEmailException;
+import isd.group_4.exceptions.InvalidPhoneException;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -61,13 +64,17 @@ public class User implements Serializable {
     public String getEmail() {
         return email;
     }
-    public void setEmail(String email) {
+    public void setEmail (String email) throws InvalidEmailException {
+        if (!validateEmail(email)) throw new InvalidEmailException("Invalid email: "+email);
         this.email = email;
     }
     public String getPhone() {
         return phone;
     }
-    public void setPhone(String phone) {
+    public void setPhone(String phone) throws InvalidPhoneException {
+        if (!validPhone(phone)) {
+            throw new InvalidPhoneException("Invalid phone number: " + phone);
+        }
         this.phone = phone;
     }
     public String getStreetNumber() {
@@ -97,17 +104,14 @@ public class User implements Serializable {
     public void login() {this.loggedInUser = true;}
     public void logout() {this.loggedInUser = false;}
 
-    boolean validateEmail() {
-        return this.email.contains("@");
+    boolean validateEmail(String email) {
+        return email.contains("@");
     }
 
-    boolean validatePhone() {
-        return this.phone.matches("[0-9]*");
+    boolean validPhone(String phone) {
+        return phone != null && phone.matches("\\d{10}");
     }
 
-    boolean validatePhoneNumber() {
-        return this.phone.length() == 10;
-    }
 
 
 

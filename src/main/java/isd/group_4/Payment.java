@@ -1,12 +1,14 @@
 package isd.group_4;
 
+import isd.group_4.exceptions.InvalidCardException;
+
 import java.util.Date;
 
 public class Payment {
     private int paymentID;
     private String bankName;
     private String cardHolderName;
-    private int cardNumber;
+    private String cardNumber;
     private Date cardExpiryDate;
     private String cardCVV; //it should be deleted afterwards
     private boolean paymentStatus;
@@ -33,10 +35,11 @@ public class Payment {
     public void setCardHolderName(String cardHolderName) {
         this.cardHolderName = cardHolderName;
     }
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
-    public void setCardNumber(int cardNumber) {
+    public void setCardNumber(String cardNumber) throws InvalidCardException {
+        if(!validateCard(cardNumber)) throw new InvalidCardException("Invalid card number");
         this.cardNumber = cardNumber;
     }
     public Date getCardExpiryDate() {
@@ -62,5 +65,9 @@ public class Payment {
     }
     public void setPaymentPending(boolean paymentPending) {
         this.paymentPending = paymentPending;
+    }
+
+    boolean validateCard(String cardNumber){
+        return cardNumber.matches("\\d{13,16}");
     }
 }
