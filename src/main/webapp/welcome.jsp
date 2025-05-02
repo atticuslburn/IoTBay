@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: adrianirwin
-  Date: 1/4/2025
-  Time: 11:45 am
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="isd.group_4.User" %>
 <html>
@@ -27,7 +20,5 @@
       response.sendRedirect("login.jsp");
     }
   %>
-  
-
   </body>
 </html>
