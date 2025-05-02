@@ -4,6 +4,7 @@ package isd.group_4.controller;
 import isd.group_4.User;
 import isd.group_4.database.DBConnector;
 import isd.group_4.database.DatabaseManager;
+import isd.group_4.database.DAO;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
@@ -26,7 +27,7 @@ public class StartupListener implements ServletContextListener, HttpSessionListe
         System.out.println("StartupListener sessionCreated");
         HttpSession session = se.getSession();
         try {
-            DatabaseManager database = new DatabaseManager(new DBConnector().getConnection());
+            DAO database = new DAO() {};
             session.setAttribute("database", database);
         } catch (SQLException exception) {
             System.out.println("failed database connection");
