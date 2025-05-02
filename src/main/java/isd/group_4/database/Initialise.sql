@@ -28,6 +28,10 @@ CREATE TABLE ITEMS (
 );
 
 INSERT INTO ITEMS (itemName, itemDescription, quantity, price) VALUES
-                                                                   ('iPhone 14', 'Apple iPhone 14 with A15 chip', 10, 999.99),
-                                                                   ('iPhone 15 Mini', 'Smaller version with improved camera', 5, 1099.00),
-                                                                   ('Smart Plug', 'WiFi smart plug for home automation', 20, 29.95);
+('Apple iPhone 14', '6.1-inch display, A15 chip, dual-camera system', 10, 799.00),
+('Apple iPhone 15', '6.1-inch display, A16 chip, dynamic island design', 10, 899.00),
+('Apple iPhone 16', '6.1-inch display, A17 chip, improved battery life', 10, 999.00),
+('Apple iPhone 14 Pro', '6.1-inch display, ProMotion, triple-camera system', 5, 1099.00),
+('Apple iPhone 15 Pro', 'Titanium body, A17 Pro chip, USB-C port', 5, 1199.00),
+('Apple iPhone 16 Pro', 'Latest Pro features, enhanced GPU, spatial video', 5, 1299.00),
+('Apple AirPods Pro', 'Noise-canceling earbuds with spatial audio', 20, 249.00);
