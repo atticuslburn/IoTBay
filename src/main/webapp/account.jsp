@@ -62,5 +62,15 @@
     Click to logout.
 </div>
 
+<div class="center-box">
+    Click to edit your information. THIS IS INCOMPELTE
+</div>
+
+<div class="center-box">
+    <form method="POST" action="/DeleteServlet">
+    Click to delete account. THIS IS INCOMPEATE TOO, lol
+    </form>
+</div>
+
 </body>
 </html>
