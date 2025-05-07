@@ -37,5 +37,7 @@ INSERT INTO ITEMS (itemName, itemDescription, quantity, price) VALUES
 ('Apple iPhone 16', '6.1-inch display, A17 chip, improved battery life', 10, 999.00),
 ('Apple iPhone 14 Pro', '6.1-inch display, ProMotion, triple-camera system', 5, 1099.00),
 ('Apple iPhone 15 Pro', 'Titanium body, A17 Pro chip, USB-C port', 5, 1199.00),
+('Apple iPhone 15 Pro', 'Titanium body, A17 Pro chip, USB-C port', 5, 1199.00),
 ('Apple iPhone 16 Pro', 'Latest Pro features, enhanced GPU, spatial video', 5, 1299.00),
+('Apple iPhone 16e', 'Lighter', 5, 799.00),
 ('Apple AirPods Pro', 'Noise-canceling earbuds with spatial audio', 20, 249.00);
