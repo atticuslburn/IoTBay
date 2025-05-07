@@ -109,7 +109,7 @@ public class User implements Serializable {
     }
 
     boolean validPhone(String phone) {
-        return phone != null && phone.matches("\\d{10}");
+        return this.phone.matches("\\d{10}");
     }
 
 

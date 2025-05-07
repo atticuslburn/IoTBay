@@ -3,6 +3,8 @@ package isd.group_4.controller;
 import isd.group_4.User;
 import isd.group_4.database.DAO;
 import isd.group_4.database.DatabaseManager;
+import isd.group_4.exceptions.InvalidEmailException;
+import isd.group_4.exceptions.InvalidPhoneException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -50,6 +52,17 @@ public class RegisterServlet extends HttpServlet {
                 } else {
                     User nUser = new User(upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, ustreetName, usuburb, upostcode);
                     nUser.setUserID(userCount);
+                    try {nUser.setPhone(uphone);
+                    } catch (InvalidPhoneException e)
+                    {
+                        System.out.println("Invalid phone number triggred");
+                        failText = "phone number should be a number";
+                        resp.sendRedirect("register.jsp");
+                        session.setAttribute("failedRegistration", failedRegistration);
+                        session.setAttribute("failText", failText);
+                        return;
+                    }
+
                     try {
                         if (database.Users().add(nUser) == -1) {
                             failText = "Email is already in use.";
