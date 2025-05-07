@@ -24,8 +24,6 @@ public class DAO {
     public UserDatabaseManager Users() {
         return (UserDatabaseManager) tables.get(0);
     }
-
-    public ItemDatabaseManager Items() {
-        return (ItemDatabaseManager) tables.get(1);
-    }
+    public ItemDatabaseManager Items() {return (ItemDatabaseManager) tables.get(1);}
+    public OrderDatabaseManager Orders() {return (OrderDatabaseManager) tables.get(2);}
 }
