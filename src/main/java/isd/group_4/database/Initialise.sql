@@ -35,3 +35,16 @@ INSERT INTO ITEMS (itemName, itemDescription, quantity, price) VALUES
 ('Apple iPhone 15 Pro', 'Titanium body, A17 Pro chip, USB-C port', 5, 1199.00),
 ('Apple iPhone 16 Pro', 'Latest Pro features, enhanced GPU, spatial video', 5, 1299.00),
 ('Apple AirPods Pro', 'Noise-canceling earbuds with spatial audio', 20, 249.00);
+
+
+-- ORDER
+DROP TABLE IF EXISTS ORDERS;
+CREATE TABLE ORDERS (
+    orderID INTEGER PRIMARY KEY AUTOINCREMENT,
+    itemID INTEGER,
+    userID INTEGER,
+    orderQuantity INTEGER,
+    orderDate DATE,
+    CONSTRAINT itemFK FOREIGN KEY (itemID) REFERENCES ITEMS(itemID),
+    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES USERS(userID)
+);

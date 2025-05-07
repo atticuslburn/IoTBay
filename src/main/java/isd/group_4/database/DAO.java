@@ -1,6 +1,5 @@
 package isd.group_4.database;
 
-import isd.group_4.UserData;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,6 +14,8 @@ public class DAO {
         try {
             tables.add(new UserDatabaseManager(connection));
             tables.add(new ItemDatabaseManager(connection));
+            tables.add(new OrderDatabaseManager(connection));
+
         } catch (SQLException ex) {
             System.out.println("Error initializing DBManagers");
         }
