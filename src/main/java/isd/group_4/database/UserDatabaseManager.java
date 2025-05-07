@@ -45,7 +45,9 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
             String streetName = resultSet.getString("streetName");
             String suburb = resultSet.getString("suburb");
             String postcode = resultSet.getString("postcode");
-            return new User(password, email, firstName, lastName, phone, streetNumber, streetName, suburb, postcode);
+            User user = new User(password, email, firstName, lastName, phone, streetNumber, streetName, suburb, postcode);
+            user.setUserID(userID);
+            return user;
         }
 
 

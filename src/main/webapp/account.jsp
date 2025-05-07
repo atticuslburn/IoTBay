@@ -63,12 +63,12 @@
 </div>
 
 <div class="center-box">
-    Click to edit your information. THIS IS INCOMPELTE
+    Click to edit your information.
 </div>
 
 <div class="center-box">
     <form method="POST" action="/DeleteServlet">
-    Click to delete account. THIS IS INCOMPEATE TOO, lol
+    <button> to delete account.</button>
     </form>
 </div>
 

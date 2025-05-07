@@ -12,8 +12,12 @@ CREATE TABLE USERS (
     suburb varchar(32),
     postcode varchar(4)
 );
-INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode) VALUES ('abc', 'John@citizen','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000');
-
+INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode) VALUES
+('abc', 'John@citizen','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000');
+INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode) VALUES
+    ('abc', 'bruh@gmail','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000');
+INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode) VALUES
+    ('abc', 'yoho@fake','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000');
 SELECT * FROM USERS;
 
 -- ITEM TABLE
