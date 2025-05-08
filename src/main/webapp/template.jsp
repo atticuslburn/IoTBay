@@ -10,6 +10,8 @@
     <div class="page_header">
         <a href="index.jsp"><div class="box">Home</div></a>
         <a href="browse.jsp"><div class="box">Browse</div></a>
+        <a href="staff.jsp"><div class="box">Staff</div></a>
+
         <%
             User nuser = (User) session.getAttribute("loggedInUser");
             if (session.getAttribute("loggedInUser") != null) {
