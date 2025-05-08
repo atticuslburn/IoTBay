@@ -13,7 +13,6 @@
     <div class="content">
         <div class="bg"></div>
         <%
-            DAO database = (DAO) session.getAttribute("database");
             List<Item> itemList = database.Items().getAllItems();
         %>
         <div class="header-grid">

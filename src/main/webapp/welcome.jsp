@@ -7,8 +7,6 @@
   </head>
   <body>
   <%
-    User loggedInUser = (User) session.getAttribute("loggedInUser");
-
     if (loggedInUser != null) {
       String fname = loggedInUser.getFirstName();
   %>

@@ -20,6 +20,21 @@ INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumb
     ('abc', 'yoho@fake','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000');
 SELECT * FROM USERS;
 
+-- USER PERMISSIONS
+DROP TABLE IF EXISTS USERPERMISSIONS;
+CREATE TABLE USERPERMISSIONS (
+    userID INTEGER PRIMARY KEY,
+    isRegistered BOOLEAN,
+    isAdmin BOOLEAN,
+    isMerchant BOOLEAN,
+    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES USERS(userID)
+);
+
+INSERT INTO USERPERMISSIONS (userID, isRegistered, isAdmin, isMerchant) VALUES (1, true, true, true);
+
+SELECT COUNT(*) FROM USERPERMISSIONS WHERE (isAdmin = true OR isMerchant = true);
+
+
 -- ITEM TABLE
 DROP TABLE IF EXISTS ITEMS;
 
