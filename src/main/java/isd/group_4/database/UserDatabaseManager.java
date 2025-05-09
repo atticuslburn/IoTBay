@@ -20,7 +20,7 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
         if (userExists(user.getEmail())) {
             return -1;
         }
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         preparedStatement.setString(1, user.getPassword());
         preparedStatement.setString(2, user.getEmail());
         preparedStatement.setString(3, user.getFirstName());
@@ -30,6 +30,7 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
         preparedStatement.setString(7, user.getStreetName());
         preparedStatement.setString(8, user.getSuburb());
         preparedStatement.setString(9, user.getPostcode());
+        preparedStatement.setString(10,user.getRole());
         preparedStatement.executeUpdate();
         return userID;
     }
@@ -45,7 +46,8 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
             String streetName = resultSet.getString("streetName");
             String suburb = resultSet.getString("suburb");
             String postcode = resultSet.getString("postcode");
-            User user = new User(password, email, firstName, lastName, phone, streetNumber, streetName, suburb, postcode);
+            String role = resultSet.getString("role");
+            User user = new User(password, email, firstName, lastName, phone, streetNumber, streetName, suburb, postcode, role);
             user.setUserID(userID);
             return user;
         }
@@ -83,7 +85,7 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
     }
 
     public boolean update(int userID, User user) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE USERS SET (password = ?, email = ? , firstName = ?, lastName = ?, phone = ? , streetNumber = ?, streetName = ?, suburb = ?, postcode = ?) WHERE userID = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE USERS SET (password = ?, email = ? , firstName = ?, lastName = ?, phone = ? , streetNumber = ?, streetName = ?, suburb = ?, postcode = ?, role = ?) WHERE userID = ?");
         preparedStatement.setString(1, user.getPassword());
         preparedStatement.setString(2, user.getEmail());
         preparedStatement.setString(3, user.getFirstName());
@@ -93,7 +95,8 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
         preparedStatement.setString(7, user.getStreetName());
         preparedStatement.setString(8, user.getSuburb());
         preparedStatement.setString(9, user.getPostcode());
-        preparedStatement.setInt(10, userID);
+        preparedStatement.setString(10, user.getRole());
+        preparedStatement.setInt(11, userID);
         preparedStatement.executeUpdate();
         return true;
     }

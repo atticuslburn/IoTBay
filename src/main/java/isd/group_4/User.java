@@ -2,6 +2,7 @@ package isd.group_4;
 
 import isd.group_4.exceptions.InvalidEmailException;
 import isd.group_4.exceptions.InvalidPhoneException;
+import isd.group_4.exceptions.InvalidRoleException;
 
 import java.io.Serializable;
 
@@ -16,11 +17,17 @@ public class User implements Serializable {
     private String streetName;
     private String suburb;
     private String postcode;
+    private String role;
     private boolean loggedInUser;
 
-    public User(){}
+    public User(){
+        userID = 0;
+        email = "1";
+        password = "2";
+        role = "customer";
+    }
 
-    public User (String password, String email, String firstName, String lastName, String phone, String streetNumber, String streetName, String suburb, String postcode) {
+    public User (String password, String email, String firstName, String lastName, String phone, String streetNumber, String streetName, String suburb, String postcode, String role) {
         this.password = password;
         this.email = email;
         this.firstName = firstName;
@@ -31,6 +38,7 @@ public class User implements Serializable {
         this.suburb = suburb;
         this.postcode = postcode;
         this.loggedInUser = false;
+        this.role = role;
     }
 
     public boolean checkPassword(String password){
@@ -103,6 +111,21 @@ public class User implements Serializable {
     }
     public void login() {this.loggedInUser = true;}
     public void logout() {this.loggedInUser = false;}
+
+    public String getRole(){
+        return role;
+    }
+    public void setRole(String role) throws InvalidRoleException {
+        role = role.trim().toLowerCase();
+
+        if (role.contains("cus")) {
+            this.role = "customer";
+        } else if (role.contains("adm")) {
+            this.role = "admin";
+        } else {
+            throw new InvalidRoleException("Invalid role: " + role);
+        }
+    }
 
     boolean validateEmail(String email) {
         return email.contains("@");

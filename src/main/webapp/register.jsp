@@ -48,8 +48,13 @@
         <input type="text" id="street_name" name="street_name"><br>
         <label for="suburb">Suburb: </label>
         <input type="text" id="suburb" name="suburb"><br>
+
         <label for="postcode">Postcode: </label>
         <input type="text" id="postcode" name="postcode"><br>
+
+        <label for="role">Role: </label>
+        <input type="text" id="role" name="role"><br>
+
         <label for="terms_and_conditions">Agree to our <span style = color:dodgerblue> Terms and Conditions</span></label>
         <input type="checkbox" id="terms_and_conditions" name="terms_and_conditions">
         <br>
