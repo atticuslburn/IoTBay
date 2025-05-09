@@ -16,8 +16,6 @@
 <body>
 
 <% //check if there is a logged in user
-    User loggedInUser = (User) session.getAttribute("loggedInUser");
-
     if (loggedInUser == null) {
 
 %>
@@ -32,6 +30,7 @@
         return;
     }
     else {
+        int userID = loggedInUser.getUserID();
         String fname = loggedInUser.getFirstName();
         String uemail = loggedInUser.getEmail();
         String lname = loggedInUser.getLastName();
@@ -48,6 +47,7 @@
 
 <div class="center-box">
     Welcome, <%=fullName%>. Your details are as follows:<br>
+    User ID: <%=userID%><br>
     Email: <%= uemail%><br>
     Phone: <%= uphone%><br>
     Street Address: <%= uStreet%><br>

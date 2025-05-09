@@ -15,8 +15,7 @@
 <%
     String uemail = request.getParameter("email");
     String upassword = request.getParameter("password");
-    User loggedInUser = null;
-    DAO database = (DAO) session.getAttribute("database");
+
 
     if (uemail != null && upassword != null) {
         try {

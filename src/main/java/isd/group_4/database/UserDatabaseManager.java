@@ -97,4 +97,42 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
         preparedStatement.executeUpdate();
         return true;
     }
+
+    //STAFF
+    public int getStaffCount() throws SQLException {
+        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERPERMISSIONS WHERE (isAdmin = true OR isMerchant = true)");
+        resultSet.next();
+        return resultSet.getInt(1);
+    }
+
+    public int getAdminCount() throws SQLException {
+        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERPERMISSIONS WHERE isAdmin = true");
+        resultSet.next();
+        return resultSet.getInt(1);
+    }
+
+    public int getMerchantCount() throws SQLException {
+        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERPERMISSIONS WHERE isMerchant = true");
+        resultSet.next();
+        return resultSet.getInt(1);
+    }
+
+    public boolean isAdmin(int userID) throws SQLException {
+        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERPERMISSIONS WHERE userID = " + userID + " AND isAdmin = true");
+        resultSet.next();
+        return resultSet.getInt(1) == 1;
+    }
+
+    public boolean isMerchant(int userID) throws SQLException {
+        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERPERMISSIONS WHERE userID = " + userID + " AND isMerchant = true");
+        resultSet.next();
+        return resultSet.getInt(1) == 1;
+    }
+
+    public boolean isStaff(int userID) throws SQLException {
+        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERPERMISSIONS WHERE userID = " + userID + " AND (isMerchant = true OR isAdmin = true)");
+        resultSet.next();
+        return resultSet.getInt(1) == 1;
+    }
+
 }
