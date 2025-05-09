@@ -73,3 +73,13 @@ CREATE TABLE ORDERS (
     CONSTRAINT itemFK FOREIGN KEY (itemID) REFERENCES ITEMS(itemID),
     CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES USERS(userID)
 );
+
+--logs
+drop table if exists user_access_log;
+create table user_access_log (
+    id integer primary key autoincrement,
+    user_id integer not null,
+    login_time datetime not null,
+    logout_time datetime,
+    constraint userfk foreign key (user_id) references USERS(userID)
+);
