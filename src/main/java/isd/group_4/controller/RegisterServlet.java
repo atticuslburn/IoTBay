@@ -50,7 +50,7 @@ public class RegisterServlet extends HttpServlet {
                     failText = "Please agree to the Terms and Conditions";
                     failedRegistration = true;
                 } else {
-                    User nUser = new User(upassword, ufirstName, ulastName, uemail, uphone, ustreetNumber, ustreetName, usuburb, upostcode, role);
+                    User nUser = new User(upassword, uemail, ufirstName, ulastName, uphone, ustreetNumber, ustreetName, usuburb, upostcode, role);
                     nUser.setUserID(userCount);
                     try {nUser.setPhone(uphone);
                     } catch (InvalidPhoneException e)
