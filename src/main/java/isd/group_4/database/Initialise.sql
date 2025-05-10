@@ -56,7 +56,7 @@ INSERT INTO ITEMS (itemName, itemDescription, quantity, price) VALUES
 ('Apple iPhone 16', 'Next-gen A17 chip, improved thermal performance, 5G enhanced', 10, 1049.00),
 
 ('Apple iPhone 16 Pro', '6.7-inch display, periscope telephoto, 2TB storage option', 5, 1399.00),
-('Apple iPhone 16e', 'Slimmer model, energy-efficient, lightweight build', 5, 749.00),
+('Apple iPhone 16 e', 'Slimmer model, energy-efficient, lightweight build', 5, 749.00),
 ('Apple AirPods Pro', 'Active Noise Cancellation, Adaptive Transparency, MagSafe charging', 20, 249.00),
 
 ('Google Nest Hub', '7-inch smart display with Google Assistant, home control and media', 12, 99.00),

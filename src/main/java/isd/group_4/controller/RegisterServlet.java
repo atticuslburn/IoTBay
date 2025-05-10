@@ -80,7 +80,7 @@ public class RegisterServlet extends HttpServlet {
                             session.setAttribute("failedRegistration", failedRegistration);
                             session.setAttribute("failText", failText);
                             return;
-                        };
+                        }
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
