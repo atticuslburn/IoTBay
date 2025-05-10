@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import isd.group_4.User;
 import isd.group_4.exceptions.Customer;
 import isd.group_4.database.DAO;
 
@@ -17,19 +18,24 @@ import java.util.List;
 @WebServlet("/CustomerServlet")
 public class CustomerServlet extends HttpServlet {
 
-
-    private DAO database;
-
-    @Override
-    public void init() throws ServletException {
-    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        database = (DAO) session.getAttribute("database");
 
+        // --- 1) Auth check via User.role ---
+        HttpSession session = req.getSession(false);
+        User logged = (session == null)
+                ? null
+                : (User) session.getAttribute("loggedInUser");
+
+        if (logged == null || !"admin".equals(logged.getRole())) {
+            // not logged in or not an admin → back to home
+            resp.sendRedirect("index.jsp");
+            return;
+        }
+
+        // --- 2) Your existing list/edit/new/delete logic ---
+        DAO database = (DAO) session.getAttribute("database");
         String action = req.getParameter("action");
         try {
             if (action == null || action.equals("list")) {
@@ -43,19 +49,19 @@ public class CustomerServlet extends HttpServlet {
                     list = database.Customers().getAllCustomers();
                 }
                 req.setAttribute("customerList", list);
-                req.getRequestDispatcher("customer-list.jsp")
+                req.getRequestDispatcher("/customer-list.jsp")
                         .forward(req, resp);
 
             } else if (action.equals("new")) {
                 req.setAttribute("customer", new Customer());
-                req.getRequestDispatcher("customer-form.jsp")
+                req.getRequestDispatcher("/customer-form.jsp")
                         .forward(req, resp);
 
             } else if (action.equals("edit")) {
                 int id = Integer.parseInt(req.getParameter("id"));
                 Customer c = database.Customers().get(id);
                 req.setAttribute("customer", c);
-                req.getRequestDispatcher("customer-form.jsp")
+                req.getRequestDispatcher("/customer-form.jsp")
                         .forward(req, resp);
 
             } else if (action.equals("delete")) {
@@ -74,9 +80,20 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        database = (DAO) session.getAttribute("database");
 
+        // --- same auth check in POST ---
+        HttpSession session = req.getSession(false);
+        User logged = (session == null)
+                ? null
+                : (User) session.getAttribute("loggedInUser");
+
+        if (logged == null || !"admin".equals(logged.getRole())) {
+            resp.sendRedirect("index.jsp");
+            return;
+        }
+
+        // --- create/update logic ---
+        DAO database = (DAO) session.getAttribute("database");
         try {
             String sid = req.getParameter("id");
             int id = (sid == null || sid.isEmpty()) ? 0 : Integer.parseInt(sid);

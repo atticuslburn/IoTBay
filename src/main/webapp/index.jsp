@@ -1,6 +1,7 @@
 <%@ page import="isd.group_4.database.DatabaseManager" %>
 <%@ page import="isd.group_4.User" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="isd.group_4.database.DAO" %>
 <%@ page import="isd.group_4.database.DBConnector" %>
 
 
@@ -22,12 +23,18 @@
     <p>Please log in or register to continue.</p>
 </div>
 
-<div class = "page_body">
-    <div class="login_register">
-        <a href="login.jsp"><div class = "link_box">Login</div></a>
-        <a href="register.jsp"><div class = "link_box">Register</div></a>
-        <a href="CustomerServlet"><div class="link_box">Customer Management</div></a>
-    </div>
+<div class="login_register">
+    <a href="login.jsp"><div class="link_box">Login</div></a>
+    <a href="register.jsp"><div class="link_box">Register</div></a>
+    <%
+        User logged = (User) session.getAttribute("loggedInUser");
+        if (logged != null && "admin".equals(logged.getRole())) {
+    %>
+    <a href="CustomerServlet"><div class="link_box">Customer Management</div></a>
+    <%
+        }
+    %>
 </div>
+
 </body>
 </html>
