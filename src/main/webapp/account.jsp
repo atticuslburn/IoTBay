@@ -74,10 +74,8 @@
     </form>
 </div>
 
-<div class="center-box">
-    <form>
-        <button> to see my access logs</button>
-    </form>
+<div class="center-box" onclick="location.href='accessLog.jsp';">
+    Click to see your access log.
 </div>
 
 </body>
