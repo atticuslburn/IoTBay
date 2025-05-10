@@ -41,6 +41,12 @@
       border: 1px solid #ccc;
     }
 
+    .page_body {
+      position: static !important;
+      padding-bottom: 200px !important; /* plenty of room for your 60px footer */
+      overflow: visible !important;
+    }
+
   </style>
 </head>
 <body>
