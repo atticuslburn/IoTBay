@@ -26,6 +26,7 @@
     <div class="login_register">
         <a href="login.jsp"><div class = "link_box">Login</div></a>
         <a href="register.jsp"><div class = "link_box">Register</div></a>
+        <a href="CustomerServlet"><div class="link_box">Customer Management</div></a>
     </div>
 </div>
 </body>
