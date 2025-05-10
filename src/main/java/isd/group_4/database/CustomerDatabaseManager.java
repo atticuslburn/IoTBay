@@ -75,7 +75,7 @@ public class CustomerDatabaseManager extends DatabaseManager<Customer> {
         return true;
     }
 
-    /** READ all (optional helper) */
+    /** READ  */
     public List<Customer> getAllCustomers() throws SQLException {
         List<Customer> list = new ArrayList<>();
         ResultSet rs = statement.executeQuery("SELECT * FROM customers");
@@ -88,6 +88,28 @@ public class CustomerDatabaseManager extends DatabaseManager<Customer> {
                     rs.getString("address"),
                     rs.getBoolean("active")
             ));
+        }
+        return list;
+    }
+    /** SEARCH  */
+    public List<Customer> searchCustomers(String nameFilter, String typeFilter) throws SQLException {
+        List<Customer> list = new ArrayList<>();
+        String sql = "SELECT * FROM customers WHERE name LIKE ? AND type LIKE ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, "%" + (nameFilter == null ? "" : nameFilter) + "%");
+            ps.setString(2, "%" + (typeFilter == null ? "" : typeFilter) + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new Customer(
+                            rs.getInt("id"),
+                            rs.getString("name"),
+                            rs.getString("email"),
+                            rs.getString("type"),
+                            rs.getString("address"),
+                            rs.getBoolean("active")
+                    ));
+                }
+            }
         }
         return list;
     }
