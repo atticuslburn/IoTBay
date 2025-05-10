@@ -83,7 +83,8 @@ create table user_access_log (
     logout_time datetime,
     constraint userfk foreign key (user_id) references USERS(userID)
 );
-
+insert into user_access_log (user_id, login_time, logout_time) values
+(1, 1300, 1600);
 -- CUSTOMER INFORMATION MANAGEMENT table (Esha)
 DROP TABLE IF EXISTS customers;
 CREATE TABLE customers (

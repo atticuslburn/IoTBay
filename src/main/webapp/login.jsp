@@ -39,7 +39,7 @@
     }
 %>
 
-<form action="login.jsp" method="post">
+<form action="LoginServlet" method="post">
     <label> Email: </label>
     <input type="text" name="email"><br>
 
