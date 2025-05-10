@@ -51,15 +51,19 @@ CREATE TABLE ITEMS (
 );
 
 INSERT INTO ITEMS (itemName, itemDescription, quantity, price) VALUES
-('Apple iPhone 14', '6.1-inch display, A15 chip, dual-camera system', 10, 799.00),
-('Apple iPhone 15', '6.1-inch display, A16 chip, dynamic island design', 10, 899.00),
-('Apple iPhone 16', '6.1-inch display, A17 chip, improved battery life', 10, 999.00),
-('Apple iPhone 14 Pro', '6.1-inch display, ProMotion, triple-camera system', 5, 1099.00),
-('Apple iPhone 15 Pro', 'Titanium body, A17 Pro chip, USB-C port', 5, 1199.00),
-('Apple iPhone 15 Pro', 'Titanium body, A17 Pro chip, USB-C port', 5, 1199.00),
-('Apple iPhone 16 Pro', 'Latest Pro features, enhanced GPU, spatial video', 5, 1299.00),
-('Apple iPhone 16e', 'Lighter', 5, 799.00),
-('Apple AirPods Pro', 'Noise-canceling earbuds with spatial audio', 20, 249.00);
+
+('Apple iPhone 15', '6.1-inch OLED display, A16 Bionic chip, Dynamic Island feature', 10, 899.00),
+('Apple iPhone 16', 'Next-gen A17 chip, improved thermal performance, 5G enhanced', 10, 1049.00),
+
+('Apple iPhone 16 Pro', '6.7-inch display, periscope telephoto, 2TB storage option', 5, 1399.00),
+('Apple iPhone 16e', 'Slimmer model, energy-efficient, lightweight build', 5, 749.00),
+('Apple AirPods Pro', 'Active Noise Cancellation, Adaptive Transparency, MagSafe charging', 20, 249.00),
+
+('Google Nest Hub', '7-inch smart display with Google Assistant, home control and media', 12, 99.00),
+('Amazon Echo Dot (5th Gen)', 'Compact smart speaker with Alexa and improved bass', 15, 59.99),
+('TP-Link Kasa Smart Plug', 'Wi-Fi outlet with energy monitoring, voice control', 25, 24.99),
+('Philips Hue Starter Kit', 'Includes smart bulbs and hub, supports voice and app control', 10, 179.00),
+('LG InstaView Smart Fridge', 'Smart refrigerator with glass panel and Wi-Fi touch screen', 3, 2899.00);
 
 
 -- ORDER
@@ -83,7 +87,8 @@ create table user_access_log (
     logout_time datetime,
     constraint userfk foreign key (user_id) references USERS(userID)
 );
-
+insert into user_access_log (user_id, login_time, logout_time) values
+(1, 1300, 1600);
 -- CUSTOMER INFORMATION MANAGEMENT table (Esha)
 DROP TABLE IF EXISTS customers;
 CREATE TABLE customers (

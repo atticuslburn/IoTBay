@@ -16,7 +16,7 @@ public class DAO {
             tables.add(new ItemDatabaseManager(connection));
             tables.add(new OrderDatabaseManager(connection));
             tables.add(new CustomerDatabaseManager(connection));
-
+            tables.add(new AcessLogDatabaseManager(connection));
 
         } catch (SQLException ex) {
             System.out.println("Error initializing DBManagers");
@@ -28,6 +28,6 @@ public class DAO {
     }
     public ItemDatabaseManager Items() {return (ItemDatabaseManager) tables.get(1);}
     public OrderDatabaseManager Orders() {return (OrderDatabaseManager) tables.get(2);}
-    public CustomerDatabaseManager Customers() {return (CustomerDatabaseManager) tables.get(3);
-    }
+    public CustomerDatabaseManager Customers() {return (CustomerDatabaseManager) tables.get(3);}
+    public AcessLogDatabaseManager AccessLogs() {return (AcessLogDatabaseManager) tables.get(4);}
 }
