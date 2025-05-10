@@ -69,3 +69,15 @@ CREATE TABLE ORDERS (
     CONSTRAINT itemFK FOREIGN KEY (itemID) REFERENCES ITEMS(itemID),
     CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES USERS(userID)
 );
+
+
+-- CUSTOMER INFORMATION MANAGEMENT table (Esha)
+DROP TABLE IF EXISTS CUSTOMERS;
+CREATE TABLE CUSTOMERS (
+                           id       INT AUTO_INCREMENT PRIMARY KEY,
+                           name     VARCHAR(100)  NOT NULL,
+                           email    VARCHAR(100)  UNIQUE NOT NULL,
+                           type     VARCHAR(20)   NOT NULL,   -- 'individual' or 'company'
+                           address  VARCHAR(255)  NOT NULL,
+                           active   BOOLEAN       DEFAULT TRUE
+);
