@@ -98,7 +98,8 @@ p {
 .header-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px;
+    column-gap: 50px;
+    row-gap: 60px;
     padding: 40px;
     justify-content: center;
 }
@@ -159,12 +160,13 @@ p {
     justify-content: space-between;
     height: 100%;
 }
+
 .center-box:hover {
     transform: translateY(-5px);
 }
 
 .center-box img {
-    width: 100%;
+    width: auto;
     height: auto;
     object-fit: contain;
     margin-bottom: 15px;

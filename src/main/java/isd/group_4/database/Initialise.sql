@@ -60,8 +60,8 @@ INSERT INTO ITEMS (itemName, itemDescription, quantity, price) VALUES
 ('Apple AirPods Pro', 'Active Noise Cancellation, Adaptive Transparency, MagSafe charging', 20, 249.00),
 
 ('Google Nest Hub', '7-inch smart display with Google Assistant, home control and media', 12, 99.00),
-('Amazon Echo Dot (5th Gen)', 'Compact smart speaker with Alexa and improved bass', 15, 59.99),
-('TP-Link Kasa Smart Plug', 'Wi-Fi outlet with energy monitoring, voice control', 25, 24.99),
+('Amazon Echo Dot', 'Compact smart speaker with Alexa and improved bass', 15, 59.99),
+('TP Link Kasa Smart Plug', 'Wi-Fi outlet with energy monitoring, voice control', 25, 24.99),
 ('Philips Hue Starter Kit', 'Includes smart bulbs and hub, supports voice and app control', 10, 179.00),
 ('LG InstaView Smart Fridge', 'Smart refrigerator with glass panel and Wi-Fi touch screen', 3, 2899.00);
 
