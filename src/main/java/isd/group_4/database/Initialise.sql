@@ -10,14 +10,18 @@ CREATE TABLE USERS (
     streetNumber varchar(4),
     streetName varchar(30),
     suburb varchar(32),
-    postcode varchar(4)
+    postcode varchar(4),
+    role varchar(40)
 );
-INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode) VALUES
-('abc', 'John@citizen','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000');
-INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode) VALUES
-    ('abc', 'bruh@gmail','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000');
-INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode) VALUES
-    ('abc', 'yoho@fake','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000');
+INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode, role) VALUES
+('abc', 'John@citizen','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000', 'customer');
+INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode, role) VALUES
+    ('abc', 'bruh@gmail','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000', 'admin');
+INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode, role) VALUES
+    ('abc', 'yoho@fake','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000', 'customer');
+
+INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumber, streetName, suburb, postcode, role) VALUES
+    ('abc', 'jafdnjnfds@fzdnjfds','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000', 'admin');
 SELECT * FROM USERS;
 
 -- USER PERMISSIONS
@@ -70,14 +74,12 @@ CREATE TABLE ORDERS (
     CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES USERS(userID)
 );
 
-
--- CUSTOMER INFORMATION MANAGEMENT table (Esha)
-DROP TABLE IF EXISTS CUSTOMERS;
-CREATE TABLE CUSTOMERS (
-                           id       INT AUTO_INCREMENT PRIMARY KEY,
-                           name     VARCHAR(100)  NOT NULL,
-                           email    VARCHAR(100)  UNIQUE NOT NULL,
-                           type     VARCHAR(20)   NOT NULL,   -- 'individual' or 'company'
-                           address  VARCHAR(255)  NOT NULL,
-                           active   BOOLEAN       DEFAULT TRUE
+--logs
+drop table if exists user_access_log;
+create table user_access_log (
+    id integer primary key autoincrement,
+    user_id integer not null,
+    login_time datetime not null,
+    logout_time datetime,
+    constraint userfk foreign key (user_id) references USERS(userID)
 );

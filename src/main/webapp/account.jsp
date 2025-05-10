@@ -38,6 +38,7 @@
         String uStreet = (loggedInUser.getStreetNumber() != null && loggedInUser.getStreetName() != null) ? (loggedInUser.getStreetNumber() + " " + loggedInUser.getStreetName()) : ("Unset");
         String uSub = (loggedInUser.getSuburb() != null) ? (loggedInUser.getSuburb()) : ("Unset");
         String pCode = (loggedInUser.getPostcode() != null) ? (loggedInUser.getPostcode()) : ("Unset");
+        String role = loggedInUser.getRole();
 
         String fullName = fname;
         if (!lname.isEmpty()) {
@@ -45,14 +46,15 @@
         }
 %>
 
-<div class="center-box">
+<div class="center-box" style="font-size: 20px;">
     Welcome, <%=fullName%>. Your details are as follows:<br>
     User ID: <%=userID%><br>
     Email: <%= uemail%><br>
     Phone: <%= uphone%><br>
     Street Address: <%= uStreet%><br>
     Suburb: <%= uSub%><br>
-    Post Code: <%= pCode%>
+    Post Code: <%= pCode%><br>
+    Role: <%= role%>
 </div>
 <%
     }
@@ -69,6 +71,12 @@
 <div class="center-box">
     <form method="POST" action="/DeleteServlet">
     <button> to delete account.</button>
+    </form>
+</div>
+
+<div class="center-box">
+    <form>
+        <button> to see my access logs</button>
     </form>
 </div>
 
