@@ -83,3 +83,36 @@ create table user_access_log (
     logout_time datetime,
     constraint userfk foreign key (user_id) references USERS(userID)
 );
+
+-- CUSTOMER INFORMATION MANAGEMENT table (Esha)
+DROP TABLE IF EXISTS customers;
+CREATE TABLE customers (
+                           id       INTEGER PRIMARY KEY AUTOINCREMENT,
+                           name     VARCHAR(100)  NOT NULL,
+                           email    VARCHAR(100)  UNIQUE NOT NULL,
+                           type     VARCHAR(20)   NOT NULL,       -- 'individual' or 'company'
+                           address  VARCHAR(255)  NOT NULL,
+                           active   BOOLEAN       DEFAULT TRUE
+);
+
+INSERT INTO customers(name,email,type,address,active) VALUES
+('Alice Smith','alice.smith@example.com','individual','12 Rose St, Sydney',TRUE),
+('Bob Johnson','bob.johnson@example.com','individual','34 Maple Rd, Melbourne',TRUE),
+('Carla Reyes','carla.reyes@example.com','individual','56 Pine Ave, Brisbane',TRUE),
+('Delta Co.','contact@deltaco.com','company','78 Birch Blvd, Perth',TRUE),
+('Echo Enterprises','info@echoent.com','company','90 Cedar Ln, Adelaide',TRUE),
+('Franklin LLC','support@franklinllc.com','company','123 Elm St, Hobart',TRUE),
+('Grace Lee','grace.lee@example.com','individual','45 Oak Dr, Darwin',TRUE),
+('Hector Gomez','hector.gomez@example.com','individual','67 Cherry Pl, Canberra',TRUE),
+('Ivy Innovations','hello@ivyinnov.com','company','89 Walnut Way, Newcastle',TRUE),
+('Jones & Co.','sales@jonesco.com','company','101 Poplar Rd, Wollongong',TRUE),
+('Kyle Nguyen','kyle.nguyen@example.com','individual','11 Palm Ct, Geelong',TRUE),
+('Luna Ltd.','contact@lunaltd.com','company','22 Cypress St, Gold Coast',TRUE),
+('Mia Patel','mia.patel@example.com','individual','33 Spruce Rd, Sunshine Coast',TRUE),
+('Nova Corp.','info@novacorp.com','company','44 Redwood Ave, Townsville',TRUE),
+('Olivia Brown','olivia.brown@example.com','individual','55 Fir Ln, Toowoomba',TRUE),
+('PrimeTech','support@primetech.com','company','66 Aspen St, Ballarat',TRUE),
+('Quinn Enterprises','hello@quinnent.com','company','77 Willow Way, Bendigo',TRUE),
+('Ryan Scott','ryan.scott@example.com','individual','88 Sequoia Drive, Cairns',TRUE),
+('Sigma Services','contact@sigmasvc.com','company','99 Linden Rd, Albury',TRUE),
+('Tina Tran','tina.tran@example.com','individual','14 Eucalyptus St, Mackay',TRUE);
