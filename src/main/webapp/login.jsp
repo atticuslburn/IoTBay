@@ -39,7 +39,7 @@
     }
 %>
 
-<form action="LoginServlet" method="post">
+<form method="post">
     <label> Email: </label>
     <input type="text" name="email"><br>
 
