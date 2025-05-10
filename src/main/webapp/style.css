@@ -11,7 +11,7 @@
     --red: #7a2e39;
 }
 
-/*Remove Margins around everything*/
+/* Global reset */
 body {
     margin: 0;
     font-family: Tahoma, Geneva, Verdana, sans-serif, serif;
@@ -23,22 +23,23 @@ p {
     margin: 0;
 }
 
-/* Index Page*/
+/* Index Page */
 .login_register {
     display: flex;
-    flex-direction: column; /* Stack vertically */
-    align-items: center;     /* Center horizontally */
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     width: 300px;
-    margin: 60px auto;        /* Center the box on the page */
+    margin: 60px auto;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     background-color: #e0e4ea;
 }
 
+/* Link boxes */
 .link_box {
-    width: 250px;;
+    width: 250px;
     height: 60px;
     background-color: #242e47;
     color: #efc180;
@@ -56,26 +57,22 @@ p {
     background-color: #b5e5f8;
 }
 
-
-/* Page Header & Footer */
+/* Page Header */
 .page_header {
     position: sticky;
     top: 0;
     width: 100%;
     height: 100px;
     background-color: var(--midnights);
-    margin-top: 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 0 20px;
     z-index: 10;
 }
-/* Style all links inside the header */
 .page_header a {
     text-decoration: none;
 }
-/* Style the header buttons */
 .page_header .box {
     padding: 12px 24px;
     color: var(--fearless);
@@ -88,21 +85,37 @@ p {
     text-align: center;
     cursor: pointer;
 }
-/* Hover effect */
 .page_header .box:hover {
     background-color: var(--1989);
     color: var(--midnights);
     border-color: var(--1989);
 }
+<<<<<<< HEAD
+=======
+
+/* Content area (between header and footer) */
+.page_body {
+    position: fixed;
+    top: 100px;     /* height of header */
+    bottom: 60px;   /* height of footer (adjusted) */
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #cdc9c1;
+}
+
+/* Page Footer */
+>>>>>>> c8e3ffb7541dc4a9bfbc38f4b773e95c5855d3c0
 .page_footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 100px;
+    height: 60px;   /* reduced from 100px */
     background-color: var(--midnights);
-    margin-top: 0;
     display: flex;
     justify-content: space-around;
+<<<<<<< HEAD
     & > a {
         margin: 20px 0 20px 40px;
         flex-basis: 200px;
@@ -120,56 +133,85 @@ p {
             background-color: darkslategray;
         }
     }
+=======
+>>>>>>> c8e3ffb7541dc4a9bfbc38f4b773e95c5855d3c0
 }
+.page_footer > a {
+    margin: 20px 0 20px 40px;
+    flex-basis: 200px;
+}
+.page_footer > a > .box {
+    background-color: green;
+    font-family: Verdana, Arial, sans-serif;
+    align-content: center;
+    font-size: xx-large;
+    text-align: center;
+    height: 30px;  /* reduced from 60px */
+}
+.page_footer > a > .box:hover {
+    color: lightblue;
+    background-color: darkslategray;
+}
+
+/* Header Grid */
 .header-grid {
     display: grid;
     grid-template-columns: repeat(9, 1fr) 30px 30px;
     gap: 5px;
     margin-bottom: 10px;
+<<<<<<< HEAD
   }
 .background_colour{
+=======
+}
+
+/* Background wrapper */
+.background_colour {
+>>>>>>> c8e3ffb7541dc4a9bfbc38f4b773e95c5855d3c0
     margin: 0;
     padding: 0;
     background-color: #746f70;
-    min-height: 100vh;
 }
+<<<<<<< HEAD
+=======
+
+/* Center container */
+>>>>>>> c8e3ffb7541dc4a9bfbc38f4b773e95c5855d3c0
 .center_container {
     display: flex;
     flex-direction: column;
-    align-items: center;       /* Horizontal centering */
-    justify-content: flex-start; /* Stick to top */
+    align-items: center;
+    justify-content: flex-start;
     text-align: center;
     padding-top: 50px;
 }
 
-/* something something */
+/* Other header */
 .header {
     height: 10%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 50px 0 50px;
+    padding: 0 50px;
     font-weight: 200;
     color: black;
 }
 
-/* Default Page Formatting*/
+/* Default page formatting */
 h1 {
     text-align: center;
 }
-
 form {
     text-align: center;
-}
-p {
-    text-align: center;
-    font-weight: 200;
-    color: black;
 }
 .fail_text {
     color: red;
 }
 
+<<<<<<< HEAD
+=======
+/* Center box */
+>>>>>>> c8e3ffb7541dc4a9bfbc38f4b773e95c5855d3c0
 .center-box {
     max-width: 600px;
     margin: 25px auto;
@@ -183,6 +225,7 @@ p {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
+<<<<<<< HEAD
 
 .center-box img {
     max-width: 100%;
@@ -190,6 +233,8 @@ p {
     margin-bottom: 10px;
 }
 
+=======
+>>>>>>> c8e3ffb7541dc4a9bfbc38f4b773e95c5855d3c0
 .center-box:hover {
     transform: translateY(-3px);
 }
