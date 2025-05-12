@@ -11,6 +11,7 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
         super(connection);
     }
 
+    // Get all items from the ITEMS table in database
     public List<Item> getAllItems() throws SQLException {
         List<Item> items = new ArrayList<>();
         ResultSet rs = statement.executeQuery("SELECT * FROM ITEMS");
@@ -27,6 +28,7 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
         return items;
     }
 
+    // Add a new item to the ITEMS table
     @Override
     protected int add(Item item) throws SQLException {
         String sql = "INSERT INTO ITEMS (itemName, itemDescription, quantity, price) VALUES (?, ?, ?, ?)";
@@ -42,6 +44,7 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
         return -1;
     }
 
+    // Get a single item by itemID
     @Override
     protected Item get(int id) throws SQLException {
         ResultSet rs = statement.executeQuery("SELECT * FROM ITEMS WHERE itemID = " + id);
@@ -57,6 +60,7 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
         return null;
     }
 
+    // Updates an existing item by itemID
     @Override
     protected boolean update(int id, Item item) throws SQLException {
         String sql = "UPDATE ITEMS SET itemName = ?, itemDescription = ?, quantity = ?, price = ? WHERE itemID = ?";
@@ -69,6 +73,7 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
         return ps.executeUpdate() > 0;
     }
 
+    // Delete an item by itemID
     @Override
     protected boolean delete(int id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement("DELETE FROM ITEMS WHERE itemID = ?");

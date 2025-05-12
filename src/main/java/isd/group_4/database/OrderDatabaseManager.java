@@ -28,7 +28,7 @@ public class OrderDatabaseManager extends DatabaseManager<Order> {
         return resultSet.getInt(1) == 0;
     }
 
-    //use this function when you want to update the database
+    // use this function when you want to update the database
     public String convertCalendarToDBString(Calendar calendar) {
         //convert the date to a string format working with SQL ("YYYY-MM-DD")
         return calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-" + calendar.get(Calendar.DAY_OF_MONTH);
