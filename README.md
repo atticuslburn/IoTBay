@@ -1,5 +1,3 @@
-This is for Introduction to Software Development Test
-
 # 🛒 IoTBay Web App - 41025 Introduction to Software Development
 
 A basic JSP + Java web application that simulates an IoT shopping platform. Customers can browse smart devices, while admin users can manage items and user data.
