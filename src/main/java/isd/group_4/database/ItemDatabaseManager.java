@@ -30,7 +30,7 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
 
     // Add a new item to the ITEMS table
     @Override
-    protected int add(Item item) throws SQLException {
+    public int add(Item item) throws SQLException {
         String sql = "INSERT INTO ITEMS (itemName, itemDescription, quantity, price) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, item.getItemName());
@@ -46,7 +46,7 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
 
     // Get a single item by itemID
     @Override
-    protected Item get(int id) throws SQLException {
+    public Item get(int id) throws SQLException {
         ResultSet rs = statement.executeQuery("SELECT * FROM ITEMS WHERE itemID = " + id);
         if (rs.next()) {
             return new Item(
@@ -62,7 +62,7 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
 
     // Updates an existing item by itemID
     @Override
-    protected boolean update(int id, Item item) throws SQLException {
+    public boolean update(int id, Item item) throws SQLException {
         String sql = "UPDATE ITEMS SET itemName = ?, itemDescription = ?, quantity = ?, price = ? WHERE itemID = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, item.getItemName());
@@ -75,7 +75,7 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
 
     // Delete an item by itemID
     @Override
-    protected boolean delete(int id) throws SQLException {
+    public boolean delete(int id) throws SQLException {
         PreparedStatement ps = connection.prepareStatement("DELETE FROM ITEMS WHERE itemID = ?");
         ps.setInt(1, id);
         return ps.executeUpdate() > 0;
