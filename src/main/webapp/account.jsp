@@ -60,19 +60,30 @@
     }
 %>
 
-<div class="center-box" onclick="location.href='logout.jsp';">
-    Click to logout.
-</div>
+<%--<div class="center-box" onclick="location.href='logout.jsp';">--%>
+<%--    Click to logout.--%>
+<%--</div>--%>
 
-<div class="center-box">
-    Click to edit your information.
-</div>
+<form method="post" action="LogOutServlet">
+    <button class="center-box" type="submit">
+        click to logout
+    </button>
+</form>
 
-<div class="center-box">
-    <form method="POST" action="/DeleteServlet">
-    <button> to delete account.</button>
-    </form>
-</div>
+<%--<div class="center-box" onclick="location.href='edit.jsp';">--%>
+<%--    Click to edit your information.--%>
+<%--</div>--%>
+<form method="post" action="edit.jsp">
+    <button class="center-box" type="submit">
+        click to edit your information
+    </button>
+</form>
+
+<form method="post" action="DeleteServlet">
+    <button class="center-box" type="submit">
+        click to delete account
+    </button>
+</form>
 
 <div class="center-box" onclick="location.href='accessLog.jsp';">
     Click to see your access log.
