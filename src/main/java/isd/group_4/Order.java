@@ -37,6 +37,7 @@ public class Order implements Serializable {
     public void setOrderDate(Calendar orderDate) {
         this.orderDate = orderDate;
     }
+
     public int getItemID() {
         return itemID;
     }
@@ -47,7 +48,4 @@ public class Order implements Serializable {
     public void setUserID(int userID) {this.userID = userID; }
     public int getOrderQuantity() {return orderQuantity;}
     public void setOrderQuantity(int orderQuantity) {this.orderQuantity = orderQuantity;}
-
-
-
 }
