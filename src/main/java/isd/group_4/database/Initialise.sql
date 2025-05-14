@@ -70,13 +70,28 @@ INSERT INTO ITEMS (itemName, itemDescription, quantity, price) VALUES
 DROP TABLE IF EXISTS ORDERS;
 CREATE TABLE ORDERS (
     orderID INTEGER PRIMARY KEY AUTOINCREMENT,
-    itemID INTEGER,
     userID INTEGER,
     orderQuantity INTEGER,
-    orderDate DATE,
-    CONSTRAINT itemFK FOREIGN KEY (itemID) REFERENCES ITEMS(itemID),
+    orderDate DATETIME,
     CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES USERS(userID)
 );
+
+-- ORDERITEM
+DROP TABLE IF EXISTS ORDERITEM;
+CREATE TABLE ORDERITEM (
+    oiID INTEGER PRIMARY KEY AUTOINCREMENT,
+    orderID INTEGER,
+    itemID INTEGER,
+    orderQuantity INTEGER,
+    CONSTRAINT orderFK FOREIGN KEY (orderID) REFERENCES ORDERS(orderID),
+    CONSTRAINT itemFK FOREIGN KEY (itemID) REFERENCES ITEMS(itemID)
+);
+
+
+
+
+
+
 
 --logs
 drop table if exists user_access_log;
