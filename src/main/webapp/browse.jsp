@@ -9,26 +9,31 @@
     <%-- Also includes style.css--%>
 </head>
 <body>
-    <h1>IOT shop</h1>
-    <div class="content">
-        <div class="bg"></div>
-        <%
-            List<Item> itemList = database.Items().getAllItems();
-        %>
-        <div class="header-grid">
-            <% for (Item item : itemList) { %>
-            <div class="center-box">
-                <h3><%= item.getItemName() %></h3>
-                <p><%= item.getItemDescription() %></p>
-                <p>Price: $<%= item.getPrice() %></p>
-                <p>Stock: <%= item.getQuantity() %></p>
-                <form method="post" action="PurchaseServlet">
-                    <input type="hidden" name="itemID" value="<%= item.getItemID() %>">
-                    <input type="submit" value="Buy Now">
-                </form>
-            </div>
-            <% } %>
+<h1>IOT shop</h1>
+<div class="content">
+    <div class="bg"></div>
+    <%
+        List<Item> itemList = database.Items().getAllItems();
+    %>
+    <div class="header-grid">
+        <% for (Item item : itemList) { %>
+        <div class="center-box">
+            <img src="images/items/<%= item.getItemName().toLowerCase().replaceAll(" ", "_") %>.jpg"
+                 alt="<%= item.getItemName() %>"
+                 width="160"
+                 height="160"
+                 onerror="this.src='images/items/default.jpg';" />
+            <h3><%= item.getItemName() %></h3>
+            <p><%= item.getItemDescription() %></p>
+            <p>Price: $<%= item.getPrice() %></p>
+            <p>Stock: <%= item.getQuantity() %></p>
+            <form method="post" action="PurchaseServlet">
+                <input type="hidden" name="itemID" value="<%= item.getItemID() %>">
+                <input type="submit" value="Buy Now">
+            </form>
         </div>
+        <% } %>
     </div>
+</div>
 </body>
 </html>
