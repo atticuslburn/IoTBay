@@ -1,6 +1,5 @@
 package isd.group_4.controller;
 
-
 import isd.group_4.User;
 import isd.group_4.database.DBConnector;
 import isd.group_4.database.DatabaseManager;
