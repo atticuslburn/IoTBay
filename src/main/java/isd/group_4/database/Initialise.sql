@@ -65,7 +65,6 @@ INSERT INTO ITEMS (itemName, itemDescription, quantity, price) VALUES
 ('Philips Hue Starter Kit', 'Includes smart bulbs and hub, supports voice and app control', 10, 179.00),
 ('LG InstaView Smart Fridge', 'Smart refrigerator with glass panel and Wi-Fi touch screen', 3, 2899.00);
 
-
 -- ORDER
 DROP TABLE IF EXISTS ORDERS;
 CREATE TABLE ORDERS (
