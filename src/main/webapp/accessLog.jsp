@@ -1,4 +1,4 @@
-<%@ page import="isd.group_4.AcessLog" %><%--
+<%@ page import="isd.group_4.AccessLog" %><%--
   Created by IntelliJ IDEA.
   User: niman
   Date: 10/05/2025
@@ -13,7 +13,7 @@
 </head>
 <body>
 <%
-    AcessLog log = (AcessLog) request.getAttribute("accessLog");
+    AccessLog log = (AccessLog) session.getAttribute("accessLog");
 %>
 Your user id: <%= loggedInUser.getUserID() %>
 <br>
@@ -21,7 +21,7 @@ Your user id: <%= loggedInUser.getUserID() %>
 Your login date/times: <%= log.getLoginTime() %>
 
 <br>
-Your logout date/time:
+Your logout date/time: <%= log.getLogoutTime() %>
 
 
 </body>

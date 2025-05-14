@@ -39,7 +39,7 @@
     }
 %>
 
-<form method="post">
+<form method="post" action="LoginServlet">
     <label> Email: </label>
     <input type="text" name="email"><br>
 
@@ -47,7 +47,7 @@
     <input type="password" name="password"><br>
 
     <br>
-    <input type="submit" value="Login">
+    <input type="submit" value="Login" >
 </form>
 
 

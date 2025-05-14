@@ -2,16 +2,15 @@ package isd.group_4;
 
 import java.sql.Timestamp;
 
-public class AcessLog {
+public class AccessLog {
     private int id;
     private int userId;
     private Timestamp loginTime;
     private Timestamp logoutTime;
 
-    public AcessLog() {}
+    public AccessLog() {}
 
-    public AcessLog(int id, int userId, Timestamp loginTime, Timestamp logoutTime) {
-        this.id = id;
+    public AccessLog( int userId, Timestamp loginTime, Timestamp logoutTime) {
         this.userId = userId;
         this.loginTime = loginTime;
         this.logoutTime = logoutTime;
