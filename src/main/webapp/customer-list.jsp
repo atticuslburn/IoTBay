@@ -46,9 +46,9 @@
       padding-bottom: 200px !important; /* plenty of room for your 60px footer */
       overflow: visible !important;
     }
-
   </style>
 </head>
+
 <body>
 <div class="center_container">
   <h1>Customer Management</h1>

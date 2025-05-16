@@ -30,9 +30,17 @@ public class ItemServlet extends HttpServlet {
         String action = req.getParameter("action");
         try {
             if (action == null || action.equals("list")) {
-                List<Item> list = database.Items().getAllItems();
+
+                String nameFilter = req.getParameter("name");
+                List<Item> list;
+                if (nameFilter != null && !nameFilter.trim().isEmpty()) {
+                    list = database.Items().searchItemsByName(nameFilter);
+                } else {
+                    list = database.Items().getAllItems();
+                }
                 req.setAttribute("itemList", list);
                 req.getRequestDispatcher("staff-items.jsp").forward(req, resp);
+
             } else if (action.equals("delete")) {
                 int id = Integer.parseInt(req.getParameter("id"));
                 database.Items().delete(id);
@@ -59,12 +67,26 @@ public class ItemServlet extends HttpServlet {
         User logged = (session == null) ? null : (User) session.getAttribute("loggedInUser");
         DAO database = (DAO) session.getAttribute("database");
 
-        if (logged == null || !"admin".equals(logged.getRole())) {
+        if (logged == null || !"admin".equalsIgnoreCase(logged.getRole())) {
             resp.sendRedirect("index.jsp");
             return;
         }
 
+        String action = req.getParameter("action");
         try {
+            if ("Delete".equalsIgnoreCase(action)) {
+                int id = Integer.parseInt(req.getParameter("id"));
+                database.Items().delete(id);
+                resp.sendRedirect("ItemServlet?action=list");
+                return;
+
+            } else if ("Edit".equalsIgnoreCase(action)) {
+                int id = Integer.parseInt(req.getParameter("id"));
+                resp.sendRedirect("ItemServlet?action=edit&id=" + id);
+                return;
+            }
+
+            // For actual form submission (Add / Save)
             String sid = req.getParameter("id");
             int id = (sid == null || sid.isEmpty()) ? 0 : Integer.parseInt(sid);
 
@@ -83,7 +105,9 @@ public class ItemServlet extends HttpServlet {
             }
 
             resp.sendRedirect("ItemServlet?action=list");
-        } catch (SQLException e) {
+
+        } catch (SQLException | NumberFormatException e) {
+            e.printStackTrace();
             throw new ServletException(e);
         }
     }
