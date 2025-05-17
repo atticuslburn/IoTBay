@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: sanchitkhosla
-  Date: 16/05/25
-  Time: 11:09 pm
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page import="isd.group_4.Card" %>
 <%@ include file="template.jsp" %>
 <%

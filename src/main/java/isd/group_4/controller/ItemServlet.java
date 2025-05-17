@@ -39,7 +39,7 @@ public class ItemServlet extends HttpServlet {
                     list = database.Items().getAllItems();
                 }
                 req.setAttribute("itemList", list);
-                req.getRequestDispatcher("staff-items.jsp").forward(req, resp);
+                req.getRequestDispatcher("item-list.jsp").forward(req, resp);
 
             } else if (action.equals("delete")) {
                 int id = Integer.parseInt(req.getParameter("id"));

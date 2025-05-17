@@ -108,4 +108,31 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
         }
         return list;
     }
+
+    /** SEARCH and SORT */
+    public List<Item> searchItemsWithSort(String nameFilter, String sortOrder) throws SQLException {
+        List<Item> list = new ArrayList<>();
+        String base = "SELECT * FROM ITEMS WHERE itemName LIKE ?";
+        if ("asc".equalsIgnoreCase(sortOrder)) {
+            base += " ORDER BY price ASC";
+        } else if ("desc".equalsIgnoreCase(sortOrder)) {
+            base += " ORDER BY price DESC";
+        }
+
+        try (PreparedStatement ps = connection.prepareStatement(base)) {
+            ps.setString(1, "%" + (nameFilter == null ? "" : nameFilter) + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new Item(
+                            rs.getInt("itemID"),
+                            rs.getString("itemName"),
+                            rs.getString("itemDescription"),
+                            rs.getInt("quantity"),
+                            rs.getDouble("price")
+                    ));
+                }
+            }
+        }
+        return list;
+    }
 }

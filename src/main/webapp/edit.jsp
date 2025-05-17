@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: niman
-  Date: 11/05/2025
-  Time: 12:03 am
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="template.jsp" %>
 <html>
@@ -32,7 +25,7 @@
     String postcode = loggedInUser.getPostcode() != null ? loggedInUser.getPostcode() : "";
 %>
 
-<div class="center-box">
+<div class="edit-wrapper">
     <form method="post" action="EditServlet">
         <label>First Name: <input type="text" name="firstName" value="<%=fname%>"/></label><br>
         <label>Last Name: <input type="text" name="lastName" value="<%=lname%>"/></label><br>
@@ -43,10 +36,9 @@
         <label>Postcode: <input type="text" name="postcode" value="<%=postcode%>"/></label><br>
         <button type="submit">Save Changes</button>
     </form>
-</div>
-
-<div class="center-box" onclick="location.href='account.jsp';">
-    Cancel and go back
+    <div class="link_box" onclick="location.href='account.jsp';">
+        Cancel
+    </div>
 </div>
 
 </body>
