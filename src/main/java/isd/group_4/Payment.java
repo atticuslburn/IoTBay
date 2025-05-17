@@ -1,73 +1,69 @@
 package isd.group_4;
 
-import isd.group_4.exceptions.InvalidCardException;
-
 import java.util.Date;
 
 public class Payment {
-    private int paymentID;
+    private int paymentID;           // this will be the primary key
+    private int orderID;
+    private int userID;
+    private int cardID;
     private String bankName;
-    private String cardHolderName;
     private String cardNumber;
-    private Date cardExpiryDate;
-    private String cardCVV; //it should be deleted afterwards
+    private String cardHolderName;
+    private String cardExpiryDate;
+    private int cardCVV;
     private boolean paymentStatus;
-    private boolean paymentPending;
+    private int paymentAmount;
+    private String paymentDate;
 
-    public Payment() {
+    // reformatted nima's code and and changes some type for some fields and added new fields
+    public Payment() {}
 
-    }
-    public int getPaymentID() {
-        return paymentID;
-    }
-    public void setPaymentID(int paymentID) {
-        this.paymentID = paymentID;
-    }
-    public String getBankName() {
-        return bankName;
-    }
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
-    }
-    public String getCardHolderName() {
-        return cardHolderName;
-    }
-    public void setCardHolderName(String cardHolderName) {
-        this.cardHolderName = cardHolderName;
-    }
-    public String getCardNumber() {
-        return cardNumber;
-    }
-    public void setCardNumber(String cardNumber) throws InvalidCardException {
-        if(!validateCard(cardNumber)) throw new InvalidCardException("Invalid card number");
-        this.cardNumber = cardNumber;
-    }
-    public Date getCardExpiryDate() {
-        return cardExpiryDate;
-    }
-    public void setCardExpiryDate(Date cardExpiryDate) {
-        this.cardExpiryDate = cardExpiryDate;
-    }
-    public String getCardCVV() {
-        return cardCVV;
-    }
-    public void setCardCVV(String cardCVV) {
-        this.cardCVV = cardCVV;
-    }
-    public boolean isPaymentStatus() {
-        return paymentStatus;
-    }
-    public void setPaymentStatus(boolean paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-    public boolean isPaymentPending() {
-        return paymentPending;
-    }
-    public void setPaymentPending(boolean paymentPending) {
-        this.paymentPending = paymentPending;
-    }
+    // paymentID
+    public int getPaymentID() { return paymentID; }
+    public void setPaymentID(int paymentID) { this.paymentID = paymentID; }
 
-    boolean validateCard(String cardNumber){
-        return cardNumber.matches("\\d{13,16}");
-    }
+    // orderID
+    public int getOrderID() { return orderID; }
+    public void setOrderID(int orderID) { this.orderID = orderID; }
+
+    // userID
+    public int getUserID() { return userID; }
+    public void setUserID(int userID) { this.userID = userID; }
+
+    // cardTypeID
+    public int getCardID() { return cardID; }
+    public void setCardID(int cardID) { this.cardID = cardID; }
+
+    // bankName
+    public String getBankName() { return bankName; }
+    public void setBankName(String bankName) { this.bankName = bankName; }
+
+    // cardNumber
+    public String getCardNumber() { return cardNumber; }
+    public void setCardNumber(String cardNumber) { this.cardNumber = cardNumber; }
+
+    // cardHolderName
+    public String getCardHolderName() { return cardHolderName; }
+    public void setCardHolderName(String cardHolderName) { this.cardHolderName = cardHolderName; }
+
+    // cardExpiryDate
+    public String getCardExpiryDate() { return cardExpiryDate; }
+    public void setCardExpiryDate(String cardExpiryDate) { this.cardExpiryDate = cardExpiryDate; }
+
+    // cardCVV
+    public int getCardCVV() { return cardCVV; }
+    public void setCardCVV(int cardCVV) { this.cardCVV = cardCVV; }
+
+    // paymentStatus
+    public boolean isPaymentStatus() { return paymentStatus; }
+    public void setPaymentStatus(boolean paymentStatus) { this.paymentStatus = paymentStatus; }
+
+    // paymentAmount
+    public int getPaymentAmount() { return paymentAmount; }
+    public void setPaymentAmount(int paymentAmount) { this.paymentAmount = paymentAmount; }
+
+    // paymentDate
+    public String getPaymentDate() { return paymentDate; }
+    public void setPaymentDate(String paymentDate) { this.paymentDate = paymentDate; }
 }

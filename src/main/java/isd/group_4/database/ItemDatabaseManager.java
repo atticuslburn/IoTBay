@@ -2,7 +2,7 @@ package isd.group_4.database;
 
 import isd.group_4.Item;
 import java.sql.*;
-import java.util.ArrayList;
+        import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDatabaseManager extends DatabaseManager<Item> {
@@ -11,73 +11,128 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
         super(connection);
     }
 
-    // Get all items from the ITEMS table in database
-    public List<Item> getAllItems() throws SQLException {
-        List<Item> items = new ArrayList<>();
-        ResultSet rs = statement.executeQuery("SELECT * FROM ITEMS");
-
-        while (rs.next()) {
-            int id = rs.getInt("itemID");
-            String name = rs.getString("itemName");
-            String desc = rs.getString("itemDescription");
-            int quantity = rs.getInt("quantity");
-            double price = rs.getDouble("price");
-
-            items.add(new Item(id, name, desc, quantity, price));
-        }
-        return items;
-    }
-
-    // Add a new item to the ITEMS table
+    /** CREATE */
     @Override
-    protected int add(Item item) throws SQLException {
+    public int add(Item item) throws SQLException {
         String sql = "INSERT INTO ITEMS (itemName, itemDescription, quantity, price) VALUES (?, ?, ?, ?)";
-        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, item.getItemName());
-        ps.setString(2, item.getItemDescription());
-        ps.setInt(3, item.getQuantity());
-        ps.setDouble(4, item.getPrice());
-        ps.executeUpdate();
-
-        ResultSet keys = ps.getGeneratedKeys();
-        if (keys.next()) return keys.getInt(1);
-        return -1;
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, item.getItemName());
+            ps.setString(2, item.getItemDescription());
+            ps.setInt(3, item.getQuantity());
+            ps.setDouble(4, item.getPrice());
+            ps.executeUpdate();
+        }
+        return 1; // Return generated key if needed
     }
 
-    // Get a single item by itemID
+    /** READ one */
     @Override
-    protected Item get(int id) throws SQLException {
-        ResultSet rs = statement.executeQuery("SELECT * FROM ITEMS WHERE itemID = " + id);
-        if (rs.next()) {
-            return new Item(
+    public Item get(int id) throws SQLException {
+        String sql = "SELECT * FROM ITEMS WHERE itemID=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new Item(
+                            rs.getInt("itemID"),
+                            rs.getString("itemName"),
+                            rs.getString("itemDescription"),
+                            rs.getInt("quantity"),
+                            rs.getDouble("price")
+                    );
+                }
+            }
+        }
+        return null;
+    }
+
+    /** UPDATE */
+    @Override
+    public boolean update(int id, Item item) throws SQLException {
+        String sql = "UPDATE ITEMS SET itemName=?, itemDescription=?, quantity=?, price=? WHERE itemID=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, item.getItemName());
+            ps.setString(2, item.getItemDescription());
+            ps.setInt(3, item.getQuantity());
+            ps.setDouble(4, item.getPrice());
+            ps.setInt(5, id);
+            ps.executeUpdate();
+        }
+        return true;
+    }
+
+    /** DELETE */
+    @Override
+    public boolean delete(int id) throws SQLException {
+        String sql = "DELETE FROM ITEMS WHERE itemID=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        }
+        return true;
+    }
+
+    /** READ all */
+    public List<Item> getAllItems() throws SQLException {
+        List<Item> list = new ArrayList<>();
+        ResultSet rs = statement.executeQuery("SELECT * FROM ITEMS");
+        while (rs.next()) {
+            list.add(new Item(
                     rs.getInt("itemID"),
                     rs.getString("itemName"),
                     rs.getString("itemDescription"),
                     rs.getInt("quantity"),
                     rs.getDouble("price")
-            );
+            ));
         }
-        return null;
+        return list;
     }
 
-    // Updates an existing item by itemID
-    @Override
-    protected boolean update(int id, Item item) throws SQLException {
-        String sql = "UPDATE ITEMS SET itemName = ?, itemDescription = ?, quantity = ?, price = ? WHERE itemID = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, item.getItemName());
-        ps.setString(2, item.getItemDescription());
-        ps.setInt(3, item.getQuantity());
-        ps.setDouble(4, item.getPrice());
-        ps.setInt(5, id);
-        return ps.executeUpdate() > 0;
+    /** SEARCH by name */
+    public List<Item> searchItemsByName(String nameFilter) throws SQLException {
+        List<Item> list = new ArrayList<>();
+        String sql = "SELECT * FROM ITEMS WHERE itemName LIKE ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, "%" + (nameFilter == null ? "" : nameFilter) + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new Item(
+                            rs.getInt("itemID"),
+                            rs.getString("itemName"),
+                            rs.getString("itemDescription"),
+                            rs.getInt("quantity"),
+                            rs.getDouble("price")
+                    ));
+                }
+            }
+        }
+        return list;
     }
 
-    // Delete an item by itemID
-    @Override
-    protected boolean delete(int id) throws SQLException {
-        PreparedStatement ps = connection.prepareStatement("DELETE FROM ITEMS WHERE itemID = ?");
-        ps.setInt(1, id);
-        return ps.executeUpdate() > 0;
+    /** SEARCH and SORT */
+    public List<Item> searchItemsWithSort(String nameFilter, String sortOrder) throws SQLException {
+        List<Item> list = new ArrayList<>();
+        String base = "SELECT * FROM ITEMS WHERE itemName LIKE ?";
+        if ("asc".equalsIgnoreCase(sortOrder)) {
+            base += " ORDER BY price ASC";
+        } else if ("desc".equalsIgnoreCase(sortOrder)) {
+            base += " ORDER BY price DESC";
+        }
+
+        try (PreparedStatement ps = connection.prepareStatement(base)) {
+            ps.setString(1, "%" + (nameFilter == null ? "" : nameFilter) + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new Item(
+                            rs.getInt("itemID"),
+                            rs.getString("itemName"),
+                            rs.getString("itemDescription"),
+                            rs.getInt("quantity"),
+                            rs.getDouble("price")
+                    ));
+                }
+            }
+        }
+        return list;
     }
 }

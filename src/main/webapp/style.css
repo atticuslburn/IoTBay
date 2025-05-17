@@ -1,3 +1,4 @@
+/* ==== THEME VARIABLES ==== */
 :root {
     --debut: #a5c9a5;
     --fearless: #efc180;
@@ -11,7 +12,7 @@
     --red: #7a2e39;
 }
 
-/*Remove Margins around everything*/
+/* ==== GLOBAL STYLES ==== */
 body {
     margin: 0;
     font-family: Tahoma, Geneva, Verdana, sans-serif, serif;
@@ -19,45 +20,93 @@ body {
     background-color: #cdc9c1;
 }
 
-p {
-    margin: 0;
+h1 {
+    text-align: center;
 }
 
-/* Index Page*/
+form {
+    text-align: center;
+}
+
+p {
+    margin: 0;
+    text-align: center;
+    font-weight: 200;
+    color: black;
+}
+
+.fail_text {
+    color: red;
+}
+
+/* ==== INDEX PAGE (LOGIN / REGISTER) ==== */
 .login_register {
     display: flex;
-    flex-direction: column; /* Stack vertically */
-    align-items: center;     /* Center horizontally */
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     width: 300px;
-    margin: 60px auto;        /* Center the box on the page */
+    margin: 60px auto;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     background-color: #e0e4ea;
 }
 
+/* ==== BUTTON LINK STYLES ==== */
 .link_box {
-    width: 250px;;
+    width: 250px;
     height: 60px;
     background-color: #242e47;
     color: #efc180;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 0;
+    margin: 10px auto;
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-decoration: none;
 }
 
 .link_box:hover {
     background-color: #b5e5f8;
 }
 
+/* ==== WELCOME PAGE WRAPPER ==== */
+.welcome-wrapper {
+    text-align: center;
+    margin: 100px auto;
+    padding: 30px;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
 
-/* Page Header & Footer */
+/* ==== ACCOUNT PAGE WRAPPER ==== */
+.account-wrapper {
+    max-width: 600px;
+    margin: 80px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+/* ==== EDIT PAGE WRAPPER ==== */
+.edit-wrapper {
+    max-width: 600px;
+    margin: 60px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* ==== PAGE HEADER & NAVIGATION ==== */
 .page_header {
     position: sticky;
     top: 0;
@@ -71,11 +120,11 @@ p {
     padding: 0 20px;
     z-index: 10;
 }
-/* Style all links inside the header */
+
 .page_header a {
     text-decoration: none;
 }
-/* Style the header buttons */
+
 .page_header .box {
     padding: 12px 24px;
     color: var(--fearless);
@@ -88,13 +137,14 @@ p {
     text-align: center;
     cursor: pointer;
 }
-/* Hover effect */
+
 .page_header .box:hover {
     background-color: var(--1989);
     color: var(--midnights);
     border-color: var(--1989);
 }
 
+/* ==== GRID LAYOUT ==== */
 .header-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -104,6 +154,7 @@ p {
     justify-content: center;
 }
 
+/* ==== PAGE BACKGROUND & LAYOUT HELPERS ==== */
 .background_colour{
     margin: 0;
     padding: 0;
@@ -120,7 +171,6 @@ p {
     padding-top: 50px;
 }
 
-/* something something */
 .header {
     height: 10%;
     display: flex;
@@ -131,23 +181,7 @@ p {
     color: black;
 }
 
-/* Default Page Formatting*/
-h1 {
-    text-align: center;
-}
-
-form {
-    text-align: center;
-}
-p {
-    text-align: center;
-    font-weight: 200;
-    color: black;
-}
-.fail_text {
-    color: red;
-}
-
+/* ==== ITEM CARD STYLE ==== */
 .center-box {
     background-color: #fff;
     border-radius: 16px;
@@ -159,6 +193,7 @@ p {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    width: 280px;
 }
 
 .center-box:hover {
@@ -172,6 +207,62 @@ p {
     margin-bottom: 15px;
 }
 
-.center-box:hover {
-    transform: translateY(-3px);
+/* ==== CARD FORMS & TABLES ==== */
+.card-form {
+    margin: 40px auto;
+    width: 400px;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+
+.card-form label {
+    display: block;
+    margin-top: 10px;
+}
+
+.card-form input,
+.card-form select {
+    width: 100%;
+    padding: 7px;
+}
+
+.card-form a {
+    display: inline-block;
+    margin-top: 15px;
+    text-align: center;
+    width: 100%;
+}
+
+.card-form button {
+    margin-top: 15px;
+    width: 100%;
+}
+
+/* ==== CARD LIST TABLE */
+.card-list {
+    margin: 40px auto;
+    width: 90%;
+}
+
+.card-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.success {
+    color: green;
+    padding: 10px;
+}
+
+.error {
+    color: red;
+    padding: 10px;
 }

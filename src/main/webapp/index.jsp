@@ -4,11 +4,6 @@
 <%@ page import="isd.group_4.database.DAO" %>
 <%@ page import="isd.group_4.database.DBConnector" %>
 
-
-
-
-
-
 <html>
 <head>
     <title>Index Page</title>
@@ -31,6 +26,10 @@
         if (logged != null && "admin".equals(logged.getRole())) {
     %>
     <a href="CustomerServlet"><div class="link_box">Customer Management</div></a>
+    <a href="ItemServlet?action=list"><div class="link_box">Item Management</div></a>
+    <a href="PaymentServlet"><div class="link_box">Payment Management</div></a>
+    <a href="CardServlet"><div class="link_box">Card Management</div></a>
+
     <%
         }
     %>

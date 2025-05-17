@@ -25,8 +25,7 @@
             type="text"
             name="name"
             value="<%=c.getName()==null?"":c.getName()%>"
-            required
-            class="input_box"
+            required class="input_box"
     /><br/><br/>
 
     <label>Email:</label><br/>
@@ -34,8 +33,7 @@
             type="email"
             name="email"
             value="<%=c.getEmail()==null?"":c.getEmail()%>"
-            required
-            class="input_box"
+            required class="input_box"
     /><br/><br/>
 
     <label>Type:</label><br/>
