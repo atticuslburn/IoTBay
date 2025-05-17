@@ -137,3 +137,68 @@ INSERT INTO customers(name,email,type,address,active) VALUES
 ('Ryan Scott','ryan.scott@example.com','individual','88 Sequoia Drive, Cairns',TRUE),
 ('Sigma Services','contact@sigmasvc.com','company','99 Linden Rd, Albury',TRUE),
 ('Tina Tran','tina.tran@example.com','individual','14 Eucalyptus St, Mackay',TRUE);
+
+
+
+-- CARD Details
+
+CREATE TABLE IF NOT EXISTS Cards (
+     cardID INTEGER PRIMARY KEY AUTOINCREMENT,
+     userID INTEGER,
+     cardTypeID INTEGER,
+     bankName TEXT,
+     cardNumber TEXT,
+     cardHolderName TEXT,
+     cardExpiryDate TEXT,
+     FOREIGN KEY (userID) REFERENCES USERS(userID),
+     FOREIGN KEY (cardTypeID) REFERENCES CardType(cardTypeID)
+);
+
+--TEST Values
+INSERT INTO Cards (userID, cardTypeID, bankName, cardNumber, cardHolderName, cardExpiryDate) VALUES
+     (1, 1, 'ANZ', '4111111111111111', 'John Citizen', '2026-12'),      -- cardID 1
+     (1, 1, 'CBA', '4111111111111111', 'John Citizen', '2026-12'),      -- cardID 2
+     (2, 2, 'CBA', '5500000000000004', 'Bruh Admin', '2025-11'),        -- cardID 3
+     (3, 3, 'Westpac', '340000000000009', 'Yoho Fake', '2027-05'),      -- cardID 4
+     (4, 1, 'NAB', '4111111111111111', 'Jafdn Admin', '2028-08');       -- cardID 5
+
+
+
+-- CARD TYPE
+DROP TABLE IF EXISTS CardType;
+CREATE TABLE CardType(
+     cardTypeID INTEGER PRIMARY KEY AUTOINCREMENT,  --Primary Key
+     cardType TEXT
+);
+
+-- Test Values
+INSERT INTO CardType (cardType) VALUES
+    ('Visa'),
+    ('MasterCard'),
+    ('American Express');
+
+
+-- PAYMENTS
+DROP TABLE IF EXISTS PAYMENTS;
+CREATE TABLE PAYMENTS (
+      paymentID INTEGER PRIMARY KEY AUTOINCREMENT,
+      orderID INTEGER,
+      userID INTEGER,
+      cardID INTEGER,
+      paymentStatus BOOLEAN,
+      paymentAmount INTEGER,
+      paymentDate TEXT,
+      FOREIGN KEY (orderID) REFERENCES ORDERS(orderID),
+      FOREIGN KEY (userID) REFERENCES USERS(userID),
+      FOREIGN KEY (cardID) REFERENCES Cards(cardID)
+    );
+
+
+-- Inserting Payments Data
+
+INSERT INTO PAYMENTS (orderID, userID, cardID, paymentStatus, paymentAmount, paymentDate) VALUES
+      (1, 1, 1, 1, 799, '2024-06-01'),
+      (1, 1, 2, 1, 799, '2024-09-01'),
+      (2, 2, 3, 0, 999, '2024-06-02'),
+      (3, 3, 4, 1, 1200, '2024-06-03'),
+      (4, 4, 5, 1, 500, '2024-06-04');

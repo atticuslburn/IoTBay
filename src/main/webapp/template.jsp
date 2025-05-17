@@ -21,11 +21,14 @@
         <a href="index.jsp"><div class="box">Home</div></a>
         <a href="browse.jsp"><div class="box">Browse</div></a>
 
+
         <%
             if (loggedInUser != null) {
 
         %>
         <a href="account.jsp"><div class="box">Account (<%=loggedInUser.getFirstName()%>)</div></a>
+        <a href="PaymentServlet"><div class="box">Payment details</div></a>
+        <a href="CardServlet"><div class="box">Card Management</div></a>
         <%
                 try {
                     isStaff = database.Users().isStaff(loggedInUser.getUserID());

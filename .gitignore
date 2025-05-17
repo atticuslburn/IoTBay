@@ -4,3 +4,6 @@
 /target
 /.smarttomcat
 /.smarttomcat
+conf/
+logs/
+out/

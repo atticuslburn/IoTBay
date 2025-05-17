@@ -27,6 +27,9 @@
     %>
     <a href="CustomerServlet"><div class="link_box">Customer Management</div></a>
     <a href="ItemServlet?action=list"><div class="link_box">Manage IoT Items</div></a>
+    <a href="PaymentServlet"><div class="link_box">Payment Management</div></a>--%>
+    <a href="CardServlet"><div class="link_box">Card Management</div></a>--%>
+
     <%
         }
     %>
