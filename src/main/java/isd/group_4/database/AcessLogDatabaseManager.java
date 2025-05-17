@@ -3,6 +3,8 @@ package isd.group_4.database;
 import isd.group_4.AccessLog;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AcessLogDatabaseManager extends DatabaseManager<AccessLog> {
 
@@ -52,5 +54,20 @@ public class AcessLogDatabaseManager extends DatabaseManager<AccessLog> {
     public boolean delete(int id) throws SQLException {
         //cannot be deleted
         return false;
+    }
+
+    public List<AccessLog> getAllAccessLogs() throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM user_access_log");
+        ResultSet resultSet = statement.executeQuery();
+        List<AccessLog> logs = new ArrayList<AccessLog>();
+        while(resultSet.next()) {
+            AccessLog log = new AccessLog();
+            log.setId(resultSet.getInt("id"));
+            log.setUserId(resultSet.getInt("user_id"));
+            log.setLoginTime(resultSet.getTimestamp("login_time"));
+            log.setLogoutTime(resultSet.getTimestamp("logout_time"));
+            logs.add(log);
+        }
+        return logs;
     }
 }

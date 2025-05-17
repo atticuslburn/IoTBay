@@ -1,4 +1,5 @@
-<%@ page import="isd.group_4.AccessLog" %><%--
+<%@ page import="isd.group_4.AccessLog" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: niman
   Date: 10/05/2025
@@ -12,17 +13,43 @@
     <title>Title</title>
 </head>
 <body>
-<%
-    AccessLog log = (AccessLog) session.getAttribute("accessLog");
-%>
-Your user id: <%= loggedInUser.getUserID() %>
-<br>
+    <table>
+        <tr>
+            <th>
+                log id
+            </th>
+            <th>
+                login time
+            </th>
+            <th>
+                logout time
+            </th>
+        </tr>
 
-Your login date/times: <%= log.getLoginTime() %>
+        <% List<AccessLog> al_list = null;
+            try {
+                al_list = database.AccessLogs().getAllAccessLogs();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
 
-<br>
-Your logout date/time: <%= log.getLogoutTime() %>
+            for (AccessLog accessLog : al_list) {
+        %>
+        <tr>
+           <td> <%=accessLog.getId()%> </td>
+        </tr>
+        <tr>
+            <td>  <%=accessLog.getLoginTime()%> </td>
+        </tr>
+        <tr>
+            <td>  <%=accessLog.getLogoutTime()%> </td>
+        </tr>
 
+        <%
+            }
 
+        %>
+
+    </table>
 </body>
 </html>
