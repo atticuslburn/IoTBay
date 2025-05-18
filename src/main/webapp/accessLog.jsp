@@ -13,6 +13,26 @@
     <title>Title</title>
 </head>
 <body>
+<%
+    String searchDate = request.getParameter("date");
+    List<AccessLog> al_list = null;
+    try {
+        System.out.println(searchDate);
+        if (searchDate != null && !searchDate.trim().isEmpty()) {
+            al_list = database.AccessLogs().getByDate(searchDate);
+        } else {
+            al_list = database.AccessLogs().getAllAccessLogs();
+        }
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+%>
+<form method = "get" action="accessLog.jsp">
+    <label for ="date"> Search by date (YYYY-MM-DD):</label>
+    <input type="date" id="date" name="date" value="<%= searchDate != null ? searchDate : "" %>">
+    <input type = "submit" value = "Search">
+
+</form>
     <table>
         <tr>
             <th>
@@ -26,23 +46,13 @@
             </th>
         </tr>
 
-        <% List<AccessLog> al_list = null;
-            try {
-                al_list = database.AccessLogs().getAllAccessLogs();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
+        <%
             for (AccessLog accessLog : al_list) {
         %>
         <tr>
-           <td> <%=accessLog.getId()%> </td>
-        </tr>
-        <tr>
-            <td>  <%=accessLog.getLoginTime()%> </td>
-        </tr>
-        <tr>
-            <td>  <%=accessLog.getLogoutTime()%> </td>
+            <td> <%=accessLog.getId()%> </td>
+            <td> <%=accessLog.getLoginTime()%> </td>
+            <td><%= accessLog.getLogoutTime()%></td>
         </tr>
 
         <%

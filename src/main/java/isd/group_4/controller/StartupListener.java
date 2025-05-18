@@ -1,5 +1,6 @@
 package isd.group_4.controller;
 
+import isd.group_4.AccessLog;
 import isd.group_4.User;
 import isd.group_4.database.DBConnector;
 import isd.group_4.database.DatabaseManager;
@@ -11,7 +12,10 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpSessionEvent;
 import jakarta.servlet.http.HttpSessionListener;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 
 @WebListener
 public class StartupListener implements ServletContextListener, HttpSessionListener {
@@ -33,4 +37,26 @@ public class StartupListener implements ServletContextListener, HttpSessionListe
         }
 
     }
+
+@Override
+public void sessionDestroyed(HttpSessionEvent se) {
+    System.out.println("StartupListener sessionDestroyed");
+
+    HttpSession session = se.getSession();
+    AccessLog log = (AccessLog) session.getAttribute("accessLog");
+    DAO database = (DAO) session.getAttribute("database");
+
+    if (log != null && database != null && log.getLogoutTime() == null) {
+        try {
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            log.setLogoutTime(now);
+            database.AccessLogs().update(log.getId(), log);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("failed database connection");
+        }
+    }
+}
+
 }
