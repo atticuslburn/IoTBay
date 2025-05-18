@@ -117,7 +117,7 @@ insert into user_access_log (user_id, login_time, logout_time) values
 (1, '2002-01-01 12:00:00.000', '2003-01-02 14:15:00.000'),
 (1, '2003-01-01 12:00:00.000', '2004-01-02 14:15:00.000');
 
--- CUSTOMER INFORMATION MANAGEMENT table (Esha)
+-- CUSTOMER INFORMATION MANAGEMENT table
 DROP TABLE IF EXISTS customers;
 CREATE TABLE customers (
                            id       INTEGER PRIMARY KEY AUTOINCREMENT,

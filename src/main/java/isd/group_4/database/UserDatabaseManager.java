@@ -9,7 +9,7 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
         super(connection);
     }
 
-    //    USERS
+    // USERS
     public int getUserCount() throws SQLException {
         ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERS");
         resultSet.next();
@@ -51,8 +51,6 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
             user.setUserID(userID);
             return user;
         }
-
-
         return null;
     }
     public User authenticateUser(String email, String password) throws SQLException {

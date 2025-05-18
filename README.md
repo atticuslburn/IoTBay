@@ -20,6 +20,17 @@ A basic JSP + Java web application that simulates an IoT shopping platform. Cust
 
 ---
 
+## 🚀 How to Run
+
+1. Clone the repo
+2. Open in IntelliJ IDEA
+3. Deploy on Tomcat server
+4. Run `initialise.sql` in SQLite
+5. Run the deployed Tomcat
+6. Visit `http://localhost:9090/`
+
+---
+
 ## 🗃 Sample Users
 
 | Email             | Password | Role     |
@@ -70,13 +81,17 @@ They are auto-mapped from the item name:
 
 ---
 
-## 🚀 How to Run
+## 🧑‍💻 Developed By
 
-1. Clone the repo
-2. Open in IntelliJ IDEA
-3. Deploy on Tomcat server
-4. Run `initialise.sql` in SQLite
-5. Visit `http://localhost:9090/`
+This web application was developed as part of Assignment 1 & 2 for 41025 Introduction to Software Development.
+
+Group 4 Members:
+- Adrian Irwin (24527172)
+- Atticus Burn (24793022)
+- Esha Sadarangani (24461093)
+- Nima Nadali (14503407)
+- Sanchit Khosla (24607537)
+- Yu-Han Chang (John) (14542423)
 
 ---
 

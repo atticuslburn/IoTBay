@@ -2,7 +2,7 @@ package isd.group_4.database;
 
 import isd.group_4.Item;
 import java.sql.*;
-        import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDatabaseManager extends DatabaseManager<Item> {
