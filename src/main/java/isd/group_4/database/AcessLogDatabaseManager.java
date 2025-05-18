@@ -12,7 +12,6 @@ public class AcessLogDatabaseManager extends DatabaseManager<AccessLog> {
         super(connection);
     }
 
-
     public int add(AccessLog object) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("INSERT INTO user_access_log (user_id, login_time) VALUES (?,?)",
                 Statement.RETURN_GENERATED_KEYS);
