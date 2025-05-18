@@ -105,7 +105,7 @@ create table user_access_log (
 -- (1, '1990-01-01 12:00', '1991-01-02 14:15');
 
 
--- CUSTOMER INFORMATION MANAGEMENT table (Esha)
+-- CUSTOMER INFORMATION MANAGEMENT table
 DROP TABLE IF EXISTS customers;
 CREATE TABLE customers (
                            id       INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -23,7 +23,7 @@ public class CustomerDatabaseManager extends DatabaseManager<Customer> {
             ps.setBoolean(5, c.isActive());
             ps.executeUpdate();
         }
-        return 1;  // you could return generated key here if needed
+        return 1;
     }
 
     /** READ one */

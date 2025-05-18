@@ -7,7 +7,7 @@
   <title>Customer Management</title>
   <%@ include file="template.jsp" %>
   <style>
-    /* Button, form & table styling (unchanged) */
+
     .small_box {
       padding: 0.4em 0.8em;
       font-size: 0.85em;
@@ -33,7 +33,7 @@
       border-collapse: collapse;
     }
 
-    /* Scroll‐wrapper: no fixed height in CSS */
+
     .table-wrapper {
       overflow-y: auto;
       margin: 0 auto;
@@ -43,7 +43,7 @@
 
     .page_body {
       position: static !important;
-      padding-bottom: 200px !important; /* plenty of room for your 60px footer */
+      padding-bottom: 200px !important;
       overflow: visible !important;
     }
   </style>
@@ -55,7 +55,7 @@
 </div>
 
 <div class="page_body">
-  <!-- Search + Reset + New -->
+
   <form method="get" action="CustomerServlet" class="form_inline">
     <input type="hidden" name="action" value="list"/>
     <input
@@ -81,7 +81,7 @@
     <a href="CustomerServlet?action=new" class="small_box">+ New Customer</a>
   </form>
 
-  <!-- Table inside a wrapper that JS will size -->
+
   <div class="table-wrapper">
     <table class="data_table" border="1">
       <thead>
@@ -124,7 +124,7 @@
   </div>
 </div>
 
-<!-- JS to dynamically size the table-wrapper -->
+
 <script>
   function adjustTableWrapper() {
     const header = document.querySelector('.page_header');
@@ -132,12 +132,12 @@
     const form   = document.querySelector('.form_inline');
     const wrapper= document.querySelector('.table-wrapper');
     if (!header || !footer || !form || !wrapper) return;
-    // Compute available height:
+
     const avail = window.innerHeight
             - header.getBoundingClientRect().height
             - footer.getBoundingClientRect().height
             - form.getBoundingClientRect().height
-            - 40; // extra buffer
+            - 40;
     wrapper.style.height = avail + 'px';
   }
   window.addEventListener('load', adjustTableWrapper);

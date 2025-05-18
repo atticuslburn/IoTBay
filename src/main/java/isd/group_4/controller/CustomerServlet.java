@@ -22,19 +22,18 @@ public class CustomerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        // --- 1) Auth check via User.role ---
+
         HttpSession session = req.getSession(false);
         User logged = (session == null)
                 ? null
                 : (User) session.getAttribute("loggedInUser");
 
         if (logged == null || !"admin".equals(logged.getRole())) {
-            // not logged in or not an admin → back to home
             resp.sendRedirect("index.jsp");
             return;
         }
 
-        // --- 2) Your existing list/edit/new/delete logic ---
+
         DAO database = (DAO) session.getAttribute("database");
         String action = req.getParameter("action");
         try {
@@ -81,7 +80,7 @@ public class CustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        // --- same auth check in POST ---
+
         HttpSession session = req.getSession(false);
         User logged = (session == null)
                 ? null
@@ -92,7 +91,7 @@ public class CustomerServlet extends HttpServlet {
             return;
         }
 
-        // --- create/update logic ---
+
         DAO database = (DAO) session.getAttribute("database");
         try {
             String sid = req.getParameter("id");
