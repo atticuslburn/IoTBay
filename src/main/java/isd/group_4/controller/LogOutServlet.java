@@ -34,7 +34,6 @@ public class LogOutServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         session.removeAttribute("loggedInUser");
-        session.invalidate();
         resp.sendRedirect("index.jsp");
     }
 }
