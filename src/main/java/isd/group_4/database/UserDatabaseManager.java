@@ -101,13 +101,13 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
 
     //STAFF
     public int getStaffCount() throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERPERMISSIONS WHERE (isAdmin = true OR isMerchant = true)");
+        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERS WHERE (role = 'admin')");
         resultSet.next();
         return resultSet.getInt(1);
     }
 
     public int getAdminCount() throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERPERMISSIONS WHERE isAdmin = true");
+        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERS WHERE (role = 'admin')");
         resultSet.next();
         return resultSet.getInt(1);
     }
@@ -119,7 +119,7 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
     }
 
     public boolean isAdmin(int userID) throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERPERMISSIONS WHERE userID = " + userID + " AND isAdmin = true");
+        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERS WHERE userID = " + userID + " AND role = 'admin'");
         resultSet.next();
         return resultSet.getInt(1) == 1;
     }
@@ -131,7 +131,7 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
     }
 
     public boolean isStaff(int userID) throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERPERMISSIONS WHERE userID = " + userID + " AND (isMerchant = true OR isAdmin = true)");
+        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERS WHERE userID = " + userID + " AND (role = 'admin')");
         resultSet.next();
         return resultSet.getInt(1) == 1;
     }

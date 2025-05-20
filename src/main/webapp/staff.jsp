@@ -3,12 +3,21 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="isd.group_4.database.DBConnector" %>
 
+
+
 <html>
 <head>
     <title>Staff Page</title>
     <%--  KEEP THIS LINE, IMPORTANT FOR HEADER AND FOOTER  --%>
     <%@ include file="template.jsp" %>
     <%-- Also includes style.css--%>
+    <%
+        if (!isStaff) {
+            response.sendRedirect("index.jsp");
+        }
+
+    %>
+
 </head>
 <body>
 
