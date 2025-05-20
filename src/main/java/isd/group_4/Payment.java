@@ -17,18 +17,7 @@ public class Payment {
     private String paymentDate;
 
     // reformatted nima's code and and changes some type for some fields and added new fields
-    public Payment(int orderID, int userID, int cardID, String bankName, String cardNumber, String cardHolderName, String cardExpiryDate, int cardCVV, boolean paymentStatus, int paymentAmount, String paymentDate) {
-        this.orderID = orderID;
-        this.userID = userID;
-        this.cardID = cardID;
-        this.bankName = bankName;
-        this.cardNumber = cardNumber;
-        this.cardHolderName = cardHolderName;
-        this.cardExpiryDate = cardExpiryDate;
-        this.cardCVV = cardCVV;
-        this.paymentStatus = paymentStatus;
-        this.paymentAmount = paymentAmount;
-        this.paymentDate = paymentDate;
+    public Payment() {
     }
 
 
