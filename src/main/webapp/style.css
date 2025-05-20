@@ -294,3 +294,6 @@ th, td {
     justify-content: flex-start;
     text-align: center;
 }
+.horizontal_container > * {
+    margin: 0 5px;
+}

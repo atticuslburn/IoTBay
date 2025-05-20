@@ -1,9 +1,13 @@
 package isd.group_4.database;
 
 import isd.group_4.Item;
+import isd.group_4.Order;
+import isd.group_4.OrderItem;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class ItemDatabaseManager extends DatabaseManager<Item> {
 
@@ -147,4 +151,18 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
         }
         return list;
     }
+
+
+    public double calculateTotalCostOfOrder(Order order) throws SQLException {
+        double totalCost = 0;
+        ListIterator<OrderItem> orderItemListIterator = order.getOrderItems().listIterator();
+        while (orderItemListIterator.hasNext()) {
+            OrderItem orderItem = orderItemListIterator.next();
+            ResultSet resultSet = statement.executeQuery("SELECT price FROM ITEMS WHERE itemID = " + orderItem.getItemID());
+            resultSet.next();
+            totalCost += resultSet.getDouble("price") * (double) orderItem.getOrderQuantity();
+        }
+        return totalCost;
+    }
+
 }

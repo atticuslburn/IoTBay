@@ -21,7 +21,8 @@ public class EditCartItemServlet extends HttpServlet {
         int itemID = Integer.parseInt(req.getParameter("itemID"));
         int itemQuantity = Integer.parseInt(req.getParameter("itemQuantity"));
 
-
+        cart.editItemInOrder(itemID, itemQuantity);
+        resp.sendRedirect("cart.jsp?s=" + itemID);
 
     }
 }

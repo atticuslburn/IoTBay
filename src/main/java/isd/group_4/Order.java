@@ -11,8 +11,6 @@ import isd.group_4.OrderItem;
 public class Order implements Serializable {
     private int orderID;
     private Calendar orderDate;
-    private int orderQuantity;
-    private int itemID;
     private int userID;
     private List<OrderItem> orderItems;
 
@@ -74,7 +72,10 @@ public class Order implements Serializable {
     }
 
     public void editItemInOrder(int itemID, int orderQuantity) {
-
+        int orderItemIndex = cartHasItem(itemID);
+        if (orderItemIndex != -1) {
+            orderItems.get(orderItemIndex).setOrderQuantity(orderQuantity);
+        }
     }
 
 

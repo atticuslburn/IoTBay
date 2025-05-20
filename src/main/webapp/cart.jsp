@@ -21,9 +21,9 @@
     <div class="horizontal_container">
         <a href="browse.jsp"><div class="link_box">Keep Shopping</div></a>
         <form method="post" action="ClearCartServlet"><button type="submit" class="link_box">Clear Cart</button></form>
-
+        <a href="checkout.jsp"><div class="link_box">Check Out</div></a>
     </div>
-
+    <p>Total Cost: <%=database.Items().calculateTotalCostOfOrder(cart)%></p>
     <%
         if (cart.getAmountOfOrders() > 0) {
     %>
@@ -54,9 +54,21 @@
         <td><%=item.getQuantity()%></td>
         <td>
             <form method="post" action="EditCartItemServlet">
-                <input type="hidden" name="orderItemID" value=<%=orderItem.getItemID()%>>
+                <input type="hidden" name="itemID" value=<%=orderItem.getItemID()%>>
                 <input type="number" name="itemQuantity" value=<%=orderItem.getOrderQuantity()%>>
-                <input type="submit" value="&#9745">
+                <input type="submit" value="&#9745"
+                    <%
+                        String requestS = request.getParameter("s");
+                        if (requestS != null) {
+                            int s = Integer.parseInt(requestS);
+                            if (s == orderItem.getItemID()) {
+                    %>
+                        style="background-color: #a5c9a5"
+                    <%
+                            }
+                        }
+                    %>
+                >
             </form>
         </td>
         <td><%=totalPrice%></td>
