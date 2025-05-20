@@ -2,12 +2,14 @@
 <%@ page import="isd.group_4.User" %>
 <%@ page import="isd.group_4.database.DAO" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="isd.group_4.Order" %>
 
 
 <%
     DAO database = (DAO) session.getAttribute("database");
     User loggedInUser = (User) session.getAttribute("loggedInUser");
     boolean isStaff = false;
+    Order cart = (Order) session.getAttribute("cart");
 
 %>
 
@@ -27,8 +29,8 @@
 
         %>
         <a href="account.jsp"><div class="box">Account (<%=loggedInUser.getFirstName()%>)</div></a>
-        <a href="PaymentServlet"><div class="box">Payment details</div></a>
-        <a href="CardServlet"><div class="box">Card Management</div></a>
+<%--        <a href="PaymentServlet"><div class="box">Payment details</div></a>--%>
+<%--        <a href="CardServlet"><div class="box">Card Management</div></a>--%>
         <%
                 try {
                     isStaff = database.Users().isStaff(loggedInUser.getUserID());
@@ -41,6 +43,8 @@
                 }
             }
         %>
+        <a href="cart.jsp"><div class="box">Your Cart: <%=cart.getAmountOfOrders()%> Items</div></a>
+
 
 
     </div>

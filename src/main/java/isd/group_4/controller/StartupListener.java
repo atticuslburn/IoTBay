@@ -1,6 +1,7 @@
 package isd.group_4.controller;
 
 import isd.group_4.AccessLog;
+import isd.group_4.Order;
 import isd.group_4.User;
 import isd.group_4.database.DBConnector;
 import isd.group_4.database.DatabaseManager;
@@ -31,7 +32,9 @@ public class StartupListener implements ServletContextListener, HttpSessionListe
         HttpSession session = se.getSession();
         try {
             DAO database = new DAO() {};
+            Order order = new Order() {};
             session.setAttribute("database", database);
+            session.setAttribute("cart", order);
         } catch (SQLException exception) {
             System.out.println("failed database connection");
         }

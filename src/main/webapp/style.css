@@ -68,6 +68,10 @@ p {
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-decoration: none;
+    border: 0;
+    font-family: Tahoma, Geneva, Verdana, sans-serif, serif;
+    font-size: 12pt;
+
 }
 
 .link_box:hover {
@@ -280,4 +284,13 @@ th, td {
     z-index: 1;
     position: absolute;
     margin-top: 100px;
+}
+
+/* horizontal button box*/
+.horizontal_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
 }
