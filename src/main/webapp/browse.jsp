@@ -50,7 +50,7 @@
             <p><%= item.getItemDescription() %></p>
             <p>Price: $<%= item.getPrice() %></p>
             <p>Stock: <%= item.getQuantity() %></p>
-            <form method="post" action="PurchaseVerifyServlet">
+            <form method="post" action="OrderServlet">
                 <input type="hidden" name="itemID" value="<%= item.getItemID() %>">
                 <input type="submit" value="Buy Now">
             </form>
