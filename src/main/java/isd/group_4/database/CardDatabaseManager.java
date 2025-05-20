@@ -102,5 +102,20 @@ public class CardDatabaseManager extends DatabaseManager<Card> {
         }
         return cards;
     }
+    // method to get Card card number and userID
+    public Card getCardByNumberAndUser(String cardNumber, int userID) throws SQLException {
+        String sql = "SELECT * FROM CARDS WHERE cardNumber = ? AND userID = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, cardNumber);
+        ps.setInt(2, userID);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            Card card = new Card();
+            card.setCardID(rs.getInt("cardID"));
+            return card;
+        }
+        return null;
+    }
+
 }
 
