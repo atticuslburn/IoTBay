@@ -11,7 +11,7 @@ public class CustomerDatabaseManager extends DatabaseManager<Customer> {
         super(connection);
     }
 
-    /** CREATE (add) */
+    /** CREATE */
     @Override
     public int add(Customer c) throws SQLException {
         String sql = "INSERT INTO customers(name,email,type,address,active) VALUES(?,?,?,?,?)";
@@ -26,7 +26,7 @@ public class CustomerDatabaseManager extends DatabaseManager<Customer> {
         return 1;
     }
 
-    /** READ one */
+    /** READ  */
     @Override
     public Customer get(int id) throws SQLException {
         String sql = "SELECT * FROM customers WHERE id=?";
