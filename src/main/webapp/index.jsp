@@ -41,12 +41,6 @@
         else if ("admin".equals(loggedInUser.getRole())) {
     %>
     <a href="staff.jsp"><div class="link_box">Staff Page</div></a>
-
-    <a href="CustomerServlet"><div class="link_box">Customer Management</div></a>
-    <a href="ItemServlet?action=list"><div class="link_box">Item Management</div></a>
-    <a href="PaymentServlet"><div class="link_box">Payment Management</div></a>
-    <a href="CardServlet"><div class="link_box">Card Management</div></a>
-
     <%
         }
     %>

@@ -23,9 +23,13 @@
 
 <div class="center_container">
     <h1>Staff Page</h1>
+    <a href="CustomerServlet"><div class="link_box">Customer Management</div></a>
+    <a href="ItemServlet?action=list"><div class="link_box">Item Management</div></a>
+
 </div>
 
 <div class = "page_body">
+
 
 </div>
 </body>

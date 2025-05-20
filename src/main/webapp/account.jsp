@@ -48,22 +48,21 @@
         Post Code: <%= pCode%><br>
         Role: <%= role%>
     </div>
-
     <form method="post" action="LogOutServlet">
         <button class="link_box" type="submit">Logout</button>
     </form>
-
     <form method="post" action="edit.jsp">
         <button class="link_box" type="submit">Edit Info</button>
     </form>
-
     <form method="post" action="DeleteServlet">
         <button class="link_box" type="submit">Delete Account</button>
     </form>
 
-    <div class="link_box" onclick="location.href='accessLog.jsp';">
-        <button class="link_box" type="submit">Access Log</button>
-    </div>
+</div>
+<div class="center_container">
+    <a href="PaymentServlet"><div class="link_box">Payment Management</div></a>
+    <a href="CardServlet"><div class="link_box">Card Management</div></a>
+    <a href="accessLog.jsp"><div class="link_box">Access Log</div></a>
 </div>
 
 <%
