@@ -21,7 +21,7 @@
     <div class="horizontal_container">
         <a href="browse.jsp"><div class="link_box">Keep Shopping</div></a>
         <form method="post" action="ClearCartServlet"><button type="submit" class="link_box">Clear Cart</button></form>
-        <a href="checkout.jsp"><div class="link_box">Check Out</div></a>
+        <a href="cardCheckout.jsp"><div class="link_box">Check Out</div></a>
     </div>
     <p>Total Cost: <%=database.Items().calculateTotalCostOfOrder(cart)%></p>
     <%
