@@ -72,6 +72,18 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
         return true;
     }
 
+    //Verify Item ID
+    public boolean doesItemExist(int itemID) throws SQLException {
+        ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM ITEMS WHERE itemID=?");
+        if (rs.next()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
     /** READ all */
     public List<Item> getAllItems() throws SQLException {
         List<Item> list = new ArrayList<>();
