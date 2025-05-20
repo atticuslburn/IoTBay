@@ -137,7 +137,7 @@ public class PaymentServlet extends HttpServlet {
 
             session.setAttribute("successMessage", "Payment successful!");
             // payment success send to index.jsp
-            resp.sendRedirect("index.jsp");
+            resp.sendRedirect("FinalCheckOutServlet");
         } catch (Exception e) {
             session.setAttribute("failText", "Payment failed: " + e.getMessage());
             resp.sendRedirect("PaymentServlet?orderID=" + orderID);

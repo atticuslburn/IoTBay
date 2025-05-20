@@ -15,6 +15,7 @@ public class Order implements Serializable {
     private Calendar orderDate;
     private int userID;
     private List<OrderItem> orderItems;
+    private Payment payment;
 
 
     //constructors
@@ -75,9 +76,13 @@ public class Order implements Serializable {
 
     public void editItemInOrder(int itemID, int orderQuantity) {
         int orderItemIndex = cartHasItem(itemID);
-        if (orderItemIndex != -1) {
+        if (orderQuantity < 1) {
+            orderItems.remove(orderItemIndex);
+        }
+        else if (orderItemIndex != -1) {
             orderItems.get(orderItemIndex).setOrderQuantity(orderQuantity);
         }
+
     }
 
 
@@ -86,7 +91,12 @@ public class Order implements Serializable {
         orderItems.add(orderItem);
     }
 
-    public void removeOrderItem(int itemID) {}
+    public void removeOrderItem(int itemID) {
+        int orderItemIndex = cartHasItem(itemID);
+        if (orderItemIndex != -1) {
+            orderItems.remove(orderItemIndex);
+        }
+    }
 
     public int getOrderID() {
         return orderID;
@@ -104,6 +114,8 @@ public class Order implements Serializable {
     public void setUserID(int userID) {this.userID = userID; }
     public List<OrderItem> getOrderItems() {return orderItems; }
     public void setOrderItems(List<OrderItem> orderItems) { this.orderItems = orderItems; } // shouldn't ever need to use this
+    public void setPayment(Payment payment) { this.payment = payment; }
+    public Payment getPayment() { return payment; }
 
 
     public List<Integer> getItemIDs() {

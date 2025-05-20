@@ -19,9 +19,9 @@
 <div class="center_container">
     <h1>Your Cart</h1>
     <div class="horizontal_container">
-        <a href="browse.jsp"><div class="link_box">Keep Shopping</div></a>
+        <form method="post" action="browse.jsp"><button type="submit" class="link_box">Keep Shopping</button></form>
         <form method="post" action="ClearCartServlet"><button type="submit" class="link_box">Clear Cart</button></form>
-        <a href="cardCheckout.jsp"><div class="link_box">Check Out</div></a>
+        <form method="post" action="PreCheckOutServlet"><button type="submit" class="link_box">Check Out</button></form>
     </div>
     <p>Total Cost: <%=database.Items().calculateTotalCostOfOrder(cart)%></p>
     <%
@@ -37,6 +37,7 @@
             <th>Stock</th>
             <th>Quantity</th>
             <th>Total Price</th>
+            <th></th>
         </tr>
 <%--    Generated Cart Row    --%>
     <%
@@ -55,7 +56,7 @@
         <td>
             <form method="post" action="EditCartItemServlet">
                 <input type="hidden" name="itemID" value=<%=orderItem.getItemID()%>>
-                <input type="number" name="itemQuantity" value=<%=orderItem.getOrderQuantity()%>>
+                <input type="number" name="itemQuantity" value=<%=orderItem.getOrderQuantity()%> max="<%=item.getQuantity()%>", min="1">
                 <input type="submit" value="&#9745"
                     <%
                         String requestS = request.getParameter("s");
@@ -72,6 +73,7 @@
             </form>
         </td>
         <td><%=totalPrice%></td>
+        <td><form method="post" action="RemoveCartItemServlet"><input type="submit" value="&#9746"><input type="hidden" name="itemID" value=<%=orderItem.getItemID()%>></form></td>
 
     </tr>
     <%

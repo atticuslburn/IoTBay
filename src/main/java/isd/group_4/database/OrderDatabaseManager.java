@@ -2,16 +2,13 @@ package isd.group_4.database;
 
 import java.sql.*;
 import java.util.Calendar;
+import java.util.ListIterator;
 
+import isd.group_4.*;
 import isd.group_4.database.*;
-import isd.group_4.Order;
-import isd.group_4.User;
-import isd.group_4.Item;
-import isd.group_4.ConvertTimeForSQL;
 
 public class OrderDatabaseManager extends DatabaseManager<Order> {
 
-    ConvertTimeForSQL convertTimeForSQL = new ConvertTimeForSQL();
     public OrderDatabaseManager(Connection connection) throws SQLException {
         super(connection);
     }
@@ -33,26 +30,54 @@ public class OrderDatabaseManager extends DatabaseManager<Order> {
 
 
     public int add(Order order) throws SQLException {
+        order.setOrderID(this.getOrderCount());
         Calendar calendar = order.getOrderDate();
-        //add into database
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ORDERS userID, orderQuantity, orderDate) VALUES (?, ?, ?)");
-        preparedStatement.setInt(1, order.getOrderID());
-        preparedStatement.setInt(2, order.getUserID());
-        preparedStatement.setString(3, (ConvertTimeForSQL.convertCalendarToSQLDateTime(calendar)));
+        //add into ORDER
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ORDERS userID, orderDate) VALUES (?, ?)");
+        preparedStatement.setInt(1, order.getUserID());
+        preparedStatement.setString(2, (ConvertTimeForSQL.convertCalendarToSQLDateTime(calendar)));
         preparedStatement.executeUpdate();
-        //get the id
+
+        //add OrderItems to ORDERITEM
+        ListIterator<OrderItem> orderItemListIterator = order.getOrderItems().listIterator();
+        while (orderItemListIterator.hasNext()) {
+            OrderItem orderItem = orderItemListIterator.next();
+            PreparedStatement preparedStatement1 = connection.prepareStatement("INSERT INTO ORDERITEM (orderID, itemID, orderQuantity) VALUES (?, ?, ?)");
+            preparedStatement1.setInt(1, order.getOrderID());
+            preparedStatement1.setInt(2, orderItem.getItemID());
+            preparedStatement1.setInt(3, orderItem.getOrderQuantity());
+            preparedStatement1.executeUpdate();
+        }
         return this.getOrderCount();
     }
 
     protected Order get(int orderID) throws SQLException {
         //get the order matching orderID and store it in resultSet
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM ORDERS WHERE orderID = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM s WHERE orderID = ?");
         preparedStatement.setInt(1, orderID);
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
+        Calendar orderDate = ConvertTimeForSQL.convertSQLDateTimeToCalendar(resultSet.getString("orderDate"));
+        int userID = resultSet.getInt("userID");
 
-        //create and return a new order object
-        return new Order(resultSet.getInt("orderID"), ConvertTimeForSQL.convertSQLDateTimeToCalendar(resultSet.getString("orderDate")),resultSet.getInt("userID"));
+
+        //create a new order object
+        Order order = new Order(orderID, orderDate, userID);
+
+
+        PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT * FROM ORDERITEM WHERE orderID = ?");
+        preparedStatement1.setInt(1, orderID);
+        ResultSet resultSet1 = preparedStatement1.executeQuery();
+        while (resultSet1.next()) {
+            int itemID = resultSet1.getInt("itemID");
+            int orderQuantity = resultSet1.getInt("orderQuantity");
+            order.addItemToOrder(itemID, orderQuantity);
+        }
+
+
+
+
+        return order;
     }
 
     protected boolean update(int orderID, Order order) throws SQLException {

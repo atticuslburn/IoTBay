@@ -8,7 +8,7 @@
 <%@ include file="template.jsp" %>
 <%
     String failText = (String) session.getAttribute("failText");
-    String orderID = request.getParameter("orderID");
+    int orderID = cart.getOrderID();
 %>
 <html>
 <head>
