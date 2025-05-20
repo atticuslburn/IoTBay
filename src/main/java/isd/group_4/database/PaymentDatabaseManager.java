@@ -39,14 +39,16 @@ public class PaymentDatabaseManager extends DatabaseManager<Payment> {
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            Payment p = new Payment();
-            p.setPaymentID(rs.getInt("paymentID"));
-            p.setOrderID(rs.getInt("orderID"));
-            p.setUserID(rs.getInt("userID"));
-            p.setCardID(rs.getInt("cardID"));
-            p.setPaymentStatus(rs.getBoolean("paymentStatus"));
-            p.setPaymentAmount(rs.getInt("paymentAmount"));
-            p.setPaymentDate(rs.getString("paymentDate"));
+            Payment p = new Payment(
+                    rs.getInt("paymentID"),
+                    rs.getInt("orderID"),
+                    rs.getInt("userID"),
+                    rs.getInt("cardID"),
+                    rs.getBoolean("paymentStatus"),
+                    rs.getInt("paymentAmount"),
+                    rs.getString("paymentDate")
+            );
+
             return p;
         }
         return null;
@@ -74,15 +76,16 @@ public class PaymentDatabaseManager extends DatabaseManager<Payment> {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Payment payment = new Payment();
-                payment.setPaymentID(rs.getInt("paymentID"));
-                payment.setOrderID(rs.getInt("orderID"));
-                payment.setUserID(rs.getInt("userID"));
-                payment.setCardID(rs.getInt("cardID"));
-                payment.setPaymentStatus(rs.getBoolean("paymentStatus"));
-                payment.setPaymentAmount(rs.getInt("paymentAmount"));
-                payment.setPaymentDate(rs.getString("paymentDate"));
-                payments.add(payment);
+                Payment p = new Payment(
+                        rs.getInt("paymentID"),
+                        rs.getInt("orderID"),
+                        rs.getInt("userID"),
+                        rs.getInt("cardID"),
+                        rs.getBoolean("paymentStatus"),
+                        rs.getInt("paymentAmount"),
+                        rs.getString("paymentDate")
+                );
+                payments.add(p);
             }
         }
         return payments;

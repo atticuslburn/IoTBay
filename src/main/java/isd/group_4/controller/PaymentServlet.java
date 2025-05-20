@@ -80,6 +80,7 @@ public class PaymentServlet extends HttpServlet {
         String cardExpiryDate = req.getParameter("cardExpiryDate");
         String paymentAmount = req.getParameter("paymentAmount");
         String paymentDate = req.getParameter("paymentDate");
+        int cardCVV = Integer.parseInt(req.getParameter("cardCVV"));
 
         // we now check no field is left empty
         if (orderID == null || orderID.trim().isEmpty() ||
@@ -117,13 +118,20 @@ public class PaymentServlet extends HttpServlet {
             }
 
             // Create payment record
-            Payment payment = new Payment();
-            payment.setOrderID(Integer.parseInt(orderID));
-            payment.setUserID(loggedInUser.getUserID());
-            payment.setCardID(cardID);
-            payment.setPaymentStatus(true); // Assume payment is successful
-            payment.setPaymentAmount(Integer.parseInt(paymentAmount));
-            payment.setPaymentDate(paymentDate);
+            Payment payment = new Payment(
+                    Integer.parseInt(orderID),
+                    loggedInUser.getUserID(),
+                    cardID,
+                    bankName,
+                    cardNumber,
+                    cardHolderName,
+                    cardExpiryDate,
+                    cardCVV,
+                    true, // paymentStatus
+                    Integer.parseInt(paymentAmount),
+                    paymentDate
+            );
+
 
             database.Payments().add(payment);
 
