@@ -36,7 +36,11 @@
             fullName+=" "+lname;
         }
 %>
-
+<div class="side_container">
+    <a href="PaymentServlet"><div class="link_box">Payment Management</div></a>
+    <a href="CardServlet"><div class="link_box">Card Management</div></a>
+    <a href="accessLog.jsp"><div class="link_box">Access Log</div></a>
+</div>
 <div class="account-wrapper">
     <div class="center-box" style="font-size: 20px;">
         Welcome, <%=fullName%>. Your details are as follows:<br>
@@ -48,6 +52,7 @@
         Post Code: <%= pCode%><br>
         Role: <%= role%>
     </div>
+
     <form method="post" action="LogOutServlet">
         <button class="link_box" type="submit">Logout</button>
     </form>
@@ -59,11 +64,7 @@
     </form>
 
 </div>
-<div class="center_container">
-    <a href="PaymentServlet"><div class="link_box">Payment Management</div></a>
-    <a href="CardServlet"><div class="link_box">Card Management</div></a>
-    <a href="accessLog.jsp"><div class="link_box">Access Log</div></a>
-</div>
+
 
 <%
     }
