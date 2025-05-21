@@ -104,6 +104,51 @@ public class PaymentServlet extends HttpServlet {
             return;
         }
 
+        try {
+            // Normalize the stackovrflow to the rescue
+            String normalizedCardNumber = cardNumber.replaceAll("\\s+", "");
+
+            //  we now check if card exists or not
+            Card existingCard = database.Cards().getCardByNumberAndUser(normalizedCardNumber, loggedInUser.getUserID());
+            int cardID;
+            if (existingCard != null) {
+                cardID = existingCard.getCardID();
+            } else {
+                // Create new card
+                Card newCard = new Card();
+                newCard.setBankName(bankName);
+                newCard.setCardTypeID(Integer.parseInt(cardTypeID));
+                newCard.setCardNumber(normalizedCardNumber);
+                newCard.setCardHolderName(cardHolderName);
+                newCard.setCardExpiryDate(cardExpiryDate);
+                newCard.setUserID(loggedInUser.getUserID());
+                cardID = database.Cards().add(newCard);
+            }
+
+            // Create payment record
+            Payment payment = new Payment(
+                    Integer.parseInt(orderID),
+                    loggedInUser.getUserID(),
+                    cardID,
+                    bankName,
+                    cardNumber,
+                    cardHolderName,
+                    cardExpiryDate,
+                    true, // paymentStatus
+                    Integer.parseInt(paymentAmount),
+                    paymentDate
+            );
+
+
+            database.Payments().add(payment);
+
+            session.setAttribute("successMessage", "Payment successful!");
+            // payment success send to index.jsp
+            resp.sendRedirect("FinalCheckOutServlet");
+        } catch (Exception e) {
+            session.setAttribute("failText", "Payment failed: " + e.getMessage());
+            resp.sendRedirect("PaymentServlet?orderID=" + orderID);
+        }
     }
 
 }

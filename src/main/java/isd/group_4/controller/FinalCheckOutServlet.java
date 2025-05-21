@@ -25,31 +25,36 @@ public class FinalCheckOutServlet extends HttpServlet {
         DAO database = (DAO) session.getAttribute("database");
         Order cart = (Order) session.getAttribute("cart");
         User loggedInUser = (User) session.getAttribute("loggedUser");
-
-        // 1. Validate cart
-        if (cart == null) {
-            session.setAttribute("failText", "Your cart is empty.");
-            resp.sendRedirect("cart.jsp");
-            return;
-        }
-
-        // 2. Handle anonymous user
-        try {
-            if (loggedInUser == null) {
-                loggedInUser = new User();
-                loggedInUser.setRole("anonymous");
-                loggedInUser.setFirstName("Anonymous");
+        int orderID;
+        if (loggedInUser == null) {
+            //temporarily set the loggedInUser
+            loggedInUser = new User();
+            loggedInUser.setRole("anonymous");
+            loggedInUser.setFirstName("Anonymous");
+            try {
                 loggedInUser.setUserID(database.Users().add(loggedInUser));
-                session.setAttribute("loggedUser", loggedInUser);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-            cart.setUserID(loggedInUser.getUserID());
-        } catch (SQLException e) {
-            session.setAttribute("failText", "User creation failed: " + e.getMessage());
-            resp.sendRedirect("cardCheckout.jsp");
-            return;
         }
 
-        // 3. Validate payment fields
+
+        cart.setUserID(loggedInUser.getUserID());
+
+
+
+
+        try {
+            orderID = database.Orders().add(cart);
+
+            resp.sendRedirect("PaymentServlet?orderID=" + orderID);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+        // Retrieve form fields from cardCheckout.jsp
         String bankName = req.getParameter("bankName");
         String cardTypeID = req.getParameter("cardTypeID");
         String cardNumber = req.getParameter("cardNumber");
@@ -57,32 +62,35 @@ public class FinalCheckOutServlet extends HttpServlet {
         String cardExpiryDate = req.getParameter("cardExpiryDate");
         String paymentAmount = req.getParameter("paymentAmount");
         String paymentDate = req.getParameter("paymentDate");
+        int cardCVV = Integer.parseInt(req.getParameter("cardCVV"));
 
-        if (bankName == null || bankName.trim().isEmpty() ||
+        // we now check no field is left empty
+        if (
+                bankName == null || bankName.trim().isEmpty() ||
                 cardTypeID == null || cardTypeID.trim().isEmpty() ||
                 cardNumber == null || cardNumber.trim().isEmpty() ||
                 cardHolderName == null || cardHolderName.trim().isEmpty() ||
                 cardExpiryDate == null || cardExpiryDate.trim().isEmpty() ||
                 paymentAmount == null || paymentAmount.trim().isEmpty() ||
-                paymentDate == null || paymentDate.trim().isEmpty()
-                ) {
+                paymentDate == null || paymentDate.trim().isEmpty()) {
             session.setAttribute("failText", "All fields are required. Please fill in all details.");
-            resp.sendRedirect("cardCheckout.jsp");
+            resp.sendRedirect("PaymentServlet?orderID=" + orderID);
             return;
         }
 
 
-        // 4. Create order and payment
+        //written by sanchit, copied to here
         try {
-            int orderID = database.Orders().add(cart);
-
-            // Normalize card number
+            // Normalize the stackovrflow to the rescue
             String normalizedCardNumber = cardNumber.replaceAll("\\s+", "");
+
+            //  we now check if card exists or not
             Card existingCard = database.Cards().getCardByNumberAndUser(normalizedCardNumber, loggedInUser.getUserID());
             int cardID;
             if (existingCard != null) {
                 cardID = existingCard.getCardID();
             } else {
+                // Create new card
                 Card newCard = new Card();
                 newCard.setBankName(bankName);
                 newCard.setCardTypeID(Integer.parseInt(cardTypeID));
@@ -92,33 +100,32 @@ public class FinalCheckOutServlet extends HttpServlet {
                 newCard.setUserID(loggedInUser.getUserID());
                 cardID = database.Cards().add(newCard);
             }
-            int amountCents = (int) Math.round(Double.parseDouble(paymentAmount) * 100);
-            // Only store last 4 digits if possible
-            String last4 = normalizedCardNumber.length() > 4 ?
-                    normalizedCardNumber.substring(normalizedCardNumber.length() - 4) : normalizedCardNumber;
 
+            // Create payment record
             Payment payment = new Payment(
                     orderID,
                     loggedInUser.getUserID(),
                     cardID,
                     bankName,
-                    last4,
+                    cardNumber,
                     cardHolderName,
                     cardExpiryDate,
-                    true,
-                    amountCents,
+                    cardCVV,
+                    true, // paymentStatus
+                    Integer.parseInt(paymentAmount),
                     paymentDate
             );
-            database.Payments().add(payment);
 
-            session.removeAttribute("cart");
+            session.setAttribute("payment", payment);
+
+
             session.setAttribute("successMessage", "Payment successful!");
-            resp.sendRedirect("index.jsp");
-
+            // payment success send to index.jsp
+            resp.sendRedirect("PaymentServlet");
         } catch (Exception e) {
-            session.setAttribute("failText", "Checkout failed: " + e.getMessage());
-            resp.sendRedirect("cardCheckout.jsp");
+            session.setAttribute("failText", "Payment failed: " + e.getMessage());
+            resp.sendRedirect("PaymentServlet?orderID=" + orderID);
         }
-    }
 
+    }
 }

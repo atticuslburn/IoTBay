@@ -54,7 +54,7 @@ public class OrderDatabaseManager extends DatabaseManager<Order> {
         order.setOrderID(this.getOrderCount());
         Calendar calendar = order.getOrderDate();
         //add into ORDER
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ORDERS (userID, orderDate) VALUES (?, ?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ORDERS userID, orderDate) VALUES (?, ?)");
         preparedStatement.setInt(1, order.getUserID());
         preparedStatement.setString(2, (ConvertTimeForSQL.convertCalendarToSQLDateTime(calendar)));
         preparedStatement.executeUpdate();
