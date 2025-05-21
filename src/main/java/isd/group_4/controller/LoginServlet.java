@@ -56,7 +56,6 @@ public class LoginServlet extends HttpServlet {
                 int logId = database.AccessLogs().add(log);
                 log.setId(logId);
                 session.setAttribute("accessLog", log);
-
                 resp.sendRedirect("welcome.jsp");
             } else {
                 System.out.println("NULL USER");

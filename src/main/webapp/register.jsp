@@ -46,7 +46,12 @@
         <input type="text" id="postcode" name="postcode"><br>
 
         <label for="role">Role: </label>
-        <input type="text" id="role" name="role"><br>
+        <select id="role" name="role">
+            <option value="admin">Admin</option>
+            <option value="merchant">Merchant</option>
+            <option value="customer">Customer</option>
+        </select>
+        <br>
 
         <label for="terms_and_conditions">Agree to our <span style = color:dodgerblue> Terms and Conditions</span></label>
         <input type="checkbox" id="terms_and_conditions" name="terms_and_conditions">

@@ -1,9 +1,9 @@
 package isd.group_4.controller;
 
+import isd.group_4.AccessLog;
 import isd.group_4.User;
 import isd.group_4.database.DAO;
 import isd.group_4.exceptions.InvalidPhoneException;
-import isd.group_4.exceptions.InvalidRoleException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
@@ -64,13 +65,8 @@ public class RegisterServlet extends HttpServlet {
                     }
                     try {
                         nUser.setRole(role);
-                    } catch (InvalidRoleException e) {
-                        System.out.println("Invalid Role Bruh");
-                        failText = "Role should be customer or admin. please try again";
-                        resp.sendRedirect("register.jsp");
-                        session.setAttribute("failedRegistration", failedRegistration);
-                        session.setAttribute("failText", failText);
-                        return;
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
                     try {
                         if (database.Users().add(nUser) == -1) {
@@ -85,7 +81,15 @@ public class RegisterServlet extends HttpServlet {
                         throw new RuntimeException(e);
                     }
                     session.setAttribute("loggedInUser", nUser);
-
+                    Timestamp loginTime = new Timestamp(System.currentTimeMillis());
+                    AccessLog log = new AccessLog(nUser.getUserID(), loginTime, null);
+                    try{
+                        int logid = database.AccessLogs().add(log);
+                        log.setId(logid);
+                        session.setAttribute("accessLog", log);
+                    }catch (Exception e){
+                        throw new RuntimeException(e);
+                    }
 
                     resp.sendRedirect("welcome.jsp");
                 }
