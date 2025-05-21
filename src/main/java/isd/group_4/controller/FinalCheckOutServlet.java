@@ -22,6 +22,7 @@ public class FinalCheckOutServlet extends HttpServlet {
 
         try {
             database.Orders().add(cart);
+            cart.clearOrders();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
