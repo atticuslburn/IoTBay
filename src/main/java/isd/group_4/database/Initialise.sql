@@ -24,7 +24,7 @@ INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumb
     ('abc', 'jafdnjnfds@fzdnjfds','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000', 'admin');
 SELECT * FROM USERS;
 
--- USER PERMISSIONS
+-- USER PERMISSIONS – SHOULD NOT BE USED
 DROP TABLE IF EXISTS USERPERMISSIONS;
 CREATE TABLE USERPERMISSIONS (
     userID INTEGER PRIMARY KEY,
@@ -71,7 +71,9 @@ CREATE TABLE ORDERS (
     orderID INTEGER PRIMARY KEY AUTOINCREMENT,
     userID INTEGER,
     orderDate DATETIME,
-    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES USERS(userID)
+    paymentID INTEGER,
+    CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES USERS(userID),
+    CONSTRAINT paymentFK FOREIGN KEY (paymentID) REFERENCES PAYMENTS(paymentID)
 );
 
 -- ORDERITEM
