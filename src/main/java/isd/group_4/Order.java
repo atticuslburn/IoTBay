@@ -15,7 +15,6 @@ public class Order implements Serializable {
     private Calendar orderDate;
     private int userID;
     private List<OrderItem> orderItems;
-    private int paymentID;
 
 
     //constructors
@@ -114,8 +113,6 @@ public class Order implements Serializable {
     public void setUserID(int userID) {this.userID = userID; }
     public List<OrderItem> getOrderItems() {return orderItems; }
     public void setOrderItems(List<OrderItem> orderItems) { this.orderItems = orderItems; } // shouldn't ever need to use this
-    public void setPaymentID(int paymentID) { this.paymentID = paymentID; }
-    public int getPaymentID() { return paymentID; }
 
 
     public List<Integer> getItemIDs() {

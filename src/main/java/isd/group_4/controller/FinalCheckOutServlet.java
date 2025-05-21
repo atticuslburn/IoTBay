@@ -19,10 +19,11 @@ public class FinalCheckOutServlet extends HttpServlet {
         HttpSession session = req.getSession();
         DAO database = (DAO) session.getAttribute("database");
         Order cart = (Order) session.getAttribute("cart");
-
+        int orderID;
         try {
-            database.Orders().add(cart);
+            orderID = database.Orders().add(cart);
             cart.clearOrders();
+            resp.sendRedirect("PaymentServlet?orderID=" + orderID);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
