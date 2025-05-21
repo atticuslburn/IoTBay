@@ -32,7 +32,7 @@ public class CardServlet extends HttpServlet {
                 req.setAttribute("card", card);
                 req.getRequestDispatcher("editCardDetails.jsp").forward(req, resp);
             } else if ("add".equals(action)) {
-                req.getRequestDispatcher("add-card.jsp").forward(req, resp);
+                req.getRequestDispatcher("addCardDetails.jsp").forward(req, resp);
             } else {
                 req.getRequestDispatcher("card-list.jsp").forward(req, resp);
             }
