@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,9 +67,17 @@ public class PaymentServlet extends HttpServlet {
         HttpSession session = req.getSession();
         DAO database = (DAO) session.getAttribute("database");
         User loggedInUser = (User) session.getAttribute("loggedInUser");
+        Payment payment = (Payment) session.getAttribute("payment");
+
         if (loggedInUser == null) {
             resp.sendRedirect("login.jsp");
             return;
+        }
+
+        try {
+            database.Payments().add(payment);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         // Retrieve form fields from cardCheckout.jsp
