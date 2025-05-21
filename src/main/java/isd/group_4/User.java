@@ -123,7 +123,7 @@ public class User implements Serializable {
     }
 
     boolean validPhone(String phone) {
-        return this.phone.matches("\\d{10}");
+        return phone.matches("\\d+");
     }
 
 

@@ -3,6 +3,7 @@ package isd.group_4.controller;
 
 import isd.group_4.User;
 import isd.group_4.database.DAO;
+import isd.group_4.exceptions.InvalidPhoneException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,6 +20,7 @@ public class EditServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User loggedInUser = (User) session.getAttribute("loggedInUser");
+        boolean failedRegistration = false;
 
         if (loggedInUser == null) {
             resp.sendRedirect("login.jsp");
@@ -35,7 +37,18 @@ public class EditServlet extends HttpServlet {
 
         loggedInUser.setFirstName(fname);
         loggedInUser.setLastName(lname);
-        loggedInUser.setPhone(phone);
+
+        try {loggedInUser.setPhone(phone);}
+
+        catch (InvalidPhoneException e) {
+            failedRegistration = true;
+            resp.sendRedirect("edit.jsp");
+            session.setAttribute("failedRegistration", failedRegistration);
+            String failText = "Wrong PHONE number bruh";
+            session.setAttribute("failText", failText);
+            return;
+        }
+
         loggedInUser.setStreetName(streetName);
         loggedInUser.setStreetNumber(streetNumber);
         loggedInUser.setSuburb(suburb);
