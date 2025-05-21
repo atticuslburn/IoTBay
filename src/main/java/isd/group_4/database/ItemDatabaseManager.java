@@ -76,7 +76,7 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
         return true;
     }
 
-    //Verify Item ID
+    /** Verify ID */
     public boolean doesItemExist(int itemID) throws SQLException {
         ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM ITEMS WHERE itemID=?");
         if (rs.next()) {
@@ -85,8 +85,6 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
             return false;
         }
     }
-
-
 
     /** READ all */
     public List<Item> getAllItems() throws SQLException {
@@ -104,7 +102,7 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
         return list;
     }
 
-    /** SEARCH by name */
+    /** SEARCH */
     public List<Item> searchItemsByName(String nameFilter) throws SQLException {
         List<Item> list = new ArrayList<>();
         String sql = "SELECT * FROM ITEMS WHERE itemName LIKE ?";
@@ -151,7 +149,6 @@ public class ItemDatabaseManager extends DatabaseManager<Item> {
         }
         return list;
     }
-
 
     public double calculateTotalCostOfOrder(Order order) throws SQLException {
         double totalCost = 0;

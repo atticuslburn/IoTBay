@@ -3,8 +3,6 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="isd.group_4.database.DBConnector" %>
 
-
-
 <html>
 <head>
     <title>Staff Page</title>
@@ -15,7 +13,6 @@
         if (!isStaff) {
             response.sendRedirect("index.jsp");
         }
-
     %>
 
 </head>
@@ -28,9 +25,8 @@
 
 </div>
 
-<div class = "page_body">
-
-
+<div
+        class = "page_body">
 </div>
 </body>
 </html>

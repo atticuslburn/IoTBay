@@ -1,5 +1,9 @@
 package isd.group_4;
 
+//edit and extend from "User" instead of creating whole new one
+
+
+
 public class Customer {
     private int id;
     private String name;

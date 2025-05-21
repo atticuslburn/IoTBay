@@ -18,6 +18,10 @@ import java.util.List;
 @WebServlet("/CustomerServlet")
 public class CustomerServlet extends HttpServlet {
 
+
+    //handling the management roles - only if admin
+
+    // using GET  to hadnle list, search, show
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -76,6 +80,8 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
+
+    //POST being used to handle the create and update features
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -117,3 +123,4 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 }
+

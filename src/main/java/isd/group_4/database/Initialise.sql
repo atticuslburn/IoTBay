@@ -74,10 +74,10 @@ CREATE TABLE ORDERS (
     CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES USERS(userID)
 );
 
-INSERT INTO ORDERS (userID, orderDate, paymentID) VALUES (1, '2001-10-05 10:05:01', 1);
-INSERT INTO ORDERS (userID, orderDate, paymentID) VALUES (1, '2002-12-05 10:05:01', 1);
+INSERT INTO ORDERS (userID, orderDate) VALUES (1, '2001-10-05 10:05:01');
+INSERT INTO ORDERS (userID, orderDate) VALUES (1, '2002-11-05 10:05:01');
 
--- ORDERITEM
+-- ORDER ITEM
 DROP TABLE IF EXISTS ORDERITEM;
 CREATE TABLE ORDERITEM (
     oiID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -89,14 +89,10 @@ CREATE TABLE ORDERITEM (
 );
 
 INSERT INTO ORDERITEM (orderID, itemID, orderQuantity) VALUES (1, 1, 1);
+INSERT INTO ORDERITEM (orderID, itemID, orderQuantity) VALUES (2, 1, 2);
+INSERT INTO ORDERITEM (orderID, itemID, orderQuantity) VALUES (2, 2, 2);
 
-
-
-
-
-
-
---logs
+-- LOGS
 drop table if exists user_access_log;
 create table user_access_log (
     id integer primary key autoincrement,
@@ -154,10 +150,7 @@ INSERT INTO customers(name,email,type,address,active) VALUES
 ('Sigma Services','contact@sigmasvc.com','company','99 Linden Rd, Albury',TRUE),
 ('Tina Tran','tina.tran@example.com','individual','14 Eucalyptus St, Mackay',TRUE);
 
-
-
 -- CARD Details
-
 CREATE TABLE IF NOT EXISTS Cards (
      cardID INTEGER PRIMARY KEY AUTOINCREMENT,
      userID INTEGER,

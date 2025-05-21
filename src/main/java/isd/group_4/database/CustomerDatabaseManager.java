@@ -11,7 +11,7 @@ public class CustomerDatabaseManager extends DatabaseManager<Customer> {
         super(connection);
     }
 
-    /** CREATE */
+ //CREATE
     @Override
     public int add(Customer c) throws SQLException {
         String sql = "INSERT INTO customers(name,email,type,address,active) VALUES(?,?,?,?,?)";

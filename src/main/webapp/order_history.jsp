@@ -2,7 +2,8 @@
 <%@ page import="java.util.ListIterator" %>
 <%@ page import="isd.group_4.OrderItem" %>
 <%@ page import="isd.group_4.Item" %>
-<%@ page import="java.util.Calendar" %><%--
+<%@ page import="java.util.Calendar" %>
+<%@ page import="java.sql.Array" %><%--
   Created by IntelliJ IDEA.
   User: atticusburn
   Date: 21/5/2025
@@ -19,8 +20,28 @@
 
 </head>
 <body>
+
+<form method="post" action="SearchOrderServlet">
+
+    <label for="selectDateAfter">Date</label>
+    <input type="date" id="selectDateAfter" name="date">
+    <label for="selectOrderID">Order ID</label>
+    <input type="number" id="selectOrderID" name="orderID">
+    <input type="submit">
+
+</form>
+<div class="center_container">
+
+
 <%
     if (loggedInUser != null) {
+
+        ArrayList<Order> filteredOrders = new ArrayList<>();
+        Order filterCart = (Order) session.getAttribute("filter_cart");
+        if (filterCart != null) {
+            filteredOrders.add(filterCart);
+        }
+
 
         ArrayList<Order> orders = null;
         try {
@@ -28,8 +49,14 @@
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        ListIterator<Order> ordersListIterator = orders.listIterator();
 
+
+        if (!filteredOrders.isEmpty()) {
+            orders = filteredOrders;
+        }
+
+        ListIterator<Order> ordersListIterator = orders.listIterator();
+        System.out.println(orders.size());
         while (ordersListIterator.hasNext()) {
             Order order = ordersListIterator.next();
             Calendar date = order.getOrderDate();
@@ -41,9 +68,8 @@
                 throw new RuntimeException(e);
             }
 %>
-<div class="center_container">
     <div class="wide_center-box">
-        <h1>Order Date: <%=orderDateString%></h1>
+        <h1>Order Number: <%=order.getOrderID()%>,  Order Date: <%=orderDateString%></h1>
         <p>Amount Spent: <%=orderCost%></p>
 <table>
     <%--        Header Row     --%>
@@ -81,7 +107,6 @@
 
 </table>
     </div>
-</div>
 
 
 
@@ -95,6 +120,7 @@
 <%
     }
 %>
+</div>
 
 </body>
 </html>
