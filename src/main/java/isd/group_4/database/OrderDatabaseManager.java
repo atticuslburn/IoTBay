@@ -41,7 +41,7 @@ public class OrderDatabaseManager extends DatabaseManager<Order> {
     }
 
     public Order getOrderFromDate(String dateString) throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT orderID) FROM ORDERS WHERE orderDate >= " + dateString);
+        ResultSet resultSet = statement.executeQuery("SELECT orderID FROM ORDERS WHERE orderDate >= " + dateString);
         resultSet.next();
         int orderID = resultSet.getInt("orderID");
         return this.get(orderID);

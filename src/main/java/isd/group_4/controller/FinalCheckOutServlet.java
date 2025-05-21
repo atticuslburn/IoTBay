@@ -31,6 +31,7 @@ public class FinalCheckOutServlet extends HttpServlet {
             loggedInUser = new User();
             loggedInUser.setRole("anonymous");
             loggedInUser.setFirstName("Anonymous");
+            loggedInUser.setEmail("noemail");
             try {
                 loggedInUser.setUserID(database.Users().add(loggedInUser));
             } catch (SQLException e) {
