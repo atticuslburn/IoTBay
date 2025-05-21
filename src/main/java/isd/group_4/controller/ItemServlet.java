@@ -17,6 +17,8 @@ import java.util.List;
 @WebServlet("/ItemServlet")
 public class ItemServlet extends HttpServlet {
     @Override
+    /// Handling Navigation & Display
+    ///  Handing Actions (View, Edit, Delete)
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         User logged = (session == null) ? null : (User) session.getAttribute("loggedInUser");
@@ -62,6 +64,8 @@ public class ItemServlet extends HttpServlet {
     }
 
     @Override
+    ///  Handling Form Submission
+    ///  Handling Actions (Add, Save, Update)
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         User logged = (session == null) ? null : (User) session.getAttribute("loggedInUser");
