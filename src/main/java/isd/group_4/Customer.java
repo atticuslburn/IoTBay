@@ -1,6 +1,6 @@
 package isd.group_4;
 
-//edit and extend from "User"
+//edit and extend from "User" instead of creating whole new one
 
 
 
