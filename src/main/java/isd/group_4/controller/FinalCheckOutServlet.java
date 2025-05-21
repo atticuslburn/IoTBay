@@ -116,8 +116,8 @@ public class FinalCheckOutServlet extends HttpServlet {
                     paymentDate
             );
 
-
             session.setAttribute("payment", payment);
+
 
             session.setAttribute("successMessage", "Payment successful!");
             // payment success send to index.jsp
