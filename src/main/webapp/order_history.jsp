@@ -30,6 +30,7 @@
     <input type="submit">
 
 </form>
+<div class="center_container">
 
 
 <%
@@ -55,6 +56,7 @@
         }
 
         ListIterator<Order> ordersListIterator = orders.listIterator();
+        System.out.println(orders.size());
         while (ordersListIterator.hasNext()) {
             Order order = ordersListIterator.next();
             Calendar date = order.getOrderDate();
@@ -66,7 +68,6 @@
                 throw new RuntimeException(e);
             }
 %>
-<div class="center_container">
     <div class="wide_center-box">
         <h1>Order Number: <%=order.getOrderID()%>,  Order Date: <%=orderDateString%></h1>
         <p>Amount Spent: <%=orderCost%></p>
@@ -106,7 +107,6 @@
 
 </table>
     </div>
-</div>
 
 
 
@@ -120,6 +120,7 @@
 <%
     }
 %>
+</div>
 
 </body>
 </html>
