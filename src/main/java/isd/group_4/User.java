@@ -2,7 +2,6 @@ package isd.group_4;
 
 import isd.group_4.exceptions.InvalidEmailException;
 import isd.group_4.exceptions.InvalidPhoneException;
-import isd.group_4.exceptions.InvalidRoleException;
 
 import java.io.Serializable;
 
@@ -115,16 +114,8 @@ public class User implements Serializable {
     public String getRole(){
         return role;
     }
-    public void setRole(String role) throws InvalidRoleException {
-        role = role.trim().toLowerCase();
-
-        if (role.contains("cus")) {
-            this.role = "customer";
-        } else if (role.contains("adm")) {
-            this.role = "admin";
-        } else {
-            throw new InvalidRoleException("Invalid role: " + role);
-        }
+    public void setRole(String role){
+        this.role = role;
     }
 
     boolean validateEmail(String email) {
@@ -132,7 +123,7 @@ public class User implements Serializable {
     }
 
     boolean validPhone(String phone) {
-        return this.phone.matches("\\d{10}");
+        return phone.matches("\\d+");
     }
 
 

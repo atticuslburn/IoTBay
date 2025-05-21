@@ -1,6 +1,7 @@
 package isd.group_4.controller;
 
 import isd.group_4.AccessLog;
+import isd.group_4.User;
 import isd.group_4.database.DAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,9 +24,8 @@ public class LogOutServlet extends HttpServlet {
         try {
             Timestamp logoutTime = new Timestamp(System.currentTimeMillis());
             AccessLog log = (AccessLog) session.getAttribute("accessLog");
-            log.setLogoutTime(logoutTime);
-
-            System.out.println("ID:::::: " + log.getId());
+            if (log != null)
+                log.setLogoutTime(logoutTime);
 
             database.AccessLogs().update(log.getId(), log);
             System.out.println("Logged out successfully at: " + log.getLogoutTime());

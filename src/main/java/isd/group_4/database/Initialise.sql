@@ -24,7 +24,7 @@ INSERT INTO USERS (password, email, firstName, lastName, phoneNumber, streetNumb
     ('abc', 'jafdnjnfds@fzdnjfds','John', 'Citizen', '0123456789', '6', 'Tanglewood Drive', 'Ultimo', '0000', 'admin');
 SELECT * FROM USERS;
 
--- USER PERMISSIONS
+-- USER PERMISSIONS – SHOULD NOT BE USED
 DROP TABLE IF EXISTS USERPERMISSIONS;
 CREATE TABLE USERPERMISSIONS (
     userID INTEGER PRIMARY KEY,
@@ -65,7 +65,7 @@ INSERT INTO ITEMS (itemName, itemDescription, quantity, price) VALUES
 ('Philips Hue Starter Kit', 'Includes smart bulbs and hub, supports voice and app control', 10, 179.00),
 ('LG InstaView Smart Fridge', 'Smart refrigerator with glass panel and Wi-Fi touch screen', 3, 2899.00);
 
--- ORDER
+-- ORDERS
 DROP TABLE IF EXISTS ORDERS;
 CREATE TABLE ORDERS (
     orderID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -73,6 +73,8 @@ CREATE TABLE ORDERS (
     orderDate DATETIME,
     CONSTRAINT userFK FOREIGN KEY (userID) REFERENCES USERS(userID)
 );
+
+INSERT INTO ORDERS (userID, orderDate, paymentID) VALUES (1, '2001-10-05 10:05:01', 1);
 
 -- ORDERITEM
 DROP TABLE IF EXISTS ORDERITEM;
@@ -84,6 +86,8 @@ CREATE TABLE ORDERITEM (
     CONSTRAINT orderFK FOREIGN KEY (orderID) REFERENCES ORDERS(orderID),
     CONSTRAINT itemFK FOREIGN KEY (itemID) REFERENCES ITEMS(itemID)
 );
+
+INSERT INTO ORDERITEM (orderID, itemID, orderQuantity) VALUES (1, 1, 1);
 
 
 

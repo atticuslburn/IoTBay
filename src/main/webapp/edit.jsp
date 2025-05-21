@@ -12,6 +12,8 @@
 <a href="login.jsp">
     <div class="center-box">You are not logged in. Click to login.</div>
 </a>
+
+
 <%
         return;
     }
@@ -23,6 +25,17 @@
     String streetName = loggedInUser.getStreetName() != null ? loggedInUser.getStreetName() : "";
     String suburb = loggedInUser.getSuburb() != null ? loggedInUser.getSuburb() : "";
     String postcode = loggedInUser.getPostcode() != null ? loggedInUser.getPostcode() : "";
+
+    boolean failedRegistration = session.getAttribute("failedRegistration") != null;
+%>
+<%
+    if (failedRegistration) {
+        String failText = (String)session.getAttribute("failText");
+        session.removeAttribute("failedRegistration");
+%>
+<p class="fail_text"><%=failText%></p>
+<%
+    }
 %>
 
 <div class="edit-wrapper">

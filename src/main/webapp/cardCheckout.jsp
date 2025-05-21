@@ -1,14 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: sanchitkhosla
-  Date: 20/05/25
-  Time: 5:30 pm
-  To change this template use File | Settings | File Templates.
---%>
 <%@ include file="template.jsp" %>
 <%
     String failText = (String) session.getAttribute("failText");
-    int orderID = cart.getOrderID();
+    isd.group_4.Order cart = (isd.group_4.Order) session.getAttribute("cart");
+    isd.group_4.database.DAO database = (isd.group_4.database.DAO) session.getAttribute("database");
+    int orderID = cart != null ? cart.getOrderID() : 0;
+    double totalCost = (cart != null && database != null) ? database.Items().calculateTotalCostOfOrder(cart) : 0.0;
 %>
 <html>
 <head>
@@ -19,9 +15,9 @@
 <% if (failText != null) { %>
 <div class="error"><%= failText %></div>
 <%
-    session.removeAttribute("failText");
+        session.removeAttribute("failText");
+    }
 %>
-<% } %>
 <form action="PaymentServlet" method="post">
     <input type="hidden" name="orderID" value="<%= orderID %>" />
 
@@ -45,7 +41,8 @@
     <input type="month" id="cardExpiryDate" name="cardExpiryDate" required />
 
     <label for="paymentAmount">Amount:</label>
-    <input type="number" id="paymentAmount" name="paymentAmount" required />
+    <input type="number" id="paymentAmount" name="paymentAmount" min="0.01" step="0.01"
+           value="<%= totalCost %>" required readonly />
 
     <label for="paymentDate">Payment Date:</label>
     <input type="date" id="paymentDate" name="paymentDate" value="<%= java.time.LocalDate.now() %>" required />

@@ -1,6 +1,7 @@
 package isd.group_4.database;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ListIterator;
 
@@ -17,6 +18,26 @@ public class OrderDatabaseManager extends DatabaseManager<Order> {
         ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM ORDERS");
         resultSet.next();
         return resultSet.getInt(1);
+    }
+
+    public ArrayList<Order> getAllOrdersForUserID(int userID) throws SQLException {
+        ArrayList<Order> orders = new ArrayList<>();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM ORDERS WHERE userID = " + userID);
+        while (resultSet.next()) {
+            Order order = new Order();
+            order.setOrderDate(ConvertTimeForSQL.convertSQLDateTimeToCalendar(resultSet.getString("orderDate")));
+            int orderID = resultSet.getInt("orderID");
+            order.setOrderID(orderID);
+            order.setUserID(resultSet.getInt("userID"));
+
+
+            ResultSet resultSet1 = statement.executeQuery("SELECT * FROM ORDERITEM WHERE orderID = " + orderID);
+            while (resultSet1.next()) {
+                order.addItemToOrder(resultSet1.getInt("itemID"), resultSet1.getInt("orderQuantity"));
+            }
+            orders.add(order);
+        }
+        return orders;
     }
 
     public boolean orderDoesntExist(int orderID) throws SQLException {
