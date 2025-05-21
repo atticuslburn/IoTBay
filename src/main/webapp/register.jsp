@@ -15,6 +15,7 @@
     <%
         if (failedRegistration) {
             String failText = (String)session.getAttribute("failText");
+            session.removeAttribute("failedRegistration");
     %>
     <p class="fail_text"><%=failText%></p>
     <%
