@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import isd.group_4.User;
-import isd.group_4.exceptions.Customer;
+import isd.group_4.Customer;
 import isd.group_4.database.DAO;
 
 import java.io.IOException;

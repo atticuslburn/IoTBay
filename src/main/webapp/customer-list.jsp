@@ -1,5 +1,5 @@
 <%@ page language="java" %>
-<%@ page import="isd.group_4.exceptions.Customer" %>
+<%@ page import="isd.group_4.Customer" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
