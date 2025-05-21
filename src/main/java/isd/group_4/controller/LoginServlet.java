@@ -13,29 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-//
-//@WebServlet("/LoginServlet")
-//public class LoginServlet extends HttpServlet {
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//
-//        String email = req.getParameter("email");
-//        HttpSession session = req.getSession();
-//        DAO database = (DAO) session.getAttribute("database");
-//
-//        try {
-//            int uid = database.Users().getUserID(email);
-//            Timestamp loginTime = new Timestamp(System.currentTimeMillis());
-//            AccessLog log = new AccessLog(uid, loginTime, null);
-//            int logId = database.AccessLogs().add(log);
-//            session.setAttribute("accessLog", logId);
-//            resp.sendRedirect("index.jsp");
-//
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//}
+
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
     @Override
