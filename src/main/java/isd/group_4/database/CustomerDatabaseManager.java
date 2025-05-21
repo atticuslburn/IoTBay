@@ -1,6 +1,6 @@
 package isd.group_4.database;
 
-import isd.group_4.exceptions.Customer;
+import isd.group_4.Customer;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

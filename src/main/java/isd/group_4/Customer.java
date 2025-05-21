@@ -1,4 +1,4 @@
-package isd.group_4.exceptions;
+package isd.group_4;
 
 public class Customer {
     private int id;

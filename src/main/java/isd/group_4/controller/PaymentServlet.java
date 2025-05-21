@@ -80,7 +80,6 @@ public class PaymentServlet extends HttpServlet {
         String cardExpiryDate = req.getParameter("cardExpiryDate");
         String paymentAmount = req.getParameter("paymentAmount");
         String paymentDate = req.getParameter("paymentDate");
-        int cardCVV = Integer.parseInt(req.getParameter("cardCVV"));
 
         // we now check no field is left empty
         if (orderID == null || orderID.trim().isEmpty() ||
@@ -126,7 +125,6 @@ public class PaymentServlet extends HttpServlet {
                     cardNumber,
                     cardHolderName,
                     cardExpiryDate,
-                    cardCVV,
                     true, // paymentStatus
                     Integer.parseInt(paymentAmount),
                     paymentDate
