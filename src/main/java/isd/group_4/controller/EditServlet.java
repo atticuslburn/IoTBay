@@ -28,6 +28,14 @@ public class EditServlet extends HttpServlet {
         }
         DAO dao = (DAO) session.getAttribute("database");
         String fname = req.getParameter("firstName");
+        if (fname == null || fname.isEmpty()) {
+            failedRegistration = true;
+            resp.sendRedirect("edit.jsp");
+            session.setAttribute("failedRegistration", failedRegistration);
+            String failText = "BRUH, the first name cannot be empty!";
+            session.setAttribute("failText", failText);
+            return;
+        }
         String lname = req.getParameter("lastName");
         String phone = req.getParameter("phoneNumber");
         String streetName = req.getParameter("streetName");

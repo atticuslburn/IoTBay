@@ -1,10 +1,14 @@
 <%@ include file="template.jsp" %>
 <%
     String failText = (String) session.getAttribute("failText");
-    isd.group_4.Order cart = (isd.group_4.Order) session.getAttribute("cart");
-    isd.group_4.database.DAO database = (isd.group_4.database.DAO) session.getAttribute("database");
     int orderID = cart != null ? cart.getOrderID() : 0;
-    double totalCost = (cart != null && database != null) ? database.Items().calculateTotalCostOfOrder(cart) : 0.0;
+
+    double totalCost = 0.0;
+    try {
+        totalCost = database.Items().calculateTotalCostOfOrder(cart);
+    } catch (SQLException e) {
+        System.out.println("<div class='error'>Database error: " + e.getMessage() + "</div>");
+    }
 %>
 <html>
 <head>
@@ -18,7 +22,7 @@
         session.removeAttribute("failText");
     }
 %>
-<form action="PaymentServlet" method="post">
+<form action="FinalCheckOutServlet" method="post">
     <input type="hidden" name="orderID" value="<%= orderID %>" />
 
     <label for="bankName">Bank Name:</label>
