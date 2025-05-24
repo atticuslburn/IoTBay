@@ -2,6 +2,8 @@
 <%@ page import="isd.group_4.User" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="isd.group_4.database.DBConnector" %>
+<%-- pottentially all redundant  --%>
+
 
 <html>
 <head>
@@ -13,6 +15,7 @@
         if (!isStaff) {
             response.sendRedirect("index.jsp");
         }
+
     %>
 
 </head>
@@ -22,11 +25,13 @@
     <h1>Staff Page</h1>
     <a href="CustomerServlet"><div class="link_box">Customer Management</div></a>
     <a href="ItemServlet?action=list"><div class="link_box">Item Management</div></a>
+    <a href="UserServlet?action=list"><div class="link_box">User Management</div></a>
 
 </div>
 
-<div
-        class = "page_body">
+<div class = "page_body">
+
+
 </div>
 </body>
 </html>
