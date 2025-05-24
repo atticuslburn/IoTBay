@@ -20,7 +20,6 @@ public class CustomerServlet extends HttpServlet {
 
 
     //handling the management roles - only if admin
-
     // using GET  to hadnle list, search, show
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
