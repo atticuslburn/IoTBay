@@ -1,5 +1,7 @@
 package isd.group_4.controller;
 
+import isd.group_4.User;
+import isd.group_4.database.DAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,20 +9,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import isd.group_4.User;
-import isd.group_4.Customer;
-import isd.group_4.database.DAO;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/CustomerServlet")
-public class CustomerServlet extends HttpServlet {
+@WebServlet("/UserServlet")
+public class UserServlet extends HttpServlet {
 
-
-    //handling the management roles - only if admin
-    // using GET  to hadnle list, search, show
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -43,44 +38,43 @@ public class CustomerServlet extends HttpServlet {
             if (action == null || action.equals("list")) {
                 String nameFilter = req.getParameter("name");
                 String typeFilter = req.getParameter("type");
-                List<Customer> list;
+                List<User> list;
                 if ((nameFilter != null && !nameFilter.isEmpty())
                         || (typeFilter != null && !typeFilter.isEmpty())) {
-                    list = database.Customers().searchCustomers(nameFilter, typeFilter);
+                    list = database.Users().searchUsers(nameFilter, typeFilter);
+                    //list = database.Users().getAllUsers();
                 } else {
-                    list = database.Customers().getAllCustomers();
+                    list = database.Users().getAllUsers();
                 }
-                req.setAttribute("customerList", list);
-                req.getRequestDispatcher("/customer-list.jsp")
+                req.setAttribute("userList", list);
+                req.getRequestDispatcher("/user-list.jsp")
                         .forward(req, resp);
 
             } else if (action.equals("new")) {
-                req.setAttribute("customer", new Customer());
-                req.getRequestDispatcher("/customer-form.jsp")
+                req.setAttribute("user", new User());
+                req.getRequestDispatcher("/new-user.jsp")
                         .forward(req, resp);
 
             } else if (action.equals("edit")) {
                 int id = Integer.parseInt(req.getParameter("id"));
-                Customer c = database.Customers().get(id);
-                req.setAttribute("customer", c);
-                req.getRequestDispatcher("/customer-form.jsp")
+                User c = database.Users().get(id);
+                req.setAttribute("user", c);
+                req.getRequestDispatcher("/new-user.jsp")
                         .forward(req, resp);
 
             } else if (action.equals("delete")) {
                 int id = Integer.parseInt(req.getParameter("id"));
-                database.Customers().delete(id);
-                resp.sendRedirect("CustomerServlet");
+                database.Users().delete(id);
+                resp.sendRedirect("UserServlet");
 
             } else {
-                resp.sendRedirect("CustomerServlet");
+                resp.sendRedirect("UserServlet");
             }
         } catch (SQLException e) {
             throw new ServletException(e);
         }
     }
 
-
-    //POST being used to handle the create and update features
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -102,24 +96,27 @@ public class CustomerServlet extends HttpServlet {
             String sid = req.getParameter("id");
             int id = (sid == null || sid.isEmpty()) ? 0 : Integer.parseInt(sid);
 
-            Customer c = new Customer();
-            c.setId(id);
-            c.setName(req.getParameter("name"));
-            c.setEmail(req.getParameter("email"));
-            c.setType(req.getParameter("type"));
-            c.setAddress(req.getParameter("address"));
-            c.setActive(req.getParameter("active") != null);
+            User u = new User();
+            u.setUserID(id);
+            u.setPassword(req.getParameter("password"));
+            u.setFirstName(req.getParameter("firstName"));
+            u.setLastName(req.getParameter("lastName"));
+            u.setEmail(req.getParameter("email"));
+            u.setStreetNumber(req.getParameter("streetNumber"));
+            u.setStreetName(req.getParameter("streetName"));
+            u.setSuburb(req.getParameter("suburb"));
+            u.setPostcode(req.getParameter("postcode"));
+            u.setRole(req.getParameter("role"));
 
             if (id == 0) {
-                database.Customers().add(c);
+                database.Users().add(u);
             } else {
-                database.Customers().update(id, c);
+                database.Users().update(id, u);
             }
-            resp.sendRedirect("CustomerServlet");
+            resp.sendRedirect("UserServlet");
 
         } catch (SQLException e) {
             throw new ServletException(e);
         }
     }
 }
-

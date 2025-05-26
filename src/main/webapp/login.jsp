@@ -16,7 +16,6 @@
     String uemail = request.getParameter("email");
     String upassword = request.getParameter("password");
 
-
     if (uemail != null && upassword != null) {
         try {
             loggedInUser = database.Users().authenticateUser(uemail, upassword);
@@ -49,7 +48,6 @@
     <br>
     <input type="submit" value="Login" >
 </form>
-
 
 <p>
     Don't have an account yet?

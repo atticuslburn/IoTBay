@@ -22,6 +22,15 @@
         <form method="post" action="browse.jsp"><button type="submit" class="link_box">Keep Shopping</button></form>
         <form method="post" action="ClearCartServlet"><button type="submit" class="link_box">Clear Cart</button></form>
         <form method="post" action="PreCheckOutServlet"><button type="submit" class="link_box">Check Out</button></form>
+        <%
+            if (loggedInUser != null) {
+        %>
+        <form method="post" action="order_history.jsp"><button type="submit" class="link_box">View Previous Orders</button></form>
+        <%
+            }
+        %>
+
+
     </div>
     <p>Total Cost: <%=database.Items().calculateTotalCostOfOrder(cart)%></p>
     <%

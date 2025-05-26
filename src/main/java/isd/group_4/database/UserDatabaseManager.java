@@ -3,6 +3,11 @@ package isd.group_4.database;
 import java.sql.*;
 import isd.group_4.User;
 
+
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserDatabaseManager extends DatabaseManager<User>  {
 
     public UserDatabaseManager(Connection connection) throws SQLException {
@@ -99,36 +104,66 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
         return true;
     }
 
-    //STAFF
-    public int getStaffCount() throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERS WHERE (role = 'admin')");
-        resultSet.next();
-        return resultSet.getInt(1);
+    /** READ – return every row in the users table */
+    public List<User> getAllUsers() throws SQLException {
+        List<User> list = new ArrayList<>();
+
+    /* you already have a ‘statement’ field just like the customer DAO;
+       using it keeps the code symmetrical, but you can just as well
+       open a fresh Statement in a try-with-resources block. */
+        ResultSet rs = statement.executeQuery("SELECT * FROM USERS");
+
+        while (rs.next()) {
+            User u = new User(
+                    rs.getString("password"),
+                    rs.getString("email"),
+                    rs.getString("firstName"),
+                    rs.getString("lastName"),
+                    rs.getString("phoneNumber"),   // note: column is phoneNumber
+                    rs.getString("streetNumber"),
+                    rs.getString("streetName"),
+                    rs.getString("suburb"),
+                    rs.getString("postcode"),
+                    rs.getString("role")
+            );
+            u.setUserID(rs.getInt("userID"));       // primary-key setter
+            list.add(u);
+        }
+        return list;
     }
 
-    public int getAdminCount() throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERS WHERE (role = 'admin')");
-        resultSet.next();
-        return resultSet.getInt(1);
+    //String nameFilter, String roleFilter
+    public List<User> searchUsers(String nameFilter, String roleFilter) throws SQLException {
+        List<User> list = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder("SELECT * FROM USERS WHERE 1=1");
+
+
+        try (PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    User u = new User(
+                            rs.getString("password"),
+                            rs.getString("email"),
+                            rs.getString("firstName"),
+                            rs.getString("lastName"),
+                            rs.getString("phoneNumber"),
+                            rs.getString("streetNumber"),
+                            rs.getString("streetName"),
+                            rs.getString("suburb"),
+                            rs.getString("postcode"),
+                            rs.getString("role")
+                    );
+                    u.setUserID(rs.getInt("userID"));  // primary key
+                    list.add(u);
+                }
+            }
+        }
+
+        return list;
     }
 
-    public int getMerchantCount() throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERPERMISSIONS WHERE isMerchant = true");
-        resultSet.next();
-        return resultSet.getInt(1);
-    }
-
-    public boolean isAdmin(int userID) throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERS WHERE userID = " + userID + " AND role = 'admin'");
-        resultSet.next();
-        return resultSet.getInt(1) == 1;
-    }
-
-    public boolean isMerchant(int userID) throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERPERMISSIONS WHERE userID = " + userID + " AND isMerchant = true");
-        resultSet.next();
-        return resultSet.getInt(1) == 1;
-    }
 
     public boolean isStaff(int userID) throws SQLException {
         ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM USERS WHERE userID = " + userID + " AND (role = 'admin')");

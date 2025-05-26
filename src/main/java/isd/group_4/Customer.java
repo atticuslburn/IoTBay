@@ -1,10 +1,11 @@
 package isd.group_4;
 
+
 public class Customer {
     private int id;
     private String name;
     private String email;
-    private String type;      // "individual" or "company"
+    private String type;      // individual or company
     private String address;
     private boolean active;   // true = active, false = deactivated
 
@@ -12,12 +13,12 @@ public class Customer {
 
     public Customer(int id, String name, String email,
                     String type, String address, boolean active) {
-        this.id      = id;
-        this.name    = name;
-        this.email   = email;
-        this.type    = type;
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.type = type;
         this.address = address;
-        this.active  = active;
+        this.active = active;
     }
 
     // Getters & setters

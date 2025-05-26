@@ -22,7 +22,7 @@ public class OrderDatabaseManager extends DatabaseManager<Order> {
 
     public ArrayList<Order> getAllOrdersForUserID(int userID) throws SQLException {
         ArrayList<Order> orders = new ArrayList<>();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM ORDERS WHERE userID = " + userID);
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM ORDERS WHERE userID = " + userID+ " ORDER BY orderDate DESC");
         while (resultSet.next()) {
             Order order = new Order();
             order.setOrderDate(ConvertTimeForSQL.convertSQLDateTimeToCalendar(resultSet.getString("orderDate")));
@@ -39,6 +39,15 @@ public class OrderDatabaseManager extends DatabaseManager<Order> {
         }
         return orders;
     }
+
+    public Order getOrderFromDate(String dateString) throws SQLException {
+        ResultSet resultSet = statement.executeQuery("SELECT orderID FROM ORDERS WHERE orderDate >= " + dateString);
+        resultSet.next();
+        int orderID = resultSet.getInt("orderID");
+        return this.get(orderID);
+    }
+
+
 
     public boolean orderDoesntExist(int orderID) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM ORDERS WHERE orderID = ?");
