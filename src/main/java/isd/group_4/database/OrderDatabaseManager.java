@@ -63,7 +63,7 @@ public class OrderDatabaseManager extends DatabaseManager<Order> {
         order.setOrderID(this.getOrderCount());
         Calendar calendar = order.getOrderDate();
         //add into ORDER
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ORDERS userID, orderDate) VALUES (?, ?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO (ORDERS userID, orderDate) VALUES (?, ?)");
         preparedStatement.setInt(1, order.getUserID());
         preparedStatement.setString(2, (ConvertTimeForSQL.convertCalendarToSQLDateTime(calendar)));
         preparedStatement.executeUpdate();
@@ -83,7 +83,7 @@ public class OrderDatabaseManager extends DatabaseManager<Order> {
 
     protected Order get(int orderID) throws SQLException {
         //get the order matching orderID and store it in resultSet
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM s WHERE orderID = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM ORDERS WHERE orderID = ?");
         preparedStatement.setInt(1, orderID);
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
