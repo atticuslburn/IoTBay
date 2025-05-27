@@ -1,8 +1,9 @@
 package isd.group_4;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class ConvertTimeForSQL {
+public class ConvertTimeForSQL implements Serializable {
     public ConvertTimeForSQL() {}
 
     // use this function when you want to update the database

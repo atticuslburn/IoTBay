@@ -1,8 +1,9 @@
 package isd.group_4;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class AccessLog {
+public class AccessLog implements Serializable {
     private int id;
     private int userId;
     private Timestamp loginTime;

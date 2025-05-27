@@ -1,8 +1,9 @@
 package isd.group_4;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Payment {
+public class Payment implements Serializable {
     private int paymentID;           // this will be the primary key
     private int orderID;
     private int userID;

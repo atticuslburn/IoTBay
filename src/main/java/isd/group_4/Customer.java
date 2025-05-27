@@ -1,7 +1,9 @@
 package isd.group_4;
 
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer implements Serializable {
     private int id;
     private String name;
     private String email;
