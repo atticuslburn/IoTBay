@@ -14,6 +14,8 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 
 import java.io.IOException;
@@ -43,6 +45,7 @@ public class PaymentTest {
         stmt.close();
         conn.close();
     }
+//     Edit Test case
 
     @Test
     public void testDoesNotEditWorks() throws IOException, ServletException, SQLException {
@@ -66,5 +69,59 @@ public class PaymentTest {
         assertTrue(cardId > 0);
 
     }
+
+// Delete test case
+    @Test
+    public void testDelteWorks() throws IOException, ServletException, SQLException {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpSession session = mock(HttpSession.class);
+        DAO database = new DAO();
+        Card card = new Card();
+
+        card.setBankName("CBA");
+        card.setCardNumber("28287323283283232");
+        card.setCardHolderName("Sanchit");
+        card.setCardExpiryDate("08/25");
+
+        when(request.getSession()).thenReturn(session);
+        when(session.getAttribute("database")).thenReturn(database);
+
+        CardDatabaseManager cardDB = database.Cards();
+        int cardId = cardDB.add(card);
+        assertTrue(cardId > 0);
+        boolean Deleted = cardDB.delete(cardId);
+
+        assertTrue(Deleted);
+
+    }
+   // test case to get card by user and id
+    @Test
+    public void testGetCardByNumberAndUser() throws SQLException {
+        DAO database = new DAO();
+        CardDatabaseManager cardDB = database.Cards();
+
+        Card card = new Card();
+        card.setUserID(42);
+        card.setCardTypeID(1);
+        card.setBankName("CBA");
+        card.setCardNumber("1234567890123456");
+        card.setCardHolderName("Test User");
+        card.setCardExpiryDate("12/30");
+
+        int cardId = cardDB.add(card);
+        assertTrue(cardId > 0);
+
+        Card found = cardDB.getCardByNumberAndUser("1234567890123456", 42);
+        assertNotNull(found);
+        assertEquals(cardId, found.getCardID());
+
+        Card notFound = cardDB.getCardByNumberAndUser("1234567890123456", 99);
+        assertNull(notFound);
+
+        Card notFound2 = cardDB.getCardByNumberAndUser("0000000000000000", 42);
+        assertNull(notFound2);
+    }
+
 
 }
