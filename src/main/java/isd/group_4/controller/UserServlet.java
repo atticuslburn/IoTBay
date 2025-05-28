@@ -36,8 +36,8 @@ public class UserServlet extends HttpServlet {
         String action = req.getParameter("action");
         try {
             if (action == null || action.equals("list")) {
-                String nameFilter = req.getParameter("name");
-                String typeFilter = req.getParameter("type");
+                String nameFilter = req.getParameter("firstName");
+                String typeFilter = req.getParameter("role");
                 List<User> list;
                 if ((nameFilter != null && !nameFilter.isEmpty())
                         || (typeFilter != null && !typeFilter.isEmpty())) {

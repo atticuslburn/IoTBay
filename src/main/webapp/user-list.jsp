@@ -24,7 +24,6 @@
       font-size: 0.9em;
     }
 
-    <%-- pottentially all redundant  --%>
     .button_group {
       display: inline-flex;
       gap: 0.5em;
@@ -61,22 +60,23 @@
     <input type="hidden" name="action" value="list"/>
     <input
             type="text"
-            name="name"
-            placeholder="Search by name"
-            value="<%= request.getParameter("name")==null ? "" : request.getParameter("name") %>"
+            name="firstName"
+            placeholder="Search by first name"
+            value="<%= request.getParameter("firstName")==null ? "" : request.getParameter("firstName") %>"
             class="input_box"
     />
-    <select name="type" class="input_box">
+    <select name="role" class="input_box">
       <option value="" <%= (request.getParameter("type")==null||request.getParameter("type").isEmpty())?"selected":"" %>>
         All Types
       </option>
-      <option value="individual" <%= "individual".equals(request.getParameter("type"))?"selected":"" %>>
-        Individual
+      <option value="customer" <%= "customer".equals(request.getParameter("type"))?"selected":"" %>>
+        Customer
       </option>
-      <option value="company" <%= "company".equals(request.getParameter("type"))?"selected":"" %>>
-        Company
+      <option value="admin" <%= "admin".equals(request.getParameter("type"))?"selected":"" %>>
+        Admin
       </option>
     </select>
+
     <button type="submit" class="small_box">Search</button>
     <button type="button" onclick="window.location='UserServlet'" class="small_box">Reset</button>
     <a href="UserServlet?action=new" class="small_box">+ New User</a>

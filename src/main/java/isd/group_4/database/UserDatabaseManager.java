@@ -132,15 +132,32 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
         return list;
     }
 
-    //String nameFilter, String roleFilter
+
+
+
+
+
     public List<User> searchUsers(String nameFilter, String roleFilter) throws SQLException {
         List<User> list = new ArrayList<>();
 
-        StringBuilder sql = new StringBuilder("SELECT * FROM USERS WHERE 1=1");
+        // 1.  Simple SQL with two placeholders
+        String sql = "SELECT * FROM USERS " +
+                "WHERE LOWER(firstName) LIKE ? " +    // 1st placeholder
+                "AND  LOWER(role)      LIKE ?";       // 2nd placeholder
 
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
-        try (PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+            /* 2.  Build patterns — add wild-cards and lower-case for case-insensitivity  */
+            String namePattern = "%" + (nameFilter == null ? "" : nameFilter.trim().toLowerCase()) + "%";
+            String rolePattern = (roleFilter == null)
+                    ? "%"                          // blank ⇒ match any role
+                    : roleFilter.trim().toLowerCase();
 
+            /* 3.  Bind the two values BEFORE executing */
+            ps.setString(1, namePattern);
+            ps.setString(2, rolePattern);
+
+            /* 4.  Run query and map rows to User objects */
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     User u = new User(
@@ -153,14 +170,12 @@ public class UserDatabaseManager extends DatabaseManager<User>  {
                             rs.getString("streetName"),
                             rs.getString("suburb"),
                             rs.getString("postcode"),
-                            rs.getString("role")
-                    );
-                    u.setUserID(rs.getInt("userID"));  // primary key
+                            rs.getString("role"));
+                    u.setUserID(rs.getInt("userID"));
                     list.add(u);
                 }
             }
         }
-
         return list;
     }
 

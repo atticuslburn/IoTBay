@@ -56,7 +56,46 @@
         </select><br/><br/>
 
 
+        <label>Street Number:</label><br/>
+        <input
+                type="text"
+                name="streetNumber"
+                value="<%=u.getStreetNumber()==null?"":u.getStreetNumber()%>"
+                required class="input_box"
+        /><br/><br/>
 
+        <label>Street Name:</label><br/>
+        <input
+                type="text"
+                name="streetName"
+                value="<%=u.getStreetName()==null?"":u.getStreetName()%>"
+                required class="input_box"
+        /><br/><br/>
+
+        <label>Suburb:</label><br/>
+        <input
+                type="text"
+                name="suburb"
+                value="<%=u.getSuburb()==null?"":u.getSuburb()%>"
+                required class="input_box"
+        /><br/><br/>
+
+        <label>Postcode:</label><br/>
+        <input
+                type="text"
+                name="postcode"
+                value="<%=u.getPostcode()==null?"":u.getPostcode()%>"
+                required class="input_box"
+        /><br/><br/>
+
+
+        <label>Password:</label><br/>
+        <input
+                type="text"
+                name="password"
+                value="<%=u.getPassword()==null?"":u.getPassword()%>"
+                required class="input_box"
+        /><br/><br/>
 
         <br/><br/>
 
