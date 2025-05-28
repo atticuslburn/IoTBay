@@ -5,6 +5,7 @@
     <title>Add Card Details</title>
 </head>
 <body>
+<%--Page to add new card details--%>
 <h2>Add Card Details</h2>
 <form method="post" action="CardServlet?action=add">
     <label for="bankName">Bank Name:</label><br/>

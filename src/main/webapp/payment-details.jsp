@@ -10,7 +10,7 @@
 
 <div class="center" style="margin-top: 40px; width: 100%; border: 2px solid #333;">
     <h3>Your Payments</h3>
-
+<%--    // shows the list of payments--%>
     <form action="PaymentServlet" method="get" style="margin-bottom:15px;">
         Search by Payment ID:
         <input type="text" name="paymentID" />
@@ -19,7 +19,7 @@
         <input type="submit" value="Search" />
         <a href="PaymentServlet">Show All</a>
     </form>
-
+<%-- //all the payments made--%>
     <table>
         <tr>
             <th>ID</th>
@@ -54,6 +54,7 @@
                 %>
             </td>
         </tr>
+<%--        get all the payment details --%>
         <tr>
             <td><%= p.getPaymentID() %></td>
             <td><%= p.getOrderID() %></td>

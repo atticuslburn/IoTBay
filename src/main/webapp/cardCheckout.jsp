@@ -1,4 +1,6 @@
 <%@ include file="template.jsp" %>
+
+<%--we have an underlying issue here which is yet to be debugged--%>
 <%
     String failText = (String) session.getAttribute("failText");
     int orderID = cart != null ? cart.getOrderID() : 0;
@@ -22,6 +24,9 @@
         session.removeAttribute("failText");
     }
 %>
+<%--form where the payment details are mare maid this is made for the checkout process --%>
+<%--similar process as the payment details page same form used --%>
+<%--Not able to register the order and payment for the order--%>
 <form action="FinalCheckOutServlet" method="post">
     <input type="hidden" name="orderID" value="<%= orderID %>" />
 
