@@ -52,7 +52,7 @@ public class UserDatabaseTests {
     }
 
     @Test
-    public void delete_existingUser_removesRow() throws Exception {
+    public void testDeleteUser() throws Exception {
         int id = manager.add(testUser());
         //assertTrue(manager.userExists(id));
         boolean deleted = manager.delete(id);
