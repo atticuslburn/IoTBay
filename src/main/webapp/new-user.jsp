@@ -1,5 +1,5 @@
 <%@ page language="java" %>
-<%-- pottentially all redundant  --%>
+
 
 <!DOCTYPE html>
 <html>
