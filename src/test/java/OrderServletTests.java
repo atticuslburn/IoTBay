@@ -1,7 +1,10 @@
+import isd.group_4.database.DAO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.junit.Test;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,6 +15,6 @@ public class OrderServletTests {
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         HttpSession session = mock(HttpSession.class);
-
+        DAO dao = new DAO();
     }
 }
