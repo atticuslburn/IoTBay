@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         DAO database = (DAO) session.getAttribute("database");
 

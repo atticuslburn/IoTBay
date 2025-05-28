@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
         boolean failedRegistration = false;

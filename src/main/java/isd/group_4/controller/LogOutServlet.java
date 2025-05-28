@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 @WebServlet("/LogOutServlet")
 public class LogOutServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         DAO database = (DAO) session.getAttribute("database");
         String email = (String) session.getAttribute("email");
@@ -28,7 +28,7 @@ public class LogOutServlet extends HttpServlet {
                 log.setLogoutTime(logoutTime);
 
             database.AccessLogs().update(log.getId(), log);
-            System.out.println("Logged out successfully at: " + log.getLogoutTime());
+            System.out.println("Logged out successfully");
         } catch (SQLException e) {
             System.out.println(e);
             throw new RuntimeException(e);
