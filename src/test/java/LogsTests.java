@@ -223,43 +223,42 @@ public class LogsTests {
         servlet.doPost(request, response);
 
         verify(session).setAttribute(eq("failText"), eq("phone number should be a number"));
-        System.out.println("Haha. You cannot register with a text as your phone number");
+        //System.out.println("Haha. You cannot register with a text as your phone number");
 
     }
 
-//    @Test
-//    public void testOFFTC() throws Exception {
-//        HttpServletRequest request = mock(HttpServletRequest.class);
-//        HttpServletResponse response = mock(HttpServletResponse.class);
-//        HttpSession session = mock(HttpSession.class);
-//        DAO dao = mock(DAO.class);
-//        UserDatabaseManager userDB = mock(UserDatabaseManager.class);
-//        AcessLogDatabaseManager logDB = mock(AcessLogDatabaseManager.class);
-//
-//        when(request.getSession()).thenReturn(session);
-//        when(session.getAttribute("database")).thenReturn(dao);
-//        when(dao.Users()).thenReturn(userDB);
-//        when(dao.AccessLogs()).thenReturn(logDB);
-//        when(userDB.getUserCount()).thenReturn(5);
-//        when(request.getParameter("email")).thenReturn("dummmmmmmy@coldmail");
-//        when(request.getParameter("password")).thenReturn("dummypas");
-//        when(request.getParameter("first_name")).thenReturn("dummmmmmy");
-//        when(request.getParameter("last_name")).thenReturn("dummyLN");
-//        when(request.getParameter("phone_number")).thenReturn("12322910651");
-//        when(request.getParameter("suburb")).thenReturn("dummy");
-//        when(request.getParameter("role")).thenReturn("customer");
-//        when(request.getParameter("terms_and_conditions")).thenReturn("off");
-//        when(request.getParameter("submit_login")).thenReturn("true");
-//        when(userDB.add(any(User.class))).thenReturn(456);
-//        when(logDB.add(any(AccessLog.class))).thenReturn(456);
-//
-//        RegisterServlet servlet = new RegisterServlet();
-//        servlet.doPost(request, response);
-//
-//        verify(session).setAttribute(eq("failText"), eq("Please agree to the Terms and Conditions"));
-//        System.out.println("Bro, you literally did everything. JUST agree to our terms and conditions");
-//
-//    }
+    @Test
+    public void testOFFTC() throws Exception {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpSession session = mock(HttpSession.class);
+        DAO dao = mock(DAO.class);
+        UserDatabaseManager userDB = mock(UserDatabaseManager.class);
+        AcessLogDatabaseManager logDB = mock(AcessLogDatabaseManager.class);
 
+        when(request.getSession()).thenReturn(session);
+        when(session.getAttribute("database")).thenReturn(dao);
+        when(dao.Users()).thenReturn(userDB);
+        when(dao.AccessLogs()).thenReturn(logDB);
+        when(userDB.getUserCount()).thenReturn(5);
+        when(request.getParameter("email")).thenReturn("dummmmmmmy@coldmail");
+        when(request.getParameter("password")).thenReturn("dummypas");
+        when(request.getParameter("first_name")).thenReturn("dummmmmmy");
+        when(request.getParameter("last_name")).thenReturn("dummyLN");
+        when(request.getParameter("phone_number")).thenReturn("12322910651");
+        when(request.getParameter("suburb")).thenReturn("dummy");
+        when(request.getParameter("role")).thenReturn("admin");
+        when(request.getParameter("terms_and_conditions")).thenReturn(null);
+        when(request.getParameter("submit_login")).thenReturn("true");
+        when(userDB.add(any(User.class))).thenReturn(456);
+        when(logDB.add(any(AccessLog.class))).thenReturn(456);
+
+        RegisterServlet servlet = new RegisterServlet();
+        servlet.doPost(request, response);
+
+        verify(session).setAttribute(eq("failText"), eq("Please agree to the Terms and Conditions"));
+        //System.out.println("Bro, you literally did everything. JUST agree to our terms and conditions.");
+
+    }
 
 }
