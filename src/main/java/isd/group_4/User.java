@@ -123,7 +123,8 @@ public class User implements Serializable {
     }
 
     boolean validPhone(String phone) {
-        return phone.matches("\\d+");
+        return phone.isEmpty() || phone.matches("\\d+");
+        //since phone is not mandatory, the empty one is also valid ^.^
     }
 
 

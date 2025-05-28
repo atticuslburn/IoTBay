@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class DeleteServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("loggedInUser");
         DAO db = (DAO) session.getAttribute("database");

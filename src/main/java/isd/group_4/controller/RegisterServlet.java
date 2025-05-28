@@ -83,6 +83,7 @@ public class RegisterServlet extends HttpServlet {
                     session.setAttribute("loggedInUser", nUser);
                     Timestamp loginTime = new Timestamp(System.currentTimeMillis());
                     AccessLog log = new AccessLog(nUser.getUserID(), loginTime, null);
+
                     try{
                         int logid = database.AccessLogs().add(log);
                         log.setId(logid);
