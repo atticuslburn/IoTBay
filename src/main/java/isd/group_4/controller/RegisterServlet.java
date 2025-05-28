@@ -50,6 +50,7 @@ public class RegisterServlet extends HttpServlet {
                 if (!agreed) {
                     failText = "Please agree to the Terms and Conditions";
                     failedRegistration = true;
+                    resp.sendRedirect("register.jsp");
                 } else {
                     User nUser = new User(upassword, uemail, ufirstName, ulastName, uphone, ustreetNumber, ustreetName, usuburb, upostcode, role);
                     nUser.setUserID(userCount);
