@@ -12,6 +12,8 @@
     if (loggedInUser == null) {
 %>
 
+<%--// if not logged in present a message else carry out the logic--%>
+
 <a href="login.jsp">
     <div class="center-box">
         You are not logged in. Click to login or register.
